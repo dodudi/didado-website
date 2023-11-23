@@ -96,5 +96,21 @@ class MemberServiceTest {
             assertThat(result.data()).isEqualTo(member);
             assertThat(readValue.getId()).isEqualTo(1L);
         }
+
+        @Test
+        @DisplayName("존재하지 않는 회원 - 실패")
+        void throwIllegalStateException() throws JsonProcessingException {
+            //given
+            MemberParameter memberParameter = new MemberParameter("username", "firstEmail", "lastEmail", "password");
+            Member member = new Member(1L, memberParameter.username(), memberParameter.fullEmail(), memberParameter.password());
+            MemberResponse memberResponse = new MemberResponse("회원 탈퇴에 성공했습니다.", 200, member);
+
+            when(memberRepository.findByUsernameAndEmail(memberParameter.username(), memberParameter.fullEmail()))
+                    .thenReturn(Optional.ofNullable(member));
+
+            //then
+            assertThatThrownBy(() -> memberService.removeMember(memberParameter))
+                    .isInstanceOf(IllegalStateException.class);
+        }
     }
 }
