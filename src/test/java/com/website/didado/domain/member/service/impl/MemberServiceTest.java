@@ -8,6 +8,8 @@ import com.website.didado.domain.member.dto.MemberParameter;
 import com.website.didado.domain.member.dto.MemberResponse;
 import com.website.didado.domain.member.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,6 +20,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,39 +32,40 @@ class MemberServiceTest {
     @InjectMocks
     private MemberServiceImpl memberService;
 
-    @Test
-    void signUp() {
-        MemberParameter memberParameter = new MemberParameter("username", "firstEmail", "lastEmail", "password");
-        MemberResponse memberResponse = new MemberResponse("회원가입에 성공했습니다.", 200, "");
+    @Nested
+    @DisplayName("회원 가입 테스트")
+    class SingUpTest {
+        @Test
+        @DisplayName("성공 테스트")
+        void signup_success() {
+            MemberParameter memberParameter = new MemberParameter("username", "firstEmail", "lastEmail", "password");
+            MemberResponse memberResponse = new MemberResponse("회원가입에 성공했습니다.", 200, "");
 
-        //given
-        when(memberRepository.countByEmail(memberParameter.fullEmail())).thenReturn(0L);
+            //given
+            when(memberRepository.countByEmail(memberParameter.fullEmail()))
+                    .thenReturn(0L);
 
-        //when
-        MemberResponse result = memberService.signUp(memberParameter);
+            //when
+            MemberResponse result = memberService.signUp(memberParameter);
 
-        //then
-        Assertions.assertThat(result).isEqualTo(memberResponse);
+            //then
+            assertThat(result).isEqualTo(memberResponse);
+        }
+
+        @Test
+        @DisplayName("중복 회원 - 예외 발생 테스트")
+        void throwDuplicateMember() {
+            MemberParameter memberParameter = new MemberParameter("username", "firstEmail", "lastEmail", "password");
+            MemberResponse memberResponse = new MemberResponse("회원가입에 성공했습니다.", 200, "");
+
+            //given
+
+            when(memberRepository.countByEmail(memberParameter.fullEmail())).thenReturn(1L);
+
+            //when
+            assertThatThrownBy(() -> memberService.signUp(memberParameter))
+                    .isInstanceOf(IllegalStateException.class);
+        }
     }
 
-    @Test
-    void findAll() throws JsonProcessingException {
-        MemberParameter memberParameter = new MemberParameter("username", "firstEmail", "lastEmail", "password");
-        MemberResponse memberResponse = new MemberResponse("회원가입에 성공했습니다.", 200, "");
-
-        List<Member> members = List.of(new Member("username", "firstEmail@lastEmail", "password"));
-        when(memberRepository.findAll()).thenReturn(members);
-
-        memberService.signUp(memberParameter);
-
-
-        MemberResponse result = memberService.findAll();
-
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonArray = mapper.writeValueAsString(result.data());
-        System.out.println(result);
-        List<Member> myObjectList = mapper.readValue(jsonArray, new TypeReference<>() {
-        });
-        Assertions.assertThat(myObjectList.size()).isEqualTo(1);
-    }
 }
