@@ -8,6 +8,7 @@ import com.website.didado.domain.member.dto.MemberParameter;
 import com.website.didado.domain.member.dto.MemberResponse;
 import com.website.didado.domain.member.repository.MemberRepository;
 import io.micrometer.core.annotation.TimedSet;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -27,6 +28,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+@Slf4j
 @ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
 
@@ -35,6 +37,8 @@ class MemberServiceTest {
 
     @InjectMocks
     private MemberServiceImpl memberService;
+
+    private final static ObjectMapper mapper = new ObjectMapper();
 
     @Nested
     @DisplayName("회원 조회 테스트")
@@ -59,7 +63,7 @@ class MemberServiceTest {
         void throwIllegalStateException() {
             //given
             when(memberRepository.findById(1L))
-                    .thenReturn(Optional.ofNullable(null));
+                    .thenReturn(Optional.empty());
             //when
             assertThatThrownBy(() -> memberService.search(1L))
                     .isInstanceOf(IllegalStateException.class);
@@ -67,20 +71,29 @@ class MemberServiceTest {
 
         @Test
         @DisplayName("회원 전체 조회 - 성공 테스트")
-        void searchesTest() {
+        void searchesTest() throws JsonProcessingException {
             //given
-
-            //when
-            when(memberRepository.findAll()).thenReturn(List.of(
+            List<Member> params = List.of(
                     new Member(1L, "username1", "firstEmail1@lastEmail.com", "password1"),
                     new Member(2L, "username2", "firstEmail2@lastEmail.com", "password2"),
                     new Member(3L, "username3", "firstEmail3@lastEmail.com", "password3"),
                     new Member(4L, "username4", "firstEmail4@lastEmail.com", "password4")
-                    ));
+            );
+            //when
+            when(memberRepository.findAll()).thenReturn(params);
 
+            //then
             MemberResponse response = memberService.findAll();
-            System.out.println(response.data());
+            String value = mapper.writeValueAsString(response.data());
 
+            ArrayList<Member> members = mapper.readValue(value, new TypeReference<>() {
+            });
+            for (Member member : members) {
+                log.info("{}", member);
+            }
+
+            assertThat(members.size()).isEqualTo(4);
+            assertThat(response.data()).isEqualTo(params);
         }
     }
 
@@ -156,7 +169,7 @@ class MemberServiceTest {
             MemberResponse memberResponse = new MemberResponse("회원 탈퇴에 성공했습니다.", 200, member);
 
             when(memberRepository.findByUsernameAndEmail(memberParameter.username(), memberParameter.fullEmail()))
-                    .thenReturn(Optional.ofNullable(null));
+                    .thenReturn(Optional.empty());
 
             //then
             assertThatThrownBy(() -> memberService.removeMember(memberParameter))
