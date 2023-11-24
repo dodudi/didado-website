@@ -10,4 +10,6 @@ public interface MemberService {
     MemberResponse signUp(MemberParameter memberParameter);
 
     MemberResponse findAll();
+
+    MemberResponse search(Long id);
 }

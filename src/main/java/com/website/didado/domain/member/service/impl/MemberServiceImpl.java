@@ -35,6 +35,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public MemberResponse search(Long id) {
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
+        log.debug("Member Search By Id -> {}", member);
+        return new MemberResponse("회원 조회에 성공했습니다.", 200, member);
+    }
+
+    @Override
     public MemberResponse removeMember(MemberParameter memberParameter) {
         Member member = memberRepository.findByUsernameAndEmail(memberParameter.username(), memberParameter.fullEmail())
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));

@@ -7,6 +7,7 @@ import com.website.didado.domain.member.domain.Member;
 import com.website.didado.domain.member.dto.MemberParameter;
 import com.website.didado.domain.member.dto.MemberResponse;
 import com.website.didado.domain.member.repository.MemberRepository;
+import io.micrometer.core.annotation.TimedSet;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -16,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,54 @@ class MemberServiceTest {
 
     @InjectMocks
     private MemberServiceImpl memberService;
+
+    @Nested
+    @DisplayName("회원 조회 테스트")
+    class MemberSearchTest {
+        @Test
+        @DisplayName("회원 ID 조회 - 성공 테스트")
+        void search_success() {
+            //given
+            Member member = new Member(1L, "username", "firstEmail@lastEmail.com", "password");
+            MemberResponse response = new MemberResponse("회원 조회에 성공했습니다.", 200, member);
+            when(memberRepository.findById(1L))
+                    .thenReturn(Optional.of(member));
+            //when
+            MemberResponse search = memberService.search(1L);
+
+            //then
+            assertThat(search).isEqualTo(response);
+        }
+
+        @Test
+        @DisplayName("회원 존재하지 않는 ID 에러 - 에러 발생 테스트")
+        void throwIllegalStateException() {
+            //given
+            when(memberRepository.findById(1L))
+                    .thenReturn(Optional.ofNullable(null));
+            //when
+            assertThatThrownBy(() -> memberService.search(1L))
+                    .isInstanceOf(IllegalStateException.class);
+        }
+
+        @Test
+        @DisplayName("회원 전체 조회 - 성공 테스트")
+        void searchesTest() {
+            //given
+
+            //when
+            when(memberRepository.findAll()).thenReturn(List.of(
+                    new Member(1L, "username1", "firstEmail1@lastEmail.com", "password1"),
+                    new Member(2L, "username2", "firstEmail2@lastEmail.com", "password2"),
+                    new Member(3L, "username3", "firstEmail3@lastEmail.com", "password3"),
+                    new Member(4L, "username4", "firstEmail4@lastEmail.com", "password4")
+                    ));
+
+            MemberResponse response = memberService.findAll();
+            System.out.println(response.data());
+
+        }
+    }
 
     @Nested
     @DisplayName("회원 가입 테스트")

@@ -4,10 +4,7 @@ import com.website.didado.domain.member.dto.MemberParameter;
 import com.website.didado.domain.member.dto.MemberResponse;
 import com.website.didado.domain.member.service.impl.MemberService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MemberController {
@@ -25,5 +22,10 @@ public class MemberController {
     @GetMapping("/members")
     public ResponseEntity<MemberResponse> test2() {
         return ResponseEntity.ok(memberService.findAll());
+    }
+
+    @GetMapping("/members/{id}")
+    public ResponseEntity<MemberResponse> search(@PathVariable Long id) {
+        return ResponseEntity.ok(memberService.search(id));
     }
 }
