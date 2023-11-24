@@ -106,7 +106,7 @@ class MemberServiceTest {
             MemberResponse memberResponse = new MemberResponse("회원 탈퇴에 성공했습니다.", 200, member);
 
             when(memberRepository.findByUsernameAndEmail(memberParameter.username(), memberParameter.fullEmail()))
-                    .thenReturn(Optional.ofNullable(member));
+                    .thenReturn(Optional.ofNullable(null));
 
             //then
             assertThatThrownBy(() -> memberService.removeMember(memberParameter))
