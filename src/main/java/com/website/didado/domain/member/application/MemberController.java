@@ -17,8 +17,8 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @PostMapping("/signUp")
-    public ResponseEntity<MemberResponse> test(@RequestBody MemberParameter memberParameter) {
+    @PostMapping("/resister")
+    public ResponseEntity<MemberResponse> resister(@RequestBody MemberParameter memberParameter) {
         return ResponseEntity.ok(memberService.signUp(memberParameter));
     }
 
