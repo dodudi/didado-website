@@ -151,9 +151,9 @@ class MemberServiceTest {
             //given
             MemberParameter memberParameter = new MemberParameter("username", "firstEmail", "lastEmail", "password");
             Member member = new Member(1L, memberParameter.username(), memberParameter.fullEmail(), memberParameter.password());
-            MemberResponse memberResponse = new MemberResponse("회원 탈퇴에 성공했습니다.", 200, member);
+            MemberResponse memberResponse = new MemberResponse("회원 탈퇴에 성공했습니다.", 200, 1L);
 
-            when(memberRepository.findByUsernameAndEmail(memberParameter.username(), memberParameter.fullEmail()))
+            when(memberRepository.findById(1L))
                     .thenReturn(Optional.of(member));
 
             //when
@@ -162,11 +162,10 @@ class MemberServiceTest {
             //then
             ObjectMapper mapper = new ObjectMapper();
             String data = mapper.writeValueAsString(result.data());
-            Member readValue = mapper.readValue(data, Member.class);
+            Long readValue = mapper.readValue(data, Long.class);
 
             assertThat(result).isEqualTo(memberResponse);
-            assertThat(result.data()).isEqualTo(member);
-            assertThat(readValue.getId()).isEqualTo(1L);
+            assertThat(readValue).isEqualTo(1L);
         }
 
         @Test
