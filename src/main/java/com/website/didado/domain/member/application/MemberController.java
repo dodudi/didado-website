@@ -30,7 +30,12 @@ public class MemberController {
     }
 
     @PostMapping("/members/{id}/delete")
-    public ResponseEntity<MemberResponse> delete(@PathVariable Long id){
+    public ResponseEntity<MemberResponse> delete(@PathVariable Long id) {
         return ResponseEntity.ok(memberService.removeMember(id));
+    }
+
+    @PostMapping("/members/{id}/update")
+    public ResponseEntity<MemberResponse> update(@PathVariable Long id, @RequestBody MemberParameter memberParameter) {
+        return ResponseEntity.ok(memberService.update(id, memberParameter));
     }
 }

@@ -6,8 +6,10 @@ import com.website.didado.domain.member.dto.MemberResponse;
 import com.website.didado.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,6 +42,17 @@ public class MemberServiceImpl implements MemberService {
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
         log.debug("Member Search By Id -> {}", member);
         return new MemberResponse("회원 조회에 성공했습니다.", 200, member);
+    }
+
+    @Override
+    @Transactional
+    public MemberResponse update(Long id, MemberParameter memberParameter) {
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
+
+        member.updateMember(memberParameter);
+
+        return new MemberResponse("회원 업데이트에 성공했습니다.", 200, member);
     }
 
     @Override

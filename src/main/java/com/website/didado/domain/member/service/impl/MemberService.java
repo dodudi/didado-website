@@ -12,4 +12,6 @@ public interface MemberService {
     MemberResponse findAll();
 
     MemberResponse search(Long id);
+
+    MemberResponse update(Long id, MemberParameter memberParameter);
 }

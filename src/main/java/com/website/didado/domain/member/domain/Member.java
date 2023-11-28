@@ -1,5 +1,6 @@
 package com.website.didado.domain.member.domain;
 
+import com.website.didado.domain.member.dto.MemberParameter;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,6 +36,12 @@ public class Member {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public void updateMember(MemberParameter memberParameter) {
+        this.username = memberParameter.username();
+        this.email = memberParameter.fullEmail();
+        this.password = memberParameter.password();
     }
 
     @Override

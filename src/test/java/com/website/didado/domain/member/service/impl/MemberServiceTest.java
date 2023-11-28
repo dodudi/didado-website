@@ -176,4 +176,53 @@ class MemberServiceTest {
                     .isInstanceOf(IllegalStateException.class);
         }
     }
+
+    @Nested
+    @DisplayName("회원 업데이트 테스트")
+    class UpdateTest {
+        @Test
+        @DisplayName("성공 테스트")
+        void success() {
+            //given
+            Member oldMember = new Member(1L, "username", "idejrdud@gmail.com", "password");
+
+            //when
+            when(memberRepository.findById(1L)).thenReturn(Optional.of(oldMember));
+
+            //then
+            MemberParameter memberParameter = new MemberParameter(
+                    "updateUsername",
+                    "update",
+                    "gmail.com",
+                    "updatePassword"
+            );
+
+            oldMember.updateMember(memberParameter);
+            MemberResponse response = new MemberResponse("회원 업데이트에 성공했습니다.", 200, oldMember);
+
+
+            MemberResponse result = memberService.update(1L, memberParameter);
+            assertThat(result).isEqualTo(response);
+        }
+
+        @Test
+        @DisplayName("존재 하지 않는 회원 - 실패")
+        void throwIllegalStateException() {
+            //given
+
+            //when
+            when(memberRepository.findById(1L)).thenReturn(Optional.empty());
+
+            //then
+            MemberParameter memberParameter = new MemberParameter(
+                    "updateUsername",
+                    "update",
+                    "gmail.com",
+                    "updatePassword"
+            );
+
+            assertThatThrownBy(() -> memberService.update(1L, memberParameter))
+                    .isInstanceOf(IllegalStateException.class);
+        }
+    }
 }
