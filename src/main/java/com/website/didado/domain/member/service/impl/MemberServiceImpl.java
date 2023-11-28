@@ -50,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public MemberResponse update(Long id, MemberParameter memberParameter) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
+                .orElseThrow(NotFoundMemberException::new);
 
         member.updateMember(memberParameter);
 

@@ -62,7 +62,7 @@ class MemberServiceTest {
 
         @Test
         @DisplayName("회원 존재하지 않는 ID 에러 - 에러 발생 테스트")
-        void throwIllegalStateException() {
+        void throwNotFoundException() {
             //given
             when(memberRepository.findById(1L))
                     .thenReturn(Optional.empty());
@@ -209,7 +209,7 @@ class MemberServiceTest {
 
         @Test
         @DisplayName("존재 하지 않는 회원 - 실패")
-        void throwIllegalStateException() {
+        void throwNotFoundMemberException() {
             //given
 
             //when
@@ -224,7 +224,7 @@ class MemberServiceTest {
             );
 
             assertThatThrownBy(() -> memberService.update(1L, memberParameter))
-                    .isInstanceOf(IllegalStateException.class);
+                    .isInstanceOf(NotFoundMemberException.class);
         }
     }
 }
