@@ -1,7 +1,7 @@
 package com.website.didado.domain.member.exception;
 
+import com.website.didado.domain.member.domain.MemberCode;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
 public class DuplicateMemberException extends RuntimeException {

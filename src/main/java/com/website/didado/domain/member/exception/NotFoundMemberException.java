@@ -1,5 +1,7 @@
 package com.website.didado.domain.member.exception;
 
+import com.website.didado.domain.member.domain.MemberCode;
+
 public class NotFoundMemberException extends RuntimeException{
     private final String message;
     private final int status;

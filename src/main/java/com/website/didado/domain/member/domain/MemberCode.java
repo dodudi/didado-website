@@ -1,4 +1,4 @@
-package com.website.didado.domain.member.exception;
+package com.website.didado.domain.member.domain;
 
 import lombok.Getter;
 
