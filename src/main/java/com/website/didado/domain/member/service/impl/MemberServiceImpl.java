@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberResponse search(Long id) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(NotFoundMemberException::new);
+                .orElseThrow(() -> new NotFoundMemberException(id));
 
         log.debug("Member Search By Id -> {}", member);
         return new MemberResponse("회원 조회에 성공했습니다.", 200, member);
