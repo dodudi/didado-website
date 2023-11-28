@@ -3,6 +3,7 @@ package com.website.didado.domain.member.application;
 import com.website.didado.domain.member.dto.MemberParameter;
 import com.website.didado.domain.member.dto.MemberResponse;
 import com.website.didado.domain.member.exception.DuplicateMemberException;
+import com.website.didado.domain.member.exception.NotFoundMemberException;
 import com.website.didado.domain.member.service.impl.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +45,14 @@ public class MemberController {
 
     @ExceptionHandler({DuplicateMemberException.class})
     public ResponseEntity<Object> throwDuplicateMemberHandler(DuplicateMemberException e) {
+        MemberResponse response = new MemberResponse(e.getMessage(), e.getStatus(), e.getData());
+        return ResponseEntity
+                .status(e.getStatus())
+                .body(response);
+    }
+
+    @ExceptionHandler({NotFoundMemberException.class})
+    public ResponseEntity<Object> throwNotFoundMemberHandler(NotFoundMemberException e) {
         MemberResponse response = new MemberResponse(e.getMessage(), e.getStatus(), e.getData());
         return ResponseEntity
                 .status(e.getStatus())
