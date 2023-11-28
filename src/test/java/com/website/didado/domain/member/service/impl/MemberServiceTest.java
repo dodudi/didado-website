@@ -148,7 +148,7 @@ class MemberServiceTest {
                     .thenReturn(Optional.of(member));
 
             //when
-            MemberResponse result = memberService.removeMember(memberParameter);
+            MemberResponse result = memberService.removeMember(1L);
 
             //then
             ObjectMapper mapper = new ObjectMapper();
@@ -168,11 +168,11 @@ class MemberServiceTest {
             Member member = new Member(1L, memberParameter.username(), memberParameter.fullEmail(), memberParameter.password());
             MemberResponse memberResponse = new MemberResponse("회원 탈퇴에 성공했습니다.", 200, member);
 
-            when(memberRepository.findByUsernameAndEmail(memberParameter.username(), memberParameter.fullEmail()))
+            when(memberRepository.findById(1L))
                     .thenReturn(Optional.empty());
 
             //then
-            assertThatThrownBy(() -> memberService.removeMember(memberParameter))
+            assertThatThrownBy(() -> memberService.removeMember(1L))
                     .isInstanceOf(IllegalStateException.class);
         }
     }

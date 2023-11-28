@@ -5,7 +5,7 @@ import com.website.didado.domain.member.dto.MemberResponse;
 
 public interface MemberService {
 
-    MemberResponse removeMember(MemberParameter memberParameter);
+    MemberResponse removeMember(Long id);
 
     MemberResponse signUp(MemberParameter memberParameter);
 

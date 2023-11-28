@@ -43,8 +43,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberResponse removeMember(MemberParameter memberParameter) {
-        Member member = memberRepository.findByUsernameAndEmail(memberParameter.username(), memberParameter.fullEmail())
+    public MemberResponse removeMember(Long id) {
+        Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
 
         memberRepository.delete(member);

@@ -28,4 +28,9 @@ public class MemberController {
     public ResponseEntity<MemberResponse> search(@PathVariable Long id) {
         return ResponseEntity.ok(memberService.search(id));
     }
+
+    @PostMapping("/members/{id}/delete")
+    public ResponseEntity<MemberResponse> delete(@PathVariable Long id){
+        return ResponseEntity.ok(memberService.removeMember(id));
+    }
 }
