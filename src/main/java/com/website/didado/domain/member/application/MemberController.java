@@ -23,7 +23,7 @@ public class MemberController {
     }
 
     @GetMapping("/members")
-    public ResponseEntity<MemberResponse> test2() {
+    public ResponseEntity<MemberResponse> searches() {
         return ResponseEntity.ok(memberService.findAll());
     }
 
