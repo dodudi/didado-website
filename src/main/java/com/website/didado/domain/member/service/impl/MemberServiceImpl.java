@@ -60,7 +60,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberResponse removeMember(Long id) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
+                .orElseThrow(() -> new NotFoundMemberException("존재하지 않는 회원입니다."));
 
         memberRepository.delete(member);
         return new MemberResponse("회원 탈퇴에 성공했습니다.", 200, member);
