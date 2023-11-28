@@ -2,9 +2,12 @@ package com.website.didado.domain.member.application;
 
 import com.website.didado.domain.member.dto.MemberParameter;
 import com.website.didado.domain.member.dto.MemberResponse;
+import com.website.didado.domain.member.exception.DuplicateMemberException;
 import com.website.didado.domain.member.service.impl.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class MemberController {
@@ -37,5 +40,13 @@ public class MemberController {
     @PostMapping("/members/{id}/update")
     public ResponseEntity<MemberResponse> update(@PathVariable Long id, @RequestBody MemberParameter memberParameter) {
         return ResponseEntity.ok(memberService.update(id, memberParameter));
+    }
+
+    @ExceptionHandler({DuplicateMemberException.class})
+    public ResponseEntity<Object> throwDuplicateMemberHandler(DuplicateMemberException e) {
+        MemberResponse response = new MemberResponse(e.getMessage(), e.getStatus(), e.getData());
+        return ResponseEntity
+                .status(e.getStatus())
+                .body(response);
     }
 }
