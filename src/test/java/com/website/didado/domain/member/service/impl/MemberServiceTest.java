@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.website.didado.domain.member.domain.Member;
 import com.website.didado.domain.member.dto.MemberParameter;
 import com.website.didado.domain.member.dto.MemberResponse;
+import com.website.didado.domain.member.exception.DuplicateMemberException;
 import com.website.didado.domain.member.repository.MemberRepository;
 import io.micrometer.core.annotation.TimedSet;
 import lombok.extern.slf4j.Slf4j;
@@ -129,7 +130,7 @@ class MemberServiceTest {
 
             //when
             assertThatThrownBy(() -> memberService.signUp(memberParameter))
-                    .isInstanceOf(IllegalStateException.class);
+                    .isInstanceOf(DuplicateMemberException.class);
         }
     }
 
