@@ -27,7 +27,7 @@ public class MemberServiceImpl implements MemberService {
 
         Member save = memberRepository.save(memberParameter.toMember());
         log.debug("Signup Member={}", save);
-        return new MemberResponse("회원가입에 성공했습니다.", HttpStatus.OK.value(), "");
+        return new MemberResponse("회원가입에 성공했습니다.", HttpStatus.OK.value(), save.getId());
     }
 
     @Override

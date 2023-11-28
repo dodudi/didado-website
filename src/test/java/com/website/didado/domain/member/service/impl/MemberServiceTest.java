@@ -16,6 +16,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.AdditionalAnswers;
+import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -28,6 +30,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.*;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 @Slf4j
@@ -106,11 +110,14 @@ class MemberServiceTest {
         @DisplayName("성공 테스트")
         void signup_success() {
             MemberParameter memberParameter = new MemberParameter("username", "firstEmail", "lastEmail", "password");
-            MemberResponse memberResponse = new MemberResponse("회원가입에 성공했습니다.", 200, "");
-
+            MemberResponse memberResponse = new MemberResponse("회원가입에 성공했습니다.", 200, 1L);
+            Member saveMember = new Member(1L, memberParameter.username(), memberParameter.fullEmail(), memberParameter.password());
             //given
             when(memberRepository.countByEmail(memberParameter.fullEmail()))
                     .thenReturn(0L);
+
+            when(memberRepository.save(any()))
+                    .thenReturn(saveMember);
 
             //when
             MemberResponse result = memberService.signUp(memberParameter);
