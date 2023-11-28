@@ -3,6 +3,7 @@ package com.website.didado.domain.member.service.impl;
 import com.website.didado.domain.member.domain.Member;
 import com.website.didado.domain.member.dto.MemberParameter;
 import com.website.didado.domain.member.dto.MemberResponse;
+import com.website.didado.domain.member.exception.DuplicateMemberException;
 import com.website.didado.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
     public MemberResponse signUp(MemberParameter memberParameter) {
         long count = memberRepository.countByEmail(memberParameter.fullEmail());
         if (count > 0L)
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
+            throw new DuplicateMemberException(memberParameter);
 
         Member save = memberRepository.save(memberParameter.toMember());
         log.debug("Signup Member={}", save);
