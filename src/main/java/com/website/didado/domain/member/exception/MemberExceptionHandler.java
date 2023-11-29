@@ -1,6 +1,6 @@
 package com.website.didado.domain.member.exception;
 
-import com.website.didado.domain.member.application.MemberController;
+import com.website.didado.domain.member.api.MemberController;
 import com.website.didado.domain.member.dto.MemberResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

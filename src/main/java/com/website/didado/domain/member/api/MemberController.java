@@ -1,20 +1,11 @@
-package com.website.didado.domain.member.application;
+package com.website.didado.domain.member.api;
 
 import com.website.didado.domain.member.dto.MemberParameter;
 import com.website.didado.domain.member.dto.MemberResponse;
-import com.website.didado.domain.member.exception.DuplicateMemberException;
-import com.website.didado.domain.member.exception.NotFoundMemberException;
-import com.website.didado.domain.member.service.impl.MemberService;
+import com.website.didado.domain.member.application.impl.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 public class MemberController {

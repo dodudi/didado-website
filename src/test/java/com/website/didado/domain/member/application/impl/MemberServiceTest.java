@@ -1,28 +1,23 @@
-package com.website.didado.domain.member.service.impl;
+package com.website.didado.domain.member.application.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.website.didado.domain.member.application.impl.MemberServiceImpl;
 import com.website.didado.domain.member.domain.Member;
 import com.website.didado.domain.member.dto.MemberParameter;
 import com.website.didado.domain.member.dto.MemberResponse;
 import com.website.didado.domain.member.exception.DuplicateMemberException;
 import com.website.didado.domain.member.exception.NotFoundMemberException;
 import com.website.didado.domain.member.repository.MemberRepository;
-import io.micrometer.core.annotation.TimedSet;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.AdditionalAnswers;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +25,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
@@ -218,7 +212,7 @@ class MemberServiceTest {
         void notUpdateNullParameter() {
             //given
             Member oldMember = new Member(1L, "username", "idejrdud@gmail.com", "password");
-            
+
             //when
             when(memberRepository.findById(1L)).thenReturn(Optional.of(oldMember));
 

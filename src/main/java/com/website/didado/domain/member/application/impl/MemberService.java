@@ -1,4 +1,4 @@
-package com.website.didado.domain.member.service.impl;
+package com.website.didado.domain.member.application.impl;
 
 import com.website.didado.domain.member.dto.MemberParameter;
 import com.website.didado.domain.member.dto.MemberResponse;
