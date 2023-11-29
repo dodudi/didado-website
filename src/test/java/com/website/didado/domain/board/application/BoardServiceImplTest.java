@@ -37,6 +37,7 @@ class BoardServiceImplTest {
     @DisplayName("게시판 생성 테스트")
     class Create {
         @Test
+        @DisplayName("게시판 생성 - 성공 테스트")
         void success() {
             //given
             Member member = new Member(1L, "username", "email@naver.com", "password");
@@ -52,6 +53,18 @@ class BoardServiceImplTest {
             BoardResponse result = boardService.create(boardParameter);
 
             Assertions.assertThat(result).isEqualTo(boardResponse);
+        }
+
+        @Test
+        @DisplayName("로그인 하지 않은 에러 - 실패 테스트")
+        void throwNotLoginException() {
+            //when
+            BDDMockito.given(memberRepository.findById(1L)).willReturn(Optional.empty());
+
+            //then
+            BoardParameter boardParameter = new BoardParameter("title", "content");
+            Assertions.assertThatThrownBy(() -> boardService.create(boardParameter))
+                    .isInstanceOf(IllegalStateException.class);
         }
     }
 }
