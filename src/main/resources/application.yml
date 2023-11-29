@@ -19,6 +19,7 @@ spring:
 
 logging:
   level:
+    com.website.didado.domain.board: debug
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql: trace
 ---
