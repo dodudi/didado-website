@@ -214,7 +214,33 @@ class MemberServiceTest {
         }
 
         @Test
-        @DisplayName("존재 하지 않는 회원 - 실패")
+        @DisplayName("null, 공백 파라미터 업데이트 막기 - 성공 테스트")
+        void notUpdateNullParameter() {
+            //given
+            Member oldMember = new Member(1L, "username", "idejrdud@gmail.com", "password");
+            
+            //when
+            when(memberRepository.findById(1L)).thenReturn(Optional.of(oldMember));
+
+            //then
+            MemberParameter memberParameter = new MemberParameter(
+                    "updateUsername",
+                    "update",
+                    null,
+                    "updatePassword"
+            );
+
+            oldMember.updateMember(memberParameter);
+            log.info("{}", oldMember);
+            MemberResponse response = new MemberResponse("회원 업데이트에 성공했습니다.", 200, oldMember);
+
+
+            MemberResponse result = memberService.update(1L, memberParameter);
+            assertThat(result).isEqualTo(response);
+        }
+
+        @Test
+        @DisplayName("존재 하지 않는 회원 - 실패 테스트")
         void throwNotFoundMemberException() {
             //given
 
