@@ -14,7 +14,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("/boards")
-    public ResponseEntity<BoardResponse> create(@Valid @RequestBody BoardParameter boardParameter) {
+    public ResponseEntity<BoardResponse> search(@Valid @RequestBody BoardParameter boardParameter) {
         return ResponseEntity.ok(boardService.create(boardParameter));
     }
 
@@ -22,4 +22,6 @@ public class BoardController {
     public ResponseEntity<BoardResponse> create(@PathVariable Long id) {
         return ResponseEntity.ok(boardService.search(id));
     }
+
+
 }
