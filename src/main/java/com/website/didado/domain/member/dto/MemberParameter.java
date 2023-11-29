@@ -2,6 +2,7 @@ package com.website.didado.domain.member.dto;
 
 import com.website.didado.domain.member.domain.Member;
 import jakarta.validation.constraints.NotEmpty;
+import org.springframework.util.StringUtils;
 
 public record MemberParameter(
         @NotEmpty(message = "회원 이름을 입력해 주세요.") String username,
@@ -13,6 +14,9 @@ public record MemberParameter(
     }
 
     public String fullEmail() {
-        return firstEmail + "@" + lastEmail;
+        if (StringUtils.hasText(firstEmail) && StringUtils.hasText(lastEmail))
+            return firstEmail + "@" + lastEmail;
+
+        return null;
     }
 }
