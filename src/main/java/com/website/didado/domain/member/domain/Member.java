@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 
@@ -39,9 +40,14 @@ public class Member {
     }
 
     public void updateMember(MemberParameter memberParameter) {
-        this.username = memberParameter.username();
-        this.email = memberParameter.fullEmail();
-        this.password = memberParameter.password();
+        if (StringUtils.hasText(memberParameter.username()))
+            this.username = memberParameter.username();
+
+        if (StringUtils.hasText(memberParameter.fullEmail()))
+            this.email = memberParameter.fullEmail();
+
+        if (StringUtils.hasText(memberParameter.password()))
+            this.password = memberParameter.password();
     }
 
     @Override
