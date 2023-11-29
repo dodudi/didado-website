@@ -5,4 +5,6 @@ import com.website.didado.domain.board.dto.BoardResponse;
 
 public interface BoardService {
     BoardResponse create(BoardParameter boardParameter);
+
+    BoardResponse search(Long id);
 }

@@ -6,9 +6,7 @@ import com.website.didado.domain.board.dto.BoardResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,5 +16,10 @@ public class BoardController {
     @PostMapping("/boards")
     public ResponseEntity<BoardResponse> create(@Valid @RequestBody BoardParameter boardParameter) {
         return ResponseEntity.ok(boardService.create(boardParameter));
+    }
+
+    @GetMapping("/boards/{id}")
+    public ResponseEntity<BoardResponse> create(@PathVariable Long id) {
+        return ResponseEntity.ok(boardService.search(id));
     }
 }

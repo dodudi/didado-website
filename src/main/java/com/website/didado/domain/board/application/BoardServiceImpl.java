@@ -28,4 +28,13 @@ public class BoardServiceImpl implements BoardService {
         log.debug("Create Board={}", board);
         return new BoardResponse("게시판 생성에 성공했습니다.", 200, board.getId());
     }
+
+    @Override
+    public BoardResponse search(Long id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시판 id 입니다."));
+
+        log.debug("Search Board={}", board);
+        return new BoardResponse("게시판 조회에 성공했습니다.", 200, board);
+    }
 }
