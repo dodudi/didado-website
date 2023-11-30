@@ -1,5 +1,6 @@
 package com.website.didado.domain.board.domain;
 
+import com.website.didado.domain.board.dto.BoardParameter;
 import com.website.didado.domain.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 
@@ -63,5 +65,13 @@ public class Board {
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
                 '}';
+    }
+
+    public void updateBoard(BoardParameter boardParameter) {
+        if (StringUtils.hasText(boardParameter.title()))
+            this.title = boardParameter.title();
+
+        if (StringUtils.hasText(boardParameter.content()))
+            this.content = boardParameter.content();
     }
 }

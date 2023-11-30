@@ -132,4 +132,31 @@ class BoardServiceImplTest {
             assertThatThrownBy(() -> boardService.delete(1L)).isInstanceOf(IllegalStateException.class);
         }
     }
+
+    @Nested
+    @DisplayName("게시판 업데이트 테스트")
+    class Update {
+        @Test
+        @DisplayName("게시판 업데이트 - 성공 테스트")
+        void success() {
+            //given
+            Member member = new Member(1L, "username", "email@naver.com", "password");
+            Board board = new Board(1L, "title", "content", member);
+            given(boardRepository.findByIdFetch(any())).willReturn(Optional.of(board));
+
+            //when
+            BoardResponse result = boardService.update(1L, new BoardParameter("updateTitle", "updateContent"));
+
+            //then
+            assertThat(result).isEqualTo(new BoardResponse("게시판 업데이트에 성공했습니다.", 200, board));
+        }
+
+        @Test
+        @DisplayName("존재 하지 않는 게시판 ID 에러 발생 - 실패 테스트")
+        void throwIllegalStateException() {
+            //given
+            given(boardRepository.findByIdFetch(any())).willReturn(Optional.empty());
+            assertThatThrownBy(() -> boardService.update(1L, new BoardParameter("updateTitle", "updateContent"))).isInstanceOf(IllegalStateException.class);
+        }
+    }
 }

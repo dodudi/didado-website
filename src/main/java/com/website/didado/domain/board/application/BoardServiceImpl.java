@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -46,4 +44,16 @@ public class BoardServiceImpl implements BoardService {
         boardRepository.delete(board);
         return new BoardResponse("게시판 삭제에 성공했습니다.", 200, id);
     }
+
+    @Override
+    @Transactional
+    public BoardResponse update(Long id, BoardParameter boardParameter) {
+        Board board = boardRepository.findByIdFetch(id)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시판 id 입니다."));
+
+        board.updateBoard(boardParameter);
+        return new BoardResponse("게시판 업데이트에 성공했습니다.", 200, board);
+    }
+
+
 }

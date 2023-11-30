@@ -9,4 +9,6 @@ public interface BoardService {
     BoardResponse search(Long id);
 
     BoardResponse delete(Long id);
+
+    BoardResponse update(Long id, BoardParameter boardParameter);
 }
