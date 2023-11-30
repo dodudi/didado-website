@@ -7,4 +7,6 @@ public interface BoardService {
     BoardResponse create(BoardParameter boardParameter);
 
     BoardResponse search(Long id);
+
+    BoardResponse delete(Long id);
 }

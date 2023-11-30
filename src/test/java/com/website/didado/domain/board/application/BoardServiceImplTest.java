@@ -102,4 +102,34 @@ class BoardServiceImplTest {
 
 
     }
+
+    @Nested
+    @DisplayName("게시판 삭제 테스트")
+    class Delete {
+        @Test
+        @DisplayName("게시판 삭제 - 성공 테스트")
+        void success() {
+            //given
+            Member member = new Member(1L, "username", "email@naver.com", "password");
+            Board board = new Board(1L, "title", "content", member);
+            given(boardRepository.findById(any())).willReturn(Optional.of(board));
+
+            //when
+            BoardResponse result = boardService.delete(1L);
+
+            //then
+            BoardResponse response = new BoardResponse("게시판 삭제에 성공했습니다.", 200, 1L);
+            assertThat(result).isEqualTo(response);
+        }
+
+        @Test
+        @DisplayName("존재 하지 않는 게시판 ID 에러 발생 - 실패 테스트")
+        void throwIllegalStateException() {
+            //given
+            given(boardRepository.findById(any())).willReturn(Optional.empty());
+
+            //when
+            assertThatThrownBy(() -> boardService.delete(1L)).isInstanceOf(IllegalStateException.class);
+        }
+    }
 }

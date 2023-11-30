@@ -9,6 +9,7 @@ import com.website.didado.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -35,5 +36,14 @@ public class BoardServiceImpl implements BoardService {
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시판 id 입니다."));
 
         return new BoardResponse("게시판 조회에 성공했습니다.", 200, board);
+    }
+
+    @Override
+    public BoardResponse delete(Long id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시판 id 입니다."));
+
+        boardRepository.delete(board);
+        return new BoardResponse("게시판 삭제에 성공했습니다.", 200, id);
     }
 }
