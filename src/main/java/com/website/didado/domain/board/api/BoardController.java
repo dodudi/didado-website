@@ -16,7 +16,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("/boards")
-    public ResponseEntity<BoardResponse> search(@Valid @RequestBody BoardParameter boardParameter) {
+    public ResponseEntity<BoardResponse> create(@Valid @RequestBody BoardParameter boardParameter) {
         return ResponseEntity.ok(boardService.create(boardParameter));
     }
 
