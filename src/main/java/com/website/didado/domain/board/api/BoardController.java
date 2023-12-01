@@ -5,6 +5,8 @@ import com.website.didado.domain.board.dto.BoardParameter;
 import com.website.didado.domain.board.dto.BoardResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,11 @@ public class BoardController {
     @GetMapping("/boards/{id}")
     public ResponseEntity<BoardResponse> create(@PathVariable Long id) {
         return ResponseEntity.ok(boardService.search(id));
+    }
+
+    @GetMapping("/boards")
+    public ResponseEntity<BoardResponse> searchPage(Pageable pageable) {
+        return ResponseEntity.ok(boardService.search(pageable));
     }
 
     @PostMapping("/boards/{id}/delete")

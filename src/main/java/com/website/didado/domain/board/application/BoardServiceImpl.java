@@ -8,6 +8,9 @@ import com.website.didado.domain.member.domain.Member;
 import com.website.didado.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +37,17 @@ public class BoardServiceImpl implements BoardService {
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시판 id 입니다."));
 
         return new BoardResponse("게시판 조회에 성공했습니다.", 200, board);
+    }
+
+    @Override
+    public BoardResponse search(Pageable pageable) {
+        PageRequest pageRequest = (PageRequest) pageable;
+        log.debug("Page={}", pageRequest.getPageNumber());
+        log.debug("Page Size={}", pageRequest.getPageSize());
+        log.debug("Page Offset={}", pageRequest.getOffset());
+
+        Page<Board> boards = boardRepository.findPage(pageRequest);
+        return new BoardResponse("게시판 조회에 성공했습니다.", 200, boards);
     }
 
     @Override
