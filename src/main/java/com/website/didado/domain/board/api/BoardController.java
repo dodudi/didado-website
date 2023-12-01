@@ -21,7 +21,7 @@ public class BoardController {
     }
 
     @GetMapping("/boards/{id}")
-    public ResponseEntity<BoardResponse> create(@PathVariable Long id) {
+    public ResponseEntity<BoardResponse> search(@PathVariable Long id) {
         return ResponseEntity.ok(boardService.search(id));
     }
 
