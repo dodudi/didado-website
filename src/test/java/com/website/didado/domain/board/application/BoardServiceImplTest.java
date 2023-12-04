@@ -3,6 +3,7 @@ package com.website.didado.domain.board.application;
 import com.website.didado.domain.board.domain.Board;
 import com.website.didado.domain.board.dto.BoardParameter;
 import com.website.didado.domain.board.dto.BoardResponse;
+import com.website.didado.domain.board.exception.NotFoundBoardException;
 import com.website.didado.domain.board.repository.BoardRepository;
 import com.website.didado.domain.member.domain.Member;
 import com.website.didado.domain.member.repository.MemberRepository;
@@ -131,11 +132,11 @@ class BoardServiceImplTest {
         @DisplayName("존재 하지 않는 게시판 id 에러 - 실패 테스트")
         void throwNotFoundBoardException() {
             //given
-            given(boardRepository.findById(any())).willReturn(Optional.empty());
+            given(boardRepository.findByIdFetch(any())).willReturn(Optional.empty());
 
             //when
             assertThatThrownBy(() -> boardService.search(1L))
-                    .isInstanceOf(IllegalStateException.class);
+                    .isInstanceOf(NotFoundBoardException.class);
         }
     }
 
@@ -165,7 +166,7 @@ class BoardServiceImplTest {
             given(boardRepository.findById(any())).willReturn(Optional.empty());
 
             //when
-            assertThatThrownBy(() -> boardService.delete(1L)).isInstanceOf(IllegalStateException.class);
+            assertThatThrownBy(() -> boardService.delete(1L)).isInstanceOf(NotFoundBoardException.class);
         }
     }
 
@@ -192,7 +193,7 @@ class BoardServiceImplTest {
         void throwIllegalStateException() {
             //given
             given(boardRepository.findByIdFetch(any())).willReturn(Optional.empty());
-            assertThatThrownBy(() -> boardService.update(1L, new BoardParameter("updateTitle", "updateContent"))).isInstanceOf(IllegalStateException.class);
+            assertThatThrownBy(() -> boardService.update(1L, new BoardParameter("updateTitle", "updateContent"))).isInstanceOf(NotFoundBoardException.class);
         }
     }
 }
