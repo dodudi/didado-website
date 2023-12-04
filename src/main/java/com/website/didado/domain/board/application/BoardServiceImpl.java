@@ -3,6 +3,7 @@ package com.website.didado.domain.board.application;
 import com.website.didado.domain.board.domain.Board;
 import com.website.didado.domain.board.dto.BoardParameter;
 import com.website.didado.domain.board.dto.BoardResponse;
+import com.website.didado.domain.board.exception.NotFoundBoardException;
 import com.website.didado.domain.board.repository.BoardRepository;
 import com.website.didado.domain.member.domain.Member;
 import com.website.didado.domain.member.repository.MemberRepository;
@@ -34,7 +35,7 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardResponse search(Long id) {
         Board board = boardRepository.findByIdFetch(id)
-                .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시판 id 입니다."));
+                .orElseThrow(NotFoundBoardException::new);
 
         return new BoardResponse("게시판 조회에 성공했습니다.", 200, board);
     }
@@ -53,7 +54,7 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardResponse delete(Long id) {
         Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시판 id 입니다."));
+                .orElseThrow(NotFoundBoardException::new);
 
         boardRepository.delete(board);
         return new BoardResponse("게시판 삭제에 성공했습니다.", 200, id);
@@ -63,7 +64,7 @@ public class BoardServiceImpl implements BoardService {
     @Transactional
     public BoardResponse update(Long id, BoardParameter boardParameter) {
         Board board = boardRepository.findByIdFetch(id)
-                .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시판 id 입니다."));
+                .orElseThrow(NotFoundBoardException::new);
 
         board.updateBoard(boardParameter);
         return new BoardResponse("게시판 업데이트에 성공했습니다.", 200, board);
