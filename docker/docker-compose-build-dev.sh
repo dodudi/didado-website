@@ -8,7 +8,7 @@ cp build/libs/website-0.0.1-SNAPSHOT.jar docker/app.jar
 #도커 이미지, 컨테이너 초기화
 docker-compose down
 #docker container rm -f didado-website-container
-docker image rm -f didado-website
+docker image rm -f $(docker image ls -aq)
 
 #도커 이미지 생성, 컴포즈 실행
 docker image build --tag didado-website docker/.

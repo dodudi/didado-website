@@ -37,10 +37,14 @@ spring:
       hibernate:
         format_sql: true
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:/website
-    username: sa
-    password:
+    driver-class-name: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:/websitev
+#    username: sa
+#    password:
 server:
   port: 8081
 ---
