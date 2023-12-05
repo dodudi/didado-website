@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  didado-website:
+    image: didado-website
+    ports:
+      - "8081:8081"
+    networks:
+      - didado-net
+
+networks:
+  didado-net:
+    external: true
