@@ -7,10 +7,10 @@ spring:
       settings:
         web-allow-others: true
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:~/website
-    username: sa
-    password:
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:org.h2.Driver}
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:/website}
+    username: ${SPRING_DATASOURCE_USERNAME:sa}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
   #JPA
   jpa:
     hibernate:
@@ -36,15 +36,14 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:/websitev
-#    username: sa
-#    password:
+  h2:
+    console:
+      enabled: false
+#  datasource:
+#    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
+#    url: ${SPRING_DATASOURCE_URL}
+#    username: ${SPRING_DATASOURCE_USERNAME}
+#    password: ${SPRING_DATASOURCE_PASSWORD}
 server:
   port: 8081
 ---
@@ -55,10 +54,20 @@ spring:
   #JPA
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
+  h2:
+    console:
+      enabled: false
+#  datasource:
+#    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
+#    url: ${SPRING_DATASOURCE_URL}
+#    username: ${SPRING_DATASOURCE_USERNAME}
+#    password: ${SPRING_DATASOURCE_PASSWORD}
+server:
+  port: 8082
 logging:
   level:
     com.website.didado.domain.board: info
