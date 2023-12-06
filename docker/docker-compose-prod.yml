@@ -1,0 +1,32 @@
+services:
+  didado-website:
+    container_name: didado-website-prod
+    image: didado-website
+    ports:
+      - "8082:8082"
+    networks:
+      - didado-prod-net
+    environment:
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/website
+      SPRING_DATASOURCE_USERNAME: website
+      SPRING_DATASOURCE_PASSWORD: website
+      SPRING_PROFILES_ACTIVE: prod
+    depends_on:
+      - database
+  database:
+    container_name: database-prod
+    image: postgres:latest
+    ports:
+      - "5433:5432"
+    networks:
+      - didado-prod-net
+    environment:
+      POSTGRES_DB: website
+      POSTGRES_USER: website
+      POSTGRES_PASSWORD: website
+    volumes:
+      - /Users/didado/desktop/database/prod:/var/lib/postgresql/data
+networks:
+  didado-prod-net:
+    external: true

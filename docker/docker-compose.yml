@@ -4,29 +4,3 @@ services:
   didado-website:
     container_name: didado-website
     image: didado-website
-    ports:
-      - "8081:8081"
-    networks:
-      - didado-net
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/website
-      SPRING_DATASOURCE_USERNAME: website
-      SPRING_DATASOURCE_PASSWORD: website
-    depends_on:
-      - database
-  database:
-    container_name: database
-    image: postgres:latest
-    ports:
-      - "5432:5432"
-    networks:
-      - didado-net
-    environment:
-      POSTGRES_DB: website
-      POSTGRES_USER: website
-      POSTGRES_PASSWORD: website
-    volumes:
-      - /Users/didado/desktop/database/:/var/lib/postgresql/data
-networks:
-  didado-net:
-    external: true
