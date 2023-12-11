@@ -14,7 +14,12 @@ public class ArmoryController {
     private final ArmoryServiceImpl armoryService;
 
     @GetMapping("/lostark/armory/{username}")
-    public Object search(@PathVariable String username){
+    public Object search(@PathVariable String username) {
         return armoryService.search(username);
+    }
+
+    @GetMapping("/lostark/armory/{username}/profiles")
+    public Object profiles(@PathVariable String username) {
+        return armoryService.profiles(username);
     }
 }

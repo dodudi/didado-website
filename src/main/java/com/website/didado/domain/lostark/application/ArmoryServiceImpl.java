@@ -2,6 +2,7 @@ package com.website.didado.domain.lostark.application;
 
 import com.website.didado.domain.lostark.domain.LostarkProperty;
 import com.website.didado.domain.lostark.dto.armory.Armory;
+import com.website.didado.domain.lostark.dto.armory.ArmoryProfile;
 import com.website.didado.domain.lostark.dto.character.Character;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ public class ArmoryServiceImpl {
     private final RestTemplate restTemplate;
     private final LostarkProperty property;
 
-    public Object search(String username){
+    public Object search(String username) {
 
         String url = property.url() + "/armories/characters/" + username;
         HttpHeaders headers = new HttpHeaders();
@@ -33,7 +34,25 @@ public class ArmoryServiceImpl {
                 url,
                 HttpMethod.GET,
                 new HttpEntity<>(headers),
-                new ParameterizedTypeReference<>() {}
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+        return response.getBody();
+    }
+
+    public Object profiles(String username) {
+        String url = property.url() + "/armories/characters/" + username + "/profiles";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", property.apiKey());
+
+
+        ResponseEntity<ArmoryProfile> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                new ParameterizedTypeReference<>() {
+                }
         );
 
         return response.getBody();
