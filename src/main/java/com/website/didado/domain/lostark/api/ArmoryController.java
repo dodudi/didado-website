@@ -47,4 +47,8 @@ public class ArmoryController {
     public Object cards(@PathVariable String username) {
         return armoryService.cards(username);
     }
+    @GetMapping("/lostark/armory/{username}/gems")
+    public Object gems(@PathVariable String username) {
+        return armoryService.gems(username);
+    }
 }

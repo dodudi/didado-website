@@ -141,4 +141,21 @@ public class ArmoryServiceImpl {
 
         return response.getBody();
     }
+
+    public Object gems(String username) {
+        String url = property.url() + "/armories/characters/" + username + "/gems";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", property.apiKey());
+
+
+        ResponseEntity<ArmoryGem> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+        return response.getBody();
+    }
 }
