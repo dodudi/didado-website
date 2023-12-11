@@ -42,4 +42,9 @@ public class ArmoryController {
     public Object engravings(@PathVariable String username) {
         return armoryService.engravings(username);
     }
+
+    @GetMapping("/lostark/armory/{username}/cards")
+    public Object cards(@PathVariable String username) {
+        return armoryService.cards(username);
+    }
 }
