@@ -37,7 +37,7 @@ public class ArmoryServiceImpl {
                 }
         );
 
-        return response.getBody();
+        return new ArmoryResponse("캐릭터 상세 정보 조회에 성공", 200, response.getBody());
     }
 
     public Object profiles(String username) {
@@ -54,7 +54,7 @@ public class ArmoryServiceImpl {
                 }
         );
 
-        return response.getBody();
+        return new ArmoryResponse("캐릭터 프로 파일 조회에 성공", 200, response.getBody());
     }
 
     public Object equipment(String username) {
@@ -71,7 +71,7 @@ public class ArmoryServiceImpl {
                 }
         );
 
-        return response.getBody();
+        return new ArmoryResponse("캐릭터 착용 장비 조회에 성공", 200, response.getBody());
     }
 
     public Object avatars(String username) {
@@ -88,7 +88,7 @@ public class ArmoryServiceImpl {
                 }
         );
 
-        return response.getBody();
+        return new ArmoryResponse("캐릭터 착용 아바타 조회에 성공", 200, response.getBody());
     }
 
     public Object combatSkills(String username) {
@@ -105,7 +105,7 @@ public class ArmoryServiceImpl {
                 }
         );
 
-        return response.getBody();
+        return new ArmoryResponse("캐릭터 착용 스킬 조회에 성공", 200, response.getBody());
     }
 
     public Object engravings(String username) {
@@ -122,7 +122,7 @@ public class ArmoryServiceImpl {
                 }
         );
 
-        return response.getBody();
+        return new ArmoryResponse("캐릭터 착용 각인 조회에 성공", 200, response.getBody());
     }
 
     public Object cards(String username) {
@@ -139,7 +139,7 @@ public class ArmoryServiceImpl {
                 }
         );
 
-        return response.getBody();
+        return new ArmoryResponse("캐릭터 착용 카드 조회에 성공", 200, response.getBody());
     }
 
     public Object gems(String username) {
@@ -156,7 +156,7 @@ public class ArmoryServiceImpl {
                 }
         );
 
-        return response.getBody();
+        return new ArmoryResponse("캐릭터 착용 보석 조회에 성공", 200, response.getBody());
     }
 
     public Object colosseums(String username) {
@@ -173,8 +173,10 @@ public class ArmoryServiceImpl {
                 }
         );
 
-        return response.getBody();
-    }    public Object collectibles(String username) {
+        return new ArmoryResponse("캐릭터 결투장 정보 조회에 성공", 200, response.getBody());
+    }
+
+    public Object collectibles(String username) {
         String url = property.url() + "/armories/characters/" + username + "/collectibles";
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", property.apiKey());
@@ -188,6 +190,6 @@ public class ArmoryServiceImpl {
                 }
         );
 
-        return response.getBody();
+        return new ArmoryResponse("캐릭터 수집물 조회에 성공", 200, response.getBody());
     }
 }
