@@ -1,10 +1,7 @@
 package com.website.didado.domain.lostark.application;
 
 import com.website.didado.domain.lostark.domain.LostarkProperty;
-import com.website.didado.domain.lostark.dto.armory.Armory;
-import com.website.didado.domain.lostark.dto.armory.ArmoryAvatar;
-import com.website.didado.domain.lostark.dto.armory.ArmoryEquipment;
-import com.website.didado.domain.lostark.dto.armory.ArmoryProfile;
+import com.website.didado.domain.lostark.dto.armory.*;
 import com.website.didado.domain.lostark.dto.character.Character;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -84,6 +81,23 @@ public class ArmoryServiceImpl {
 
 
         ResponseEntity<List<ArmoryAvatar>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+        return response.getBody();
+    }
+
+    public Object combatSkills(String username) {
+        String url = property.url() + "/armories/characters/" + username + "/combat-skills";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", property.apiKey());
+
+
+        ResponseEntity<List<ArmorySkill>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 new HttpEntity<>(headers),
