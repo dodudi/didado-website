@@ -27,4 +27,9 @@ public class ArmoryController {
     public Object equipments(@PathVariable String username) {
         return armoryService.equipment(username);
     }
+
+    @GetMapping("/lostark/armory/{username}/avatars")
+    public Object avatars(@PathVariable String username) {
+        return armoryService.avatars(username);
+    }
 }
