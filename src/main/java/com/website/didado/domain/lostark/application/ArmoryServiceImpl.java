@@ -107,4 +107,21 @@ public class ArmoryServiceImpl {
 
         return response.getBody();
     }
+
+    public Object engravings(String username) {
+        String url = property.url() + "/armories/characters/" + username + "/engravings";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", property.apiKey());
+
+
+        ResponseEntity<ArmoryEngraving> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+        return response.getBody();
+    }
 }

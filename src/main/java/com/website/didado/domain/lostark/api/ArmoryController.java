@@ -37,4 +37,9 @@ public class ArmoryController {
     public Object combatSkills(@PathVariable String username) {
         return armoryService.combatSkills(username);
     }
+
+    @GetMapping("/lostark/armory/{username}/engravings")
+    public Object engravings(@PathVariable String username) {
+        return armoryService.engravings(username);
+    }
 }
