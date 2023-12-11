@@ -56,5 +56,8 @@ public class ArmoryController {
     @GetMapping("/lostark/armory/{username}/colosseums")
     public Object colosseums(@PathVariable String username) {
         return armoryService.colosseums(username);
+    }    @GetMapping("/lostark/armory/{username}/collectibles")
+    public Object collectibles(@PathVariable String username) {
+        return armoryService.collectibles(username);
     }
 }

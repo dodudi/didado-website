@@ -174,5 +174,20 @@ public class ArmoryServiceImpl {
         );
 
         return response.getBody();
+    }    public Object collectibles(String username) {
+        String url = property.url() + "/armories/characters/" + username + "/collectibles";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", property.apiKey());
+
+
+        ResponseEntity<List<Collectible>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+        return response.getBody();
     }
 }
