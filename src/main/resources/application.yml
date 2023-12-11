@@ -21,7 +21,9 @@ spring:
 
 logging:
   level:
+    com.website.didado.config: debug
     com.website.didado.domain.board: debug
+    com.website.didado.domain.lostark: debug
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql: trace
 ---
@@ -70,6 +72,6 @@ server:
   port: 8082
 logging:
   level:
-    com.website.didado.domain.board: info
+    com.website.didado.domain: info
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql: trace
