@@ -17,4 +17,9 @@ public class ContentController {
     public ResponseEntity<ContentResponse> abyssDungeons() {
         return ResponseEntity.ok(contentService.abyssDungeons());
     }
+
+    @GetMapping("/lostark/contents/challenge-guardian-raids")
+    public ResponseEntity<ContentResponse> guardianRaids() {
+        return ResponseEntity.ok(contentService.guardianRaids());
+    }
 }

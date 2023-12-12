@@ -4,6 +4,7 @@ import com.website.didado.domain.lostark.domain.LostarkProperty;
 import com.website.didado.domain.lostark.dto.character.Character;
 import com.website.didado.domain.lostark.dto.character.CharacterResponse;
 import com.website.didado.domain.lostark.dto.content.ChallengeAbyssDungeon;
+import com.website.didado.domain.lostark.dto.content.ChallengeGuardianRaid;
 import com.website.didado.domain.lostark.dto.content.ContentResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,4 +40,21 @@ public class ContentServiceImpl {
 
         return new ContentResponse("도전 어비스 던전 정보 조회 성공.", 200, response.getBody());
     }
+
+    public ContentResponse guardianRaids() {
+        String url = property.url() + "/gamecontents/challenge-guardian-raids";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", property.apiKey());
+
+        ResponseEntity<ChallengeGuardianRaid> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+        return new ContentResponse("도전 가디언 레이드 정보 조회 성공.", 200, response.getBody());
+    }
+
 }
