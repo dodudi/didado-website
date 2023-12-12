@@ -1,8 +1,7 @@
 package com.website.didado.domain.lostark.application;
 
 import com.website.didado.domain.lostark.domain.LostarkProperty;
-import com.website.didado.domain.lostark.dto.market.MarketOption;
-import com.website.didado.domain.lostark.dto.market.MarketResponse;
+import com.website.didado.domain.lostark.dto.market.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -29,5 +28,17 @@ public class MarketServiceImpl {
         log.debug("{}", response.getBody());
 
         return new MarketResponse("Market 옵션 검색 성공", 200, response.getBody());
+    }
+
+    public MarketResponse items(MarketParameter parameter) {
+        String url = property.url() + "/markets/items";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", property.apiKey());
+
+        ResponseEntity<MarketList> response = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(parameter, headers), MarketList.class);
+        log.debug("{}", response.getBody());
+
+        return new MarketResponse("Market 검색 성공", 200, response.getBody());
     }
 }
