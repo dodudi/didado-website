@@ -21,4 +21,9 @@ public class MarketController {
     public ResponseEntity<MarketResponse> items(@RequestBody MarketParameter parameter) {
         return ResponseEntity.ok(marketService.items(parameter));
     }
+
+    @GetMapping("/lostark/markets/items/{itemId}")
+    public ResponseEntity<MarketResponse> items(@PathVariable Integer itemId) {
+        return ResponseEntity.ok(marketService.items(itemId));
+    }
 }
