@@ -6,6 +6,7 @@ import com.website.didado.domain.lostark.dto.character.CharacterResponse;
 import com.website.didado.domain.lostark.dto.content.ChallengeAbyssDungeon;
 import com.website.didado.domain.lostark.dto.content.ChallengeGuardianRaid;
 import com.website.didado.domain.lostark.dto.content.ContentResponse;
+import com.website.didado.domain.lostark.dto.content.ContentsCalendar;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -57,4 +58,19 @@ public class ContentServiceImpl {
         return new ContentResponse("도전 가디언 레이드 정보 조회 성공.", 200, response.getBody());
     }
 
+    public ContentResponse calendar() {
+        String url = property.url() + "/gamecontents/calendar";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("authorization", property.apiKey());
+
+        ResponseEntity<List<ContentsCalendar>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+        return new ContentResponse("캘린더 정보 조회 성공.", 200, response.getBody());
+    }
 }

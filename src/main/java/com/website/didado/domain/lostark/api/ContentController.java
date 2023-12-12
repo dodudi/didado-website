@@ -22,4 +22,9 @@ public class ContentController {
     public ResponseEntity<ContentResponse> guardianRaids() {
         return ResponseEntity.ok(contentService.guardianRaids());
     }
+
+    @GetMapping("/lostark/contents/calendar")
+    public ResponseEntity<ContentResponse> calendar() {
+        return ResponseEntity.ok(contentService.calendar());
+    }
 }
