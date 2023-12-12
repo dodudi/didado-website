@@ -2,11 +2,13 @@ package com.website.didado.domain.lostark.dto.auction;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.List;
 
 @Getter
-public class RequestAuctionItems {
+@ToString
+public class AuctionParameter {
 
     @JsonProperty(value = "ItemLevelMin")
     private Integer itemLevelMin;
