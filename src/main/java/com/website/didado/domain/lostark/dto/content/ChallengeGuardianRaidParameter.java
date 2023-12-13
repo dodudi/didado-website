@@ -6,11 +6,11 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class ChallengeGuardianRaid {
+public class ChallengeGuardianRaidParameter {
 
     @JsonProperty(value = "Raids")
-    private List<GuardianRaid> Raids;
+    private List<GuardianRaidParameter> Raids;
 
     @JsonProperty(value = "RewardItems")
-    private List<LevelRewardItems> RewardItems;
+    private List<LevelRewardItemParameter> RewardItems;
 }

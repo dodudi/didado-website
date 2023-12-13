@@ -6,11 +6,11 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class LevelRewardItems {
+public class LevelRewardItemParameter {
 
     @JsonProperty(value = "ExpeditionItemLevel")
     private Integer expeditionItemLevel;
 
     @JsonProperty(value = "Items")
-    private List<RewardItem> items;
+    private List<RewardItemParameter> items;
 }

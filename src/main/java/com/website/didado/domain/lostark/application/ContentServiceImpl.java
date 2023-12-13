@@ -1,12 +1,10 @@
 package com.website.didado.domain.lostark.application;
 
 import com.website.didado.domain.lostark.domain.LostarkProperty;
-import com.website.didado.domain.lostark.dto.character.Character;
-import com.website.didado.domain.lostark.dto.character.CharacterResponse;
-import com.website.didado.domain.lostark.dto.content.ChallengeAbyssDungeon;
-import com.website.didado.domain.lostark.dto.content.ChallengeGuardianRaid;
+import com.website.didado.domain.lostark.dto.content.ChallengeAbyssDungeonParameter;
+import com.website.didado.domain.lostark.dto.content.ChallengeGuardianRaidParameter;
 import com.website.didado.domain.lostark.dto.content.ContentResponse;
-import com.website.didado.domain.lostark.dto.content.ContentsCalendar;
+import com.website.didado.domain.lostark.dto.content.ContentsCalendarParameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -31,7 +29,7 @@ public class ContentServiceImpl {
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", property.apiKey());
 
-        ResponseEntity<List<ChallengeAbyssDungeon>> response = restTemplate.exchange(
+        ResponseEntity<List<ChallengeAbyssDungeonParameter>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 new HttpEntity<>(headers),
@@ -47,7 +45,7 @@ public class ContentServiceImpl {
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", property.apiKey());
 
-        ResponseEntity<ChallengeGuardianRaid> response = restTemplate.exchange(
+        ResponseEntity<ChallengeGuardianRaidParameter> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 new HttpEntity<>(headers),
@@ -63,7 +61,7 @@ public class ContentServiceImpl {
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", property.apiKey());
 
-        ResponseEntity<List<ContentsCalendar>> response = restTemplate.exchange(
+        ResponseEntity<List<ContentsCalendarParameter>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 new HttpEntity<>(headers),

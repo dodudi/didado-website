@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class ContentsCalendar {
+public class ContentsCalendarParameter {
 
     @JsonProperty(value = "CategoryName")
     private String categoryName;
@@ -27,5 +27,5 @@ public class ContentsCalendar {
     private String location;
 
     @JsonProperty(value = "RewardItems")
-    private List<RewardItem> rewardItems;
+    private List<RewardItemParameter> rewardItems;
 }

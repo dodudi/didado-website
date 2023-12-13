@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class ChallengeAbyssDungeon {
+public class ChallengeAbyssDungeonParameter {
 
     @JsonProperty(value = "Name")
     private String name;
@@ -33,5 +33,5 @@ public class ChallengeAbyssDungeon {
     private String image;
 
     @JsonProperty(value = "RewardItems")
-    private List<RewardItem> rewardItems;
+    private List<RewardItemParameter> rewardItems;
 }

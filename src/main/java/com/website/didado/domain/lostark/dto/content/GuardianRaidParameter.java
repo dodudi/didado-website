@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class GuardianRaid {
+public class GuardianRaidParameter {
 
     @JsonProperty(value = "Name")
     private String name;
