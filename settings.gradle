@@ -1,1 +1,3 @@
 rootProject.name = 'website'
+include 'lostark-content'
+
