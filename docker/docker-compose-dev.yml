@@ -1,11 +1,46 @@
 services:
-  didado-website:
-    container_name: didado-website-dev
-    image: didado-website
+  lostark-armory:
+    container_name: lostark-armory-dev
+    ports:
+      - "8080:8080"
+    networks:
+      - lostark-dev-net
+    environment:
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/website
+      SPRING_DATASOURCE_USERNAME: website
+      SPRING_DATASOURCE_PASSWORD: website
+      SPRING_PROFILES_ACTIVE: dev
+  lostark-auction:
+    container_name: lostark-auction-dev
     ports:
       - "8081:8081"
     networks:
-      - didado-dev-net
+      - lostark-dev-net
+    environment:
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/website
+      SPRING_DATASOURCE_USERNAME: website
+      SPRING_DATASOURCE_PASSWORD: website
+      SPRING_PROFILES_ACTIVE: dev
+  lostark-character:
+    container_name: lostark-character-dev
+    ports:
+      - "8082:8082"
+    networks:
+      - lostark-dev-net
+    environment:
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/website
+      SPRING_DATASOURCE_USERNAME: website
+      SPRING_DATASOURCE_PASSWORD: website
+      SPRING_PROFILES_ACTIVE: dev
+  lostark-content:
+    container_name: lostark-content-dev
+    ports:
+      - "8083:8083"
+    networks:
+      - lostark-dev-net
     environment:
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
       SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/website
@@ -14,19 +49,20 @@ services:
       SPRING_PROFILES_ACTIVE: dev
     depends_on:
       - database
+      - 
   database:
     container_name: database-dev
     image: postgres:latest
     ports:
       - "5432:5432"
     networks:
-      - didado-dev-net
+      - lostark-dev-net
     environment:
-      POSTGRES_DB: website
-      POSTGRES_USER: website
-      POSTGRES_PASSWORD: website
+      POSTGRES_DB: lostark
+      POSTGRES_USER: lostark
+      POSTGRES_PASSWORD: lostark
     volumes:
       - /Users/didado/desktop/database/dev:/var/lib/postgresql/data
 networks:
-  didado-dev-net:
+  lostark-dev-net:
     external: true

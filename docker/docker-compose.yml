@@ -1,6 +1,18 @@
 version: '3.7'
 
 services:
-  didado-website:
-    container_name: didado-website
-    image: didado-website
+  lostark-armory:
+    container_name: lostark-armory
+    image: lostark-armory-image
+
+  lostark-auction:
+    container_name: lostark-auction
+    image: lostark-auction-image
+
+  lostark-character:
+    container_name: lostark-character
+    image: lostark-character-image
+
+  lostark-content:
+    container_name: lostark-content
+    image: lostark-content-image
