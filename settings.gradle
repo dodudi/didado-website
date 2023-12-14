@@ -2,3 +2,5 @@ rootProject.name = 'website'
 include 'lostark-content'
 include 'lostark-armory'
 include 'lostark-auction'
+include 'lostark-market'
+
