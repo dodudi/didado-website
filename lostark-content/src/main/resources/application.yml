@@ -18,12 +18,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
 logging:
   level:
-    com.website.didado.domain.board: debug
+    com.didado.content.domain: debug
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql: trace
+
 ---
 spring:
   config:
