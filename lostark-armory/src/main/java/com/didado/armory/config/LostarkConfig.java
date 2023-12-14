@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Slf4j
 @Configuration
-@PropertySource("classpath:lostark.properties")
+//@PropertySource("classpath:lostark.properties")
 public class LostarkConfig {
     @Value("${lostark.url}")
     private String url;

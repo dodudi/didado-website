@@ -1,5 +1,4 @@
 spring:
-  #Data Base
   h2:
     console:
       enabled: true
@@ -11,7 +10,6 @@ spring:
     url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:/website}
     username: ${SPRING_DATASOURCE_USERNAME:sa}
     password: ${SPRING_DATASOURCE_PASSWORD:}
-  #JPA
   jpa:
     hibernate:
       ddl-auto: create
@@ -21,9 +19,12 @@ spring:
 
 logging:
   level:
-    com.website.didado.domain.board: debug
+    com.didado.auction.domain: debug
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql: trace
+
+server:
+  port: 8081
 ---
 spring:
   config:
@@ -39,13 +40,6 @@ spring:
   h2:
     console:
       enabled: false
-#  datasource:
-#    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
-#    url: ${SPRING_DATASOURCE_URL}
-#    username: ${SPRING_DATASOURCE_USERNAME}
-#    password: ${SPRING_DATASOURCE_PASSWORD}
-server:
-  port: 8081
 ---
 spring:
   config:
@@ -61,15 +55,9 @@ spring:
   h2:
     console:
       enabled: false
-#  datasource:
-#    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
-#    url: ${SPRING_DATASOURCE_URL}
-#    username: ${SPRING_DATASOURCE_USERNAME}
-#    password: ${SPRING_DATASOURCE_PASSWORD}
-server:
-  port: 8082
+
 logging:
   level:
-    com.website.didado.domain.board: info
+    com.didado.auction.domain: info
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql: trace
