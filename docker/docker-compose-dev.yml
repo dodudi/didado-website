@@ -11,6 +11,8 @@ services:
       SPRING_DATASOURCE_USERNAME: website
       SPRING_DATASOURCE_PASSWORD: website
       SPRING_PROFILES_ACTIVE: dev
+    depends_on:
+      - database
   lostark-auction:
 #    container_name: lostark-auction-dev
     ports:
@@ -23,6 +25,8 @@ services:
       SPRING_DATASOURCE_USERNAME: website
       SPRING_DATASOURCE_PASSWORD: website
       SPRING_PROFILES_ACTIVE: dev
+    depends_on:
+      - database
   lostark-character:
 #    container_name: lostark-character-dev
     ports:
@@ -35,6 +39,8 @@ services:
       SPRING_DATASOURCE_USERNAME: website
       SPRING_DATASOURCE_PASSWORD: website
       SPRING_PROFILES_ACTIVE: dev
+    depends_on:
+      - database
   lostark-content:
 #    container_name: lostark-content-dev
     ports:
@@ -49,7 +55,7 @@ services:
       SPRING_PROFILES_ACTIVE: dev
     depends_on:
       - database
-      - 
+
   database:
 #    container_name: database-dev
     image: postgres:latest
