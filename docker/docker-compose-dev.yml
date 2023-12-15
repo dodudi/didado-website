@@ -13,6 +13,11 @@ services:
       SPRING_DATASOURCE_USERNAME: website
       SPRING_DATASOURCE_PASSWORD: website
       SPRING_PROFILES_ACTIVE: dev
+      LOSTARK_URL: /run/secrets/lostark_url
+      LOSTARK_API_KEY: /run/secrets/lostark_api_key
+    secrets:
+      - lostark_url
+      - lostark_api_key
     depends_on:
       - database
   lostark-auction:
@@ -27,6 +32,11 @@ services:
       SPRING_DATASOURCE_USERNAME: website
       SPRING_DATASOURCE_PASSWORD: website
       SPRING_PROFILES_ACTIVE: dev
+      LOSTARK_URL: /run/secrets/lostark_url
+      LOSTARK_API_KEY: /run/secrets/lostark_api_key
+    secrets:
+      - lostark_url
+      - lostark_api_key
     depends_on:
       - database
   lostark-character:
@@ -41,6 +51,11 @@ services:
       SPRING_DATASOURCE_USERNAME: website
       SPRING_DATASOURCE_PASSWORD: website
       SPRING_PROFILES_ACTIVE: dev
+      LOSTARK_URL: /run/secrets/lostark_url
+      LOSTARK_API_KEY: /run/secrets/lostark_api_key
+    secrets:
+      - lostark_url
+      - lostark_api_key
     depends_on:
       - database
   lostark-content:
