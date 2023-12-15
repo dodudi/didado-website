@@ -25,6 +25,11 @@ logging:
 
 server:
   port: 8083
+
+lostark:
+  url: "${LOSTARK_URL}"
+  api:
+    key: "${LOSTARK_API_KEY}"
 ---
 spring:
   config:
@@ -40,6 +45,11 @@ spring:
   h2:
     console:
       enabled: false
+
+#lostark:
+#  url: "file:+${LOSTARK_URL}"
+#  api:
+#    key: "file:${LOSTARK_API_KEY}"
 ---
 spring:
   config:
