@@ -1,3 +1,5 @@
+version: '3.7'
+
 services:
   lostark-armory:
 #    container_name: lostark-armory-dev
@@ -53,9 +55,13 @@ services:
       SPRING_DATASOURCE_USERNAME: website
       SPRING_DATASOURCE_PASSWORD: website
       SPRING_PROFILES_ACTIVE: dev
+      LOSTARK_URL: /run/secrets/lostark_url
+      LOSTARK_API_KEY: /run/secrets/lostark_api_key
+    secrets:
+      - lostark_url
+      - lostark_api_key
     depends_on:
       - database
-
   database:
 #    container_name: database-dev
     image: postgres:latest
@@ -71,4 +77,9 @@ services:
       - /Users/didado/desktop/database/dev:/var/lib/postgresql/data
 networks:
   lostark-dev-net:
+    external: true
+secrets:
+  lostark_url:
+    external: true
+  lostark_api_key:
     external: true
