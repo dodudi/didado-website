@@ -1,7 +1,7 @@
 #!/bin/sh
 
-#도커 스웜 으로 변경
-docker swarm init
+##도커 스웜 으로 변경
+#docker swarm init
 
 #도커 스웜 스택 초기화
 docker stack rm lostark-dev
@@ -23,6 +23,3 @@ cd docker
 docker network rm lostark-dev-net
 docker network create --driver=overlay lostark-dev-net
 docker stack deploy -c docker-compose.yml -c docker-compose-dev.yml lostark-dev
-
-#도커 스웜 종료
-docker swarm leave --force
