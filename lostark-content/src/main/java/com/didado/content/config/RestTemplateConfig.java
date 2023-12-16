@@ -1,4 +1,4 @@
-package com.didado.content.domain.config;
+package com.didado.content.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

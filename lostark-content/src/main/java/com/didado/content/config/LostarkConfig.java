@@ -1,4 +1,4 @@
-package com.didado.content.domain.config;
+package com.didado.content.config;
 
 import com.didado.content.domain.lostark.domain.LostarkProperty;
 import lombok.extern.slf4j.Slf4j;

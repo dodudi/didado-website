@@ -21,7 +21,7 @@ public class LostarkScheduler {
     private int port;
     private final RestTemplate restTemplate;
 
-    @Scheduled(cron = "0/10 * * * * *")
+    @Scheduled(cron = "0 0/30 * * * *")
     public void calender() {
         restTemplate.exchange("http://localhost:" + port + "/lostark/contents/calendar", HttpMethod.GET, null, Void.class);
         LocalDateTime now = LocalDateTime.now();
