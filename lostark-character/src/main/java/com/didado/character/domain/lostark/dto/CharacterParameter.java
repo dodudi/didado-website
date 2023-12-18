@@ -1,4 +1,4 @@
-package com.didado.character.domain.lostark.dto.character;
+package com.didado.character.domain.lostark.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class Character {
+public class CharacterParameter {
 
     @JsonProperty(value = "ServerName")
     private String serverName;
