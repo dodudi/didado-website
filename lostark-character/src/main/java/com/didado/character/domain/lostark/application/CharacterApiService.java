@@ -17,8 +17,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -91,11 +93,63 @@ public class CharacterApiService {
         return character;
     }
 
+    @Transactional(readOnly = false)
+    public void searches() {
+        LocalDateTime now = LocalDateTime.now();
+        List<Character> characters = characterRepository.findAllByUpdateTimeBetween(now.minusMinutes(1), now);
+        if (characters.isEmpty())
+            return;
+
+        for (Character character : characters) {
+            List<CharacterInfo> infos = character.getCharacterInfos();
+
+            //Convert Character Name
+            List<String> characterNames = infos.stream()
+                    .map(CharacterInfo::getCharacterName)
+                    .toList();
+
+            //Convert Map
+            Map<String, CharacterParameter> parameterMap = gets(characterNames).stream()
+                    .collect(Collectors.toMap(
+                            CharacterParameter::getCharacterName,//key
+                            parameter2 -> parameter2//value
+                    ));
+
+            //Update Character Info
+            List<CharacterInfo> updateInfos = infos.stream()
+                    .map(characterInfo -> {
+                        CharacterParameter parameter = parameterMap.get(characterInfo.getCharacterName());
+                        parameterMap.remove(characterInfo.getCharacterName());
+                        return characterInfo.updateData(parameter);
+                    })
+                    .toList();
+
+            //New Character Info
+            List<CharacterInfo> newInfos = parameterMap.values().stream()
+                    .map(parameter -> parameter.toCharacterInfo().updateCharacter(character))
+                    .toList();
+
+            //Update + New Save Repository
+            List<CharacterInfo> saveInfos = Stream.concat(updateInfos.stream(), newInfos.stream()).toList();
+            characterInfoRepository.saveAll(saveInfos);
+        }
+    }
+
+    private List<CharacterParameter> gets(List<String> characterNames) {
+        return characterNames.stream()
+                .map(this::get)
+                .filter(parameters -> !parameters.isEmpty())
+                .limit(1)
+                .flatMap(Collection::stream)
+                .toList();
+    }
+
     private List<CharacterParameter> get(String characterName) {
         String url = lostarkProperty.url() + "/characters/" + characterName + "/siblings";
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", lostarkProperty.apiKey());
 
+        log.debug("Character Api Url={}", url);
         ResponseEntity<List<CharacterParameter>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,

@@ -52,13 +52,14 @@ public class CharacterInfo {
         this.itemMaxLevel = itemMaxLevel;
     }
 
-    public void updateData(CharacterParameter characterInfo) {
+    public CharacterInfo updateData(CharacterParameter characterInfo) {
         this.serverName = characterInfo.getServerName();
         this.characterName = characterInfo.getCharacterName();
         this.characterLevel = characterInfo.getCharacterLevel();
         this.characterClassName = characterInfo.getCharacterClassName();
         this.itemAvgLevel = characterInfo.getItemAvgLevel();
         this.itemMaxLevel = characterInfo.getItemMaxLevel();
+        return this;
     }
 
     public CharacterInfo updateCharacter(Character character) {
