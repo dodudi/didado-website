@@ -32,7 +32,6 @@ public class CharacterApiService {
 
     private final RestTemplate restTemplate;
     private final LostarkProperty lostarkProperty;
-//    @GetMapping("/lostark/{username}/characters")
 
     @Transactional(readOnly = false)
     public void search(String characterName) {

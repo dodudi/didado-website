@@ -14,4 +14,7 @@ public interface CharacterRepository extends JpaRepository<Character, Long> {
 
     @Query("select c from Character c join fetch c.characterInfos where c.id in (select i.character.id from CharacterInfo i where i.characterName in (:characterName))")
     Optional<Character> findCharacterByCharacterIdFetch(@Param("characterName") List<String> characterName);
+
+    @Query("select c from Character c join fetch c.characterInfos where c.id in (select i.character.id from CharacterInfo i where i.characterName = :characterName)")
+    Optional<Character> findCharacterByCharacterIdFetch(@Param("characterName") String characterName);
 }
