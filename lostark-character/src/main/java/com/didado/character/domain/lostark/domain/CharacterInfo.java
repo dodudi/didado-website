@@ -6,10 +6,16 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @ToString(exclude = {"character"})
+@EntityListeners(AuditingEntityListener.class)
 public class CharacterInfo {
     @Id
     @GeneratedValue
@@ -26,6 +32,12 @@ public class CharacterInfo {
     private String characterClassName;
     private String itemAvgLevel;
     private String itemMaxLevel;
+
+    @CreatedDate
+    private LocalDateTime createTime;
+
+    @LastModifiedDate
+    private LocalDateTime updateTime;
 
     protected CharacterInfo() {
     }
