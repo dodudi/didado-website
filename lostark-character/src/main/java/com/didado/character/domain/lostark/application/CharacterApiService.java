@@ -115,6 +115,10 @@ public class CharacterApiService {
                             parameter2 -> parameter2//value
                     ));
 
+            //Delete Character Info
+            List<CharacterInfo> deleteInfos = infos.stream().filter(characterInfo -> !parameterMap.containsKey(characterInfo.getCharacterName()))
+                    .toList();
+
             //Update Character Info
             List<CharacterInfo> updateInfos = infos.stream()
                     .map(characterInfo -> {
@@ -132,6 +136,7 @@ public class CharacterApiService {
             //Update + New Save Repository
             List<CharacterInfo> saveInfos = Stream.concat(updateInfos.stream(), newInfos.stream()).toList();
             characterInfoRepository.saveAll(saveInfos);
+            characterInfoRepository.deleteAll(deleteInfos);
         }
     }
 
