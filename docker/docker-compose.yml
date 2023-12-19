@@ -3,16 +3,16 @@ version: '3.7'
 services:
   lostark-armory:
 #    container_name: lostark-armory
-    image: lostark-armory-image
+    image: didadu/lostark-armory-image:v1.0.0
 
   lostark-auction:
 #    container_name: lostark-auction
-    image: lostark-auction-image
+    image: didadu/lostark-auction-image:v1.0.0
 
   lostark-character:
 #    container_name: lostark-character
-    image: lostark-character-image
+    image: didadu/lostark-character-image:v1.0.0
 
   lostark-content:
 #    container_name: lostark-content
-    image: lostark-content-image
+    image: didadu/lostark-content-image:v1.0.0
