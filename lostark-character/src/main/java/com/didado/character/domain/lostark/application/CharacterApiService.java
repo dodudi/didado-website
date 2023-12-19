@@ -48,30 +48,27 @@ public class CharacterApiService {
                 .map(CharacterParameter::getCharacterName)
                 .toList();
 
-        Character character = characterInfoRepository.findCharacterInCharacterNames(characterNames)
+//        Character character = characterInfoRepository.findCharacterInCharacterNames(characterNames)
+//                .orElseGet(() -> null);
+
+        Character character = characterRepository.findCharacterByCharacterIdFetch(characterNames)
                 .orElseGet(() -> null);
+        log.debug("Character={}", character);
 
         if (character == null) {
-            log.debug("Character 가 존재하지 않는다.");
             Character newCharacter = new Character();
             characterRepository.save(newCharacter);
 
             List<CharacterInfo> list = parameters.stream()
                     .map(CharacterParameter::toCharacterInfo)
                     .map(characterInfo -> characterInfo.updateCharacter(newCharacter))
+                    .map(characterInfoRepository::save)
                     .toList();
-            characterInfoRepository.saveAll(list);
-
-            log.debug("Character={}", newCharacter);
-            log.debug("CharacterInfos={}", list);
         } else {
-            log.debug("Character 가 존재한다.");
-            Character fetchCharacter = characterRepository.findCharacterByCharacterIdFetch(character.getId())
-                    .orElseGet(Character::new);
-
-            List<CharacterInfo> characterInfos = fetchCharacter.getCharacterInfos();
+            List<CharacterInfo> characterInfos = character.getCharacterInfos();
             Map<String, CharacterParameter> parameterMap = parameters.stream()
                     .collect(Collectors.toMap(CharacterParameter::getCharacterName, parameter -> parameter));
+
             for (CharacterInfo info : characterInfos) {
                 if (parameterMap.containsKey(info.getCharacterName())) {
                     CharacterParameter getParameter = parameterMap.get(info.getCharacterName());
@@ -88,7 +85,7 @@ public class CharacterApiService {
                 Set<Map.Entry<String, CharacterParameter>> entries = parameterMap.entrySet();
                 List<CharacterInfo> list = entries.stream()
                         .map(entry -> entry.getValue().toCharacterInfo())
-                        .map(characterInfo -> characterInfo.updateCharacter(fetchCharacter))
+                        .map(characterInfo -> characterInfo.updateCharacter(character))
                         .toList();
                 characterInfoRepository.saveAll(list);
             }
