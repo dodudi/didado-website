@@ -13,7 +13,7 @@ public class TestRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        for (int i = 0; i < 2; i++)
-            characterApiService.search("디다도두");
+//        for (int i = 0; i < 2; i++)
+//            characterApiService.search("디다도두");
     }
 }

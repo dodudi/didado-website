@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -16,11 +18,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CharacterSearchService {
     private final CharacterRepository characterRepository;
+    private final CharacterApiService characterApiService;
+
 
     public List<CharacterParameter> search(String characterName) {
         Character character = characterRepository.findCharacterByCharacterIdFetch(characterName)
-                .orElseThrow(IllegalArgumentException::new);
-        
+                .orElseGet(() -> null);
+
+
+        if (character == null) {
+            character = characterApiService.search(characterName);
+            if (character == null)
+                return Collections.emptyList();
+        }
+
         log.debug("Search CharacterName={}", characterName);
         log.debug("Find Character={}", character);
 

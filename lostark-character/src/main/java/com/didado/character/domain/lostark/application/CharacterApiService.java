@@ -1,17 +1,14 @@
 package com.didado.character.domain.lostark.application;
 
-import com.didado.character.domain.config.LostarkConfig;
 import com.didado.character.domain.lostark.domain.Character;
 import com.didado.character.domain.lostark.domain.CharacterInfo;
 import com.didado.character.domain.lostark.domain.LostarkProperty;
 import com.didado.character.domain.lostark.dto.CharacterParameter;
-import com.didado.character.domain.lostark.dto.CharacterResponse;
 import com.didado.character.domain.lostark.repository.CharacterInfoRepository;
 import com.didado.character.domain.lostark.repository.CharacterRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -34,13 +31,13 @@ public class CharacterApiService {
     private final LostarkProperty lostarkProperty;
 
     @Transactional(readOnly = false)
-    public void search(String characterName) {
+    public Character search(String characterName) {
         List<CharacterParameter> parameters = get(characterName);
         if (parameters.isEmpty()) {
             characterInfoRepository.findByCharacterName(characterName)
                     .flatMap(info -> characterRepository.findById(info.getId()))
                     .ifPresent(characterRepository::delete);
-            return;
+            return null;
         }
 
         List<String> characterNames = parameters.stream()
@@ -63,6 +60,8 @@ public class CharacterApiService {
                     .map(characterInfo -> characterInfo.updateCharacter(newCharacter))
                     .map(characterInfoRepository::save)
                     .toList();
+
+            return newCharacter;
         } else {
             List<CharacterInfo> characterInfos = character.getCharacterInfos();
             Map<String, CharacterParameter> parameterMap = parameters.stream()
@@ -89,6 +88,7 @@ public class CharacterApiService {
                 characterInfoRepository.saveAll(list);
             }
         }
+        return character;
     }
 
     private List<CharacterParameter> get(String characterName) {
