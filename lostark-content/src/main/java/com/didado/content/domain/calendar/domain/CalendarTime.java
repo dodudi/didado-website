@@ -8,33 +8,38 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
-@ToString
+@ToString(exclude = "calendar")
 @EntityListeners(AuditingEntityListener.class)
-public class Calendar {
+public class CalendarTime {
     @Id
     @GeneratedValue
-    @Column(name = "calendar_id")
+    @Column(name = "calendar_time_id")
     private Long id;
-    private String categoryName;
-    private String contentsName;
-    private String contentsIcon;
-    private Integer minItemLevel;
+    private String startTime;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "calendar")
-    private List<CalendarTime> startTimes = new ArrayList<>();
-    private String location;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "calendar")
-    private List<CalendarRewardItem> rewardItems = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "calendar_id")
+    private Calendar calendar;
 
     @CreatedDate
     private LocalDateTime createDate;
 
     @LastModifiedDate
     private LocalDateTime updateDate;
+
+    protected CalendarTime() {
+    }
+
+    public CalendarTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public CalendarTime updateCalendar(Calendar calendar) {
+        this.calendar = calendar;
+        calendar.getStartTimes().add(this);
+        return this;
+    }
 }
