@@ -25,6 +25,11 @@ logging:
 
 server:
   port: 8082
+
+lostark:
+  url: "${LOSTARK_URL}"
+  api:
+    key: "${LOSTARK_API_KEY}"
 ---
 spring:
   config:
@@ -36,7 +41,7 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
   h2:
     console:
       enabled: false
@@ -51,7 +56,7 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
   h2:
     console:
       enabled: false
