@@ -1,4 +1,4 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.profile.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class Stat {
+public class StatParameter {
     @JsonProperty(value = "Type")
     private String type;
     @JsonProperty(value = "Value")

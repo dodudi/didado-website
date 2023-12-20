@@ -1,4 +1,4 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.profile.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class ArmoryProfile {
+public class ArmoryProfileParameter {
     @JsonProperty(value = "CharacterImage")
     private String characterImage;
 
@@ -38,10 +38,10 @@ public class ArmoryProfile {
     private Integer totalSkillPoint;
 
     @JsonProperty(value = "Stats")
-    private List<Stat> stats;
+    private List<StatParameter> statParameters;
 
     @JsonProperty(value = "Tendencies")
-    private List<Tendency> tendencies;
+    private List<TendencyParameter> tendencies;
 
     @JsonProperty(value = "ServerName")
     private String serverName;

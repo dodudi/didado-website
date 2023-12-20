@@ -3,6 +3,7 @@ package com.didado.armory.domain.application;
 
 import com.didado.armory.domain.dto.LostarkProperty;
 import com.didado.armory.domain.dto.armory.*;
+import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -46,7 +47,7 @@ public class ArmoryServiceImpl {
         headers.set("authorization", property.apiKey());
 
 
-        ResponseEntity<ArmoryProfile> response = restTemplate.exchange(
+        ResponseEntity<ArmoryProfileParameter> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 new HttpEntity<>(headers),

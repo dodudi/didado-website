@@ -1,5 +1,6 @@
 package com.didado.armory.domain.dto.armory;
 
+import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 @Getter
 public class Armory {
-    @JsonProperty(value = "ArmoryProfile") private ArmoryProfile armoryProfile;
+    @JsonProperty(value = "ArmoryProfile") private ArmoryProfileParameter armoryProfileParameter;
     @JsonProperty(value = "ArmoryEquipment") private List<ArmoryEquipment> armoryEquipment;
     @JsonProperty(value = "ArmoryAvatars") private List<ArmoryAvatar> armoryAvatars;
     @JsonProperty(value = "ArmorySkills") private List<ArmorySkill> armorySkills;
