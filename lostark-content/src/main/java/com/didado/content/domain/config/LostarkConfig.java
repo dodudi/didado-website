@@ -1,17 +1,12 @@
-package com.didado.content.config;
+package com.didado.content.domain.config;
 
-import com.didado.content.domain.lostark.domain.LostarkProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,7 +23,7 @@ public class LostarkConfig {
 
     @Bean
     @Profile("default")
-    public LostarkProperty getLostarkPropertyDefault(){
+    public LostarkProperty getLostarkPropertyDefault() {
         log.debug("Lostark Url={}", url);
         log.debug("Lostark apiKey={}", apiKey);
         return new LostarkProperty(url, apiKey);

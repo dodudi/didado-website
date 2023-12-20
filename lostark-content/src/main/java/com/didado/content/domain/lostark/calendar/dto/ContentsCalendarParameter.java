@@ -1,6 +1,6 @@
-package com.didado.content.domain.calendar.dto;
+package com.didado.content.domain.lostark.calendar.dto;
 
-import com.didado.content.domain.lostark.dto.content.RewardItemParameter;
+import com.didado.content.domain.lostark.common.dto.RewardItemParameter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 

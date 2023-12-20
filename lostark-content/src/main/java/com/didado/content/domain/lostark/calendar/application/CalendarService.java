@@ -1,8 +1,8 @@
-package com.didado.content.domain.lostark.application;
+package com.didado.content.domain.lostark.calendar.application;
 
+import com.didado.content.domain.lostark.calendar.dto.CalendarResponse;
+import com.didado.content.domain.lostark.calendar.dto.ContentsCalendarParameter;
 import com.didado.content.domain.config.LostarkProperty;
-import com.didado.content.domain.lostark.dungeon.dto.ChallengeAbyssDungeonParameter;
-import com.didado.content.domain.lostark.dungeon.dto.ChallengeAbyssDungeonResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -18,17 +18,16 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ChallengeAbyssDungeonServiceImpl {
-
+public class CalendarService {
     private final RestTemplate restTemplate;
     private final LostarkProperty property;
 
-    public ChallengeAbyssDungeonResponse abyssDungeons() {
-        String url = property.url() + "/gamecontents/challenge-abyss-dungeons";
+    public CalendarResponse calendar() {
+        String url = property.url() + "/gamecontents/calendar";
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", property.apiKey());
 
-        ResponseEntity<List<ChallengeAbyssDungeonParameter>> response = restTemplate.exchange(
+        ResponseEntity<List<ContentsCalendarParameter>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 new HttpEntity<>(headers),
@@ -36,6 +35,6 @@ public class ChallengeAbyssDungeonServiceImpl {
                 }
         );
 
-        return new ChallengeAbyssDungeonResponse("도전 어비스 던전 정보 조회 성공.", 200, response.getBody());
+        return new CalendarResponse("캘린더 정보 조회 성공.", 200, response.getBody());
     }
 }

@@ -1,8 +1,7 @@
-package com.didado.content.domain.lostark.application;
+package com.didado.content.domain.lostark.raid.application;
 
 import com.didado.content.domain.config.LostarkProperty;
-import com.didado.content.domain.lostark.dungeon.dto.ChallengeAbyssDungeonParameter;
-import com.didado.content.domain.lostark.dungeon.dto.ChallengeAbyssDungeonResponse;
+import com.didado.content.domain.lostark.raid.dto.ChallengeGuardianRaidResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -13,22 +12,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ChallengeAbyssDungeonServiceImpl {
-
+public class ChallengeGuardianRaidService {
     private final RestTemplate restTemplate;
     private final LostarkProperty property;
 
-    public ChallengeAbyssDungeonResponse abyssDungeons() {
-        String url = property.url() + "/gamecontents/challenge-abyss-dungeons";
+    public ChallengeGuardianRaidResponse guardianRaids() {
+        String url = property.url() + "/gamecontents/challenge-guardian-raids";
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", property.apiKey());
 
-        ResponseEntity<List<ChallengeAbyssDungeonParameter>> response = restTemplate.exchange(
+        ResponseEntity<ChallengeGuardianRaidResponse> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 new HttpEntity<>(headers),
@@ -36,6 +32,6 @@ public class ChallengeAbyssDungeonServiceImpl {
                 }
         );
 
-        return new ChallengeAbyssDungeonResponse("도전 어비스 던전 정보 조회 성공.", 200, response.getBody());
+        return new ChallengeGuardianRaidResponse("도전 가디언 레이드 조회 성공", 200, response.getBody());
     }
 }

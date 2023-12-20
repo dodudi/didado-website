@@ -1,4 +1,4 @@
-package com.didado.content.domain.lostark.dto.content;
+package com.didado.content.domain.lostark.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

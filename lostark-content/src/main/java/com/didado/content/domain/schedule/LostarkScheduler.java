@@ -17,14 +17,14 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class LostarkScheduler {
 
-    @Value("${server.port}")
-    private int port;
-    private final RestTemplate restTemplate;
-
-    @Scheduled(cron = "0 0/30 * * * *")
-    public void calender() {
-        restTemplate.exchange("http://localhost:" + port + "/lostark/contents/calendar", HttpMethod.GET, null, Void.class);
-        LocalDateTime now = LocalDateTime.now();
-        log.info("Calender Scheduled = {}", now);
-    }
+//    @Value("${server.port}")
+//    private int port;
+//    private final RestTemplate restTemplate;
+//
+//    @Scheduled(cron = "0 0/30 * * * *")
+//    public void calender() {
+//        restTemplate.exchange("http://localhost:" + port + "/lostark/contents/calendar", HttpMethod.GET, null, Void.class);
+//        LocalDateTime now = LocalDateTime.now();
+//        log.info("Calender Scheduled = {}", now);
+//    }
 }
