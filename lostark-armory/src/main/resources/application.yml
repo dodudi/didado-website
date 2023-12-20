@@ -27,6 +27,11 @@ logging:
 
 server:
   port: 8080
+
+lostark:
+  url: "${LOSTARK_URL}"
+  api:
+    key: "${LOSTARK_API_KEY}"
 ---
 spring:
   config:
