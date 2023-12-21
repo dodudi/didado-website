@@ -1,4 +1,4 @@
-package com.didado.armory.domain.application;
+package com.didado.armory.domain.profile.application;
 
 
 import com.didado.armory.domain.dto.LostarkProperty;
@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ArmoryServiceImpl {
+public class ProfileServiceImpl {
     private final RestTemplate restTemplate;
     private final LostarkProperty property;
 
@@ -41,22 +41,6 @@ public class ArmoryServiceImpl {
         return new ArmoryResponse("캐릭터 상세 정보 조회에 성공", 200, response.getBody());
     }
 
-    public Object profiles(String username) {
-        String url = property.url() + "/armories/characters/" + username + "/profiles";
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("authorization", property.apiKey());
-
-
-        ResponseEntity<ArmoryProfileParameter> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                new HttpEntity<>(headers),
-                new ParameterizedTypeReference<>() {
-                }
-        );
-
-        return new ArmoryResponse("캐릭터 프로 파일 조회에 성공", 200, response.getBody());
-    }
 
     public Object equipment(String username) {
         String url = property.url() + "/armories/characters/" + username + "/equipment";

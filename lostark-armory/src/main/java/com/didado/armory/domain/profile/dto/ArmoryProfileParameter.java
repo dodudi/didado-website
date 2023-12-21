@@ -1,5 +1,6 @@
 package com.didado.armory.domain.profile.dto;
 
+import com.didado.armory.domain.profile.domain.ArmoryProfile;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
@@ -38,7 +39,7 @@ public class ArmoryProfileParameter {
     private Integer totalSkillPoint;
 
     @JsonProperty(value = "Stats")
-    private List<StatParameter> statParameters;
+    private List<StatParameter> stats;
 
     @JsonProperty(value = "Tendencies")
     private List<TendencyParameter> tendencies;
@@ -61,5 +62,24 @@ public class ArmoryProfileParameter {
     @JsonProperty(value = "ItemMaxLevel")
     private String itemMaxLevel;
 
-
+    public ArmoryProfile toArmoryProfile() {
+        return ArmoryProfile.builder()
+                .characterImage(this.characterImage)
+                .expeditionLevel(this.expeditionLevel)
+                .pvpGradeName(this.pvpGradeName)
+                .townLevel(this.townLevel)
+                .townName(this.townName)
+                .title(this.title)
+                .guildMemberGrade(this.guildMemberGrade)
+                .guildName(this.guildName)
+                .usingSkillPoint(this.usingSkillPoint)
+                .totalSkillPoint(this.totalSkillPoint)
+                .serverName(this.serverName)
+                .characterName(this.characterName)
+                .characterLevel(this.characterLevel)
+                .characterClassName(this.characterClassName)
+                .itemAvgLevel(this.itemAvgLevel)
+                .itemMaxLevel(this.itemMaxLevel)
+                .build();
+    }
 }
