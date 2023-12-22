@@ -90,22 +90,7 @@ public class ProfileServiceImpl {
 //    }
 //
 //
-//    public Object equipment(String username) {
-//        String url = property.url() + "/armories/characters/" + username + "/equipment";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("authorization", property.apiKey());
-//
-//
-//        ResponseEntity<List<ArmoryEquipment>> response = restTemplate.exchange(
-//                url,
-//                HttpMethod.GET,
-//                new HttpEntity<>(headers),
-//                new ParameterizedTypeReference<>() {
-//                }
-//        );
-//
-//        return new ArmoryResponse("캐릭터 착용 장비 조회에 성공", 200, response.getBody());
-//    }
+
 //
 //    public Object avatars(String username) {
 //        String url = property.url() + "/armories/characters/" + username + "/avatars";
