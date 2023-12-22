@@ -1,5 +1,7 @@
 package com.didado.armory.domain.profile.domain;
 
+import com.didado.armory.domain.profile.dto.StatParameter;
+import com.didado.armory.domain.profile.dto.TendencyParameter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -33,6 +35,13 @@ public class Tendency {
         this.type = type;
         this.point = point;
         this.maxPoint = maxPoint;
+    }
+
+    public Tendency updateData(TendencyParameter parameter) {
+        this.type = parameter.getType();
+        this.point = parameter.getPoint();
+        this.maxPoint = parameter.getMaxPoint();
+        return this;
     }
 
     public Tendency updateArmoryProfile(ArmoryProfile armoryProfile) {

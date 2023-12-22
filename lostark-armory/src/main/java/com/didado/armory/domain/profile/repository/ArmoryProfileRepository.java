@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface ArmoryProfileRepository extends JpaRepository<ArmoryProfile, Long> {
-    @Query("select p from ArmoryProfile p join fetch p.stats where p.characterName = :characterName")
+    @Query("select p from ArmoryProfile p where p.characterName = :characterName")
     Optional<ArmoryProfile> findByCharacterName(@Param("characterName") String characterName);
 }

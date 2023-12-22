@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ArmoryStatRepository extends JpaRepository<Stat, Long> {
-    @Query("select s from armory_stat s join fetch s.armoryProfile where s.armoryProfile.id = :profileId")
-    List<Stat> findByArmoryProfile(@Param("profileId") Long profileId);
+    @Query("select s from armory_stat s join fetch s.toolTip where s.armoryProfile.id = :profileId")
+    List<Stat> findStatByProfileId(@Param("profileId") Long profileId);
 }

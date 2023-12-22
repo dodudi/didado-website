@@ -43,6 +43,7 @@ public class ProfileSchedulerService {
                 .orElseGet(() -> null);
 
         if (armoryProfile == null) {
+            log.debug("Armory Profile Exist {}", characterName);
             ArmoryProfile convertProfile = newParameter.toArmoryProfile();
             armoryProfileRepository.save(convertProfile);
 
@@ -58,29 +59,33 @@ public class ProfileSchedulerService {
                     .map(tendency -> tendency.updateArmoryProfile(convertProfile))
                     .toList();
             armoryTendencyRepository.saveAll(convertTendencies);
-
-            log.debug("{}", convertProfile.getStats());
-            log.debug("{}", convertProfile.getTendencies());
-            log.debug("{}",armoryStatRepository.findByArmoryProfile(convertProfile.getId()));
         } else {
-            armoryProfile.getStats().clear();
-            armoryProfile.getTendencies().clear();
+            log.debug("Armory Profile Not Exist {}", characterName);
+//            armoryProfile.getStats().clear();
+//            armoryProfile.getTendencies().clear();
 
-            List<Stat> convertStats = newStats.stream()
-                    .map(statParameter -> statParameter.toStat(statParameter.getToolTip()))
-                    .map(stat -> stat.updateArmoryProfile(armoryProfile))
-                    .toList();
+            Long profileId = armoryProfile.getId();
 
-            armoryStatRepository.saveAll(convertStats);
+            List<Stat> oldStats = armoryStatRepository.findStatByProfileId(profileId);
+            List<Stat> updateStats = oldStats.stream()
+                    .peek(stat -> newStats.stream()
+                            .filter(statParameter -> statParameter.getType().equals(stat.getType()))
+                            .findFirst()
+                            .ifPresent(stat::updateData)).toList();
+            armoryStatRepository.saveAll(updateStats);
 
-            List<Tendency> convertTendencies = newTendencies.stream()
-                    .map(TendencyParameter::toTendency)
-                    .map(tendency -> tendency.updateArmoryProfile(armoryProfile))
-                    .toList();
-            armoryTendencyRepository.saveAll(convertTendencies);
 
-            log.debug("{}", armoryProfile.getStats());
-            log.debug("{}", armoryProfile.getTendencies());
+            List<Tendency> oldTendencies = armoryTendencyRepository.findTendencyByProfileId(profileId);
+            List<Tendency> updateTendencies = oldTendencies.stream()
+                    .peek(tendency -> newTendencies.stream()
+                            .filter(tendencyParameter -> tendencyParameter.getType().equals(tendency.getType()))
+                            .findFirst()
+                            .ifPresent(tendency::updateData)
+                    ).toList();
+            armoryTendencyRepository.saveAll(updateTendencies);
+
+            log.debug("Update Stats={}", updateStats);
+            log.debug("Update Tendencies={}", updateTendencies);
         }
     }
 
