@@ -61,6 +61,16 @@ public class ProfileServiceImpl {
                 .toList();
     }
 
+    public List<TendencyParameter> searchTendencies(String characterName) {
+        ArmoryProfile armoryProfiles = armoryProfileRepository.findByCharacterName(characterName)
+                .orElseThrow(() -> new IllegalArgumentException("존재하는 캐릭터명이 아닙니다."));
+
+        List<Tendency> tendencies = armoryTendencyRepository.findTendencyByProfileId(armoryProfiles.getId());
+        return tendencies.stream()
+                .map(TendencyParameter::new)
+                .toList();
+    }
+
 //    public Object search(String username) {
 //
 //        String url = property.url() + "/armories/characters/" + username;

@@ -3,6 +3,7 @@ package com.didado.armory.domain.profile.api;
 import com.didado.armory.domain.profile.application.ProfileServiceImpl;
 import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
 import com.didado.armory.domain.profile.dto.StatParameter;
+import com.didado.armory.domain.profile.dto.TendencyParameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,11 @@ public class ProfileController {
     @GetMapping("/lostark/armory/{characterName}/profiles/stats")
     public ResponseEntity<List<StatParameter>> stats(@PathVariable String characterName) {
         return ResponseEntity.ok(profileService.searchStats(characterName));
+    }
+
+    @GetMapping("/lostark/armory/{characterName}/profiles/tendencies")
+    public ResponseEntity<List<TendencyParameter>> tendencies(@PathVariable String characterName) {
+        return ResponseEntity.ok(profileService.searchTendencies(characterName));
     }
 
 //    @GetMapping("/lostark/armory/{username}")
