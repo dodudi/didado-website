@@ -50,6 +50,17 @@ public class ProfileServiceImpl {
 
         return new ArmoryProfileParameter(armoryProfiles, convertStats, convertTendencies);
     }
+
+    public List<StatParameter> searchStats(String characterName) {
+        ArmoryProfile armoryProfiles = armoryProfileRepository.findByCharacterName(characterName)
+                .orElseThrow(() -> new IllegalArgumentException("존재하는 캐릭터명이 아닙니다."));
+
+        List<Stat> stats = armoryStatRepository.findStatByProfileId(armoryProfiles.getId());
+        return stats.stream()
+                .map(StatParameter::new)
+                .toList();
+    }
+
 //    public Object search(String username) {
 //
 //        String url = property.url() + "/armories/characters/" + username;
