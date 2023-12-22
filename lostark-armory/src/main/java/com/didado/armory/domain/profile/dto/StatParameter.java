@@ -15,6 +15,15 @@ public class StatParameter {
     @JsonProperty(value = "Tooltip")
     private List<String> toolTip;
 
+    protected StatParameter() {
+    }
+
+    public StatParameter(Stat stat) {
+        this.type = stat.getType();
+        this.value = stat.getAmount();
+        this.toolTip = stat.getToolTip();
+    }
+
     public Stat toStat(List<String> toolTips) {
         Stat stat = Stat.builder()
                 .type(type)

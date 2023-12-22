@@ -54,8 +54,7 @@ public class ArmoryProfile {
 
     private String itemMaxLevel;
 
-    protected ArmoryProfile() {
-    }
+    protected ArmoryProfile(){}
 
     @Builder
     public ArmoryProfile(String characterImage, Integer expeditionLevel, String pvpGradeName, Integer townLevel, String townName, String title, String guildMemberGrade, String guildName, Integer usingSkillPoint, Integer totalSkillPoint, String serverName, String characterName, Integer characterLevel, String characterClassName, String itemAvgLevel, String itemMaxLevel) {

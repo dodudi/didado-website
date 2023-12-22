@@ -1,7 +1,9 @@
 package com.didado.armory.domain.profile.api;
 
 import com.didado.armory.domain.profile.application.ProfileServiceImpl;
+import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,10 +14,9 @@ public class ProfileController {
 
     private final ProfileServiceImpl profileService;
 
-    @GetMapping("/lostark/armory/{username}/profiles")
-    public Object profiles(@PathVariable String username) {
-        return profileService.search(username);
-
+    @GetMapping("/lostark/armory/{characterName}/profiles")
+    public ResponseEntity<ArmoryProfileParameter> profiles(@PathVariable String characterName) {
+        return ResponseEntity.ok(profileService.search(characterName));
     }
 
 //    @GetMapping("/lostark/armory/{username}")

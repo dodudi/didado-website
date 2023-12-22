@@ -15,6 +15,15 @@ public class TendencyParameter {
     @JsonProperty(value = "MaxPoint")
     private Integer maxPoint;
 
+    protected TendencyParameter() {
+    }
+
+    public TendencyParameter(Tendency tendency) {
+        this.type = tendency.getType();
+        this.point = tendency.getPoint();
+        this.maxPoint = tendency.getMaxPoint();
+    }
+
     public Tendency toTendency() {
         return Tendency.builder()
                 .type(type)
