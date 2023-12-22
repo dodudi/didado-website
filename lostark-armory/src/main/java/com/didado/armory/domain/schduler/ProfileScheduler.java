@@ -16,7 +16,7 @@ public class ProfileScheduler {
 
     @Scheduled(cron = "0/10 * * * * *")
     public void test() {
-//        profileSchedulerService.search("디다도두");
+        profileSchedulerService.search("디다도두");
         equipmentSchedulerService.search("디다도두");
     }
 }

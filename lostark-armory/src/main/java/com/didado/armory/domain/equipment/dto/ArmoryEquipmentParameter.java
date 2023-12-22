@@ -21,6 +21,17 @@ public class ArmoryEquipmentParameter {
     @JsonProperty(value = "Tooltip")
     private String toolTip;
 
+    protected ArmoryEquipmentParameter() {
+    }
+
+    public ArmoryEquipmentParameter(ArmoryEquipment armoryEquipment) {
+        this.type = armoryEquipment.getType();
+        this.name = armoryEquipment.getName();
+        this.icon = armoryEquipment.getIcon();
+        this.grade = armoryEquipment.getGrade();
+        this.toolTip = armoryEquipment.getToolTip();
+    }
+
     public ArmoryEquipment toArmoryEquipment(String characterName) {
         return ArmoryEquipment.builder()
                 .characterName(characterName)
