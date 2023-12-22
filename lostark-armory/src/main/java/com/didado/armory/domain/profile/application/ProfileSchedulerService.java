@@ -43,7 +43,7 @@ public class ProfileSchedulerService {
                 .orElseGet(() -> null);
 
         if (armoryProfile == null) {
-            log.debug("Armory Profile Exist {}", characterName);
+            log.debug("Armory Profile Not Exist {}", characterName);
             ArmoryProfile convertProfile = newParameter.toArmoryProfile();
             armoryProfileRepository.save(convertProfile);
 
@@ -60,7 +60,7 @@ public class ProfileSchedulerService {
                     .toList();
             armoryTendencyRepository.saveAll(convertTendencies);
         } else {
-            log.debug("Armory Profile Not Exist {}", characterName);
+            log.debug("Armory Profile Exist {}", characterName);
 //            armoryProfile.getStats().clear();
 //            armoryProfile.getTendencies().clear();
 
