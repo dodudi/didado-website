@@ -1,5 +1,7 @@
 package com.didado.armory.domain.schduler;
 
+import com.didado.armory.domain.avatar.application.AvatarSchedulerService;
+import com.didado.armory.domain.avatar.repository.AvatarRepository;
 import com.didado.armory.domain.equipment.application.EquipmentSchedulerService;
 import com.didado.armory.domain.profile.application.ProfileSchedulerService;
 import lombok.RequiredArgsConstructor;
@@ -13,10 +15,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class ProfileScheduler {
     private final ProfileSchedulerService profileSchedulerService;
     private final EquipmentSchedulerService equipmentSchedulerService;
+    private final AvatarSchedulerService avatarSchedulerService;
 
     @Scheduled(cron = "0/10 * * * * *")
     public void test() {
-        profileSchedulerService.search("디다도두");
-        equipmentSchedulerService.search("디다도두");
+//        profileSchedulerService.search("디다도두");
+//        equipmentSchedulerService.search("디다도두");
+        avatarSchedulerService.search("디다도두");
     }
 }

@@ -92,22 +92,7 @@ public class ProfileServiceImpl {
 //
 
 //
-//    public Object avatars(String username) {
-//        String url = property.url() + "/armories/characters/" + username + "/avatars";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("authorization", property.apiKey());
-//
-//
-//        ResponseEntity<List<ArmoryAvatar>> response = restTemplate.exchange(
-//                url,
-//                HttpMethod.GET,
-//                new HttpEntity<>(headers),
-//                new ParameterizedTypeReference<>() {
-//                }
-//        );
-//
-//        return new ArmoryResponse("캐릭터 착용 아바타 조회에 성공", 200, response.getBody());
-//    }
+
 //
 //    public Object combatSkills(String username) {
 //        String url = property.url() + "/armories/characters/" + username + "/combat-skills";
