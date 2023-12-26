@@ -1,7 +1,5 @@
 package com.didado.armory.domain.profile.domain;
 
-import com.didado.armory.domain.dto.armory.Armory;
-import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
 import com.didado.armory.domain.profile.dto.StatParameter;
 import jakarta.persistence.*;
 import lombok.Builder;

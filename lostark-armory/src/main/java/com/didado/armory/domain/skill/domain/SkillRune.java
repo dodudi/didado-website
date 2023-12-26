@@ -1,8 +1,6 @@
 package com.didado.armory.domain.skill.domain;
 
-import com.didado.armory.domain.dto.armory.Armory;
 import com.didado.armory.domain.skill.dto.SkillRuneParameter;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
