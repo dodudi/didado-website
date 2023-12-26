@@ -1,4 +1,4 @@
-package com.didado.armory.domain.info.dto.engraving;
+package com.didado.armory.domain.engraving.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,9 +8,17 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class ArmoryEngraving {
+public class Engraving {
     @Id
     @GeneratedValue
-    @Column(name = "armory_engraving_id")
+    @Column(name = "engraving_id")
     private Long id;
+
+    private Integer slot;
+
+    private String name;
+
+    private String icon;
+
+    private String toolTip;
 }

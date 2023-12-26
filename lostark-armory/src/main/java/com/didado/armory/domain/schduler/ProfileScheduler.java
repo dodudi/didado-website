@@ -4,6 +4,7 @@ import com.didado.armory.domain.avatar.application.AvatarSchedulerService;
 import com.didado.armory.domain.card.application.CardSchedulerService;
 import com.didado.armory.domain.collectible.application.CollectibleSchedulerService;
 import com.didado.armory.domain.colosseum.application.ColosseumSchedulerService;
+import com.didado.armory.domain.engraving.application.EngravingSchedulerService;
 import com.didado.armory.domain.equipment.application.EquipmentSchedulerService;
 import com.didado.armory.domain.gem.application.GemSchedulerService;
 import com.didado.armory.domain.profile.application.ProfileSchedulerService;
@@ -29,6 +30,7 @@ public class ProfileScheduler {
     private final CollectibleSchedulerService collectibleSchedulerService;
 
     private final ColosseumSchedulerService colosseumSchedulerService;
+    private final EngravingSchedulerService engravingSchedulerService;
 
     @Scheduled(cron = "0/10 * * * * *")
     public void test() {
@@ -39,6 +41,7 @@ public class ProfileScheduler {
 //        gemSchedulerService.search("Nelip");
 //        cardSchedulerService.search("Nelip");
 //        collectibleSchedulerService.search("Nelip");
-        colosseumSchedulerService.search("Nelip");
+//        colosseumSchedulerService.search("Nelip");
+        engravingSchedulerService.search("Nelip");
     }
 }

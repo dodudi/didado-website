@@ -80,22 +80,7 @@ public class ProfileServiceImpl {
 //
 
 //
-//    public Object engravings(String username) {
-//        String url = property.url() + "/armories/characters/" + username + "/engravings";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("authorization", property.apiKey());
-//
-//
-//        ResponseEntity<ArmoryEngraving> response = restTemplate.exchange(
-//                url,
-//                HttpMethod.GET,
-//                new HttpEntity<>(headers),
-//                new ParameterizedTypeReference<>() {
-//                }
-//        );
-//
-//        return new ArmoryResponse("캐릭터 착용 각인 조회에 성공", 200, response.getBody());
-//    }
+
 //
 
 //
