@@ -1,12 +1,12 @@
 package com.didado.armory.domain.info.dto;
 
+import com.didado.armory.domain.gem.dto.ArmoryGemParameter;
 import com.didado.armory.domain.info.dto.avatar.ArmoryAvatarParameter;
 import com.didado.armory.domain.info.dto.card.ArmoryCardParameter;
 import com.didado.armory.domain.info.dto.collectible.CollectibleParameter;
 import com.didado.armory.domain.info.dto.colosseum.ColosseumInfoParameter;
 import com.didado.armory.domain.info.dto.engraving.ArmoryEngravingParameter;
 import com.didado.armory.domain.info.dto.equipment.ArmoryEquipmentParameter;
-import com.didado.armory.domain.info.dto.gem.ArmoryGemParameter;
 import com.didado.armory.domain.info.dto.profile.ArmoryProfileParameter;
 import com.didado.armory.domain.info.dto.skill.ArmorySkillParameter;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -114,22 +114,7 @@ public class ProfileServiceImpl {
 //        return new ArmoryResponse("캐릭터 착용 카드 조회에 성공", 200, response.getBody());
 //    }
 //
-//    public Object gems(String username) {
-//        String url = property.url() + "/armories/characters/" + username + "/gems";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("authorization", property.apiKey());
-//
-//
-//        ResponseEntity<ArmoryGem> response = restTemplate.exchange(
-//                url,
-//                HttpMethod.GET,
-//                new HttpEntity<>(headers),
-//                new ParameterizedTypeReference<>() {
-//                }
-//        );
-//
-//        return new ArmoryResponse("캐릭터 착용 보석 조회에 성공", 200, response.getBody());
-//    }
+
 //
 //    public Object colosseums(String username) {
 //        String url = property.url() + "/armories/characters/" + username + "/colosseums";

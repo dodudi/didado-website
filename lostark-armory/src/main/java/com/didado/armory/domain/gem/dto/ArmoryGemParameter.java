@@ -1,4 +1,4 @@
-package com.didado.armory.domain.info.dto.gem;
+package com.didado.armory.domain.gem.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
