@@ -5,7 +5,7 @@ import com.didado.armory.domain.collectible.dto.CollectibleParameter;
 import com.didado.armory.domain.equipment.dto.ArmoryEquipmentParameter;
 import com.didado.armory.domain.gem.dto.ArmoryGemParameter;
 import com.didado.armory.domain.card.dto.ArmoryCardParameter;
-import com.didado.armory.domain.info.dto.colosseum.ColosseumInfoParameter;
+import com.didado.armory.domain.colosseum.dto.ColosseumInfoParameter;
 import com.didado.armory.domain.info.dto.engraving.ArmoryEngravingParameter;
 import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
 import com.didado.armory.domain.skill.dto.ArmorySkillParameter;

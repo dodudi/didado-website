@@ -1,9 +1,11 @@
-package com.didado.armory.domain.info.dto.colosseum;
+package com.didado.armory.domain.colosseum.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class ColosseumParameter {
 
     @JsonProperty(value = "SeasonName")

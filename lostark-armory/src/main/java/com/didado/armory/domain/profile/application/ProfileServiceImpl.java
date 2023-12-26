@@ -101,22 +101,7 @@ public class ProfileServiceImpl {
 //
 
 //
-//    public Object colosseums(String username) {
-//        String url = property.url() + "/armories/characters/" + username + "/colosseums";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("authorization", property.apiKey());
-//
-//
-//        ResponseEntity<ColosseumInfo> response = restTemplate.exchange(
-//                url,
-//                HttpMethod.GET,
-//                new HttpEntity<>(headers),
-//                new ParameterizedTypeReference<>() {
-//                }
-//        );
-//
-//        return new ArmoryResponse("캐릭터 결투장 정보 조회에 성공", 200, response.getBody());
-//    }
+
 //
 
 }

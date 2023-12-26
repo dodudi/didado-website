@@ -1,22 +1,12 @@
-package com.didado.armory.domain.info.dto.colosseum;
+package com.didado.armory.domain.colosseum.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
-public class AggregationTeamDeathMatchRankParameter {
-    @JsonProperty(value = "Rank")
-    private Integer rank;
-
-    @JsonProperty(value = "RankName")
-    private String rankName;
-
-    @JsonProperty(value = "RankIcon")
-    private String rankIcon;
-
-    @JsonProperty(value = "RankLastMmr")
-    private Integer rankLastMmr;
-
+@ToString
+public class AggregationParameter {
     @JsonProperty(value = "PlayCount")
     private Integer playCount;
 
