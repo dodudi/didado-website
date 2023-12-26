@@ -1,10 +1,10 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.info.dto.gem;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class GemEffect {
+public class GemEffectParameter {
     @JsonProperty(value = "GemSlot")
     private String gemSlot;
 

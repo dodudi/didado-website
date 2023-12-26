@@ -1,4 +1,4 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.info.dto.colosseum;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class ColosseumInfo {
+public class ColosseumInfoParameter {
     @JsonProperty(value = "Rank")
     private Integer rank;
 
@@ -17,5 +17,5 @@ public class ColosseumInfo {
     private Integer exp;
 
     @JsonProperty(value = "Colosseums")
-    private List<Colosseum> colosseums;
+    private List<ColosseumParameter> colosseums;
 }

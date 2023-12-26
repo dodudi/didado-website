@@ -1,10 +1,10 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.info.dto.collectible;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class CollectiblePoint {
+public class CollectiblePointParameter {
     @JsonProperty(value = "PointName")
     private String pointName;
 

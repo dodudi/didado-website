@@ -20,10 +20,9 @@ public class ProfileScheduler {
 
     @Scheduled(cron = "0/10 * * * * *")
     public void test() {
-//        profileSchedulerService.search("디다도두");
-//        equipmentSchedulerService.search("디다도두");
-//        avatarSchedulerService.search("디다도두");
-
+        profileSchedulerService.search("디다도두");
+        equipmentSchedulerService.search("디다도두");
+        avatarSchedulerService.search("디다도두");
         skillSchedulerService.search("디다도두");
     }
 }

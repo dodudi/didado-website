@@ -71,23 +71,7 @@ public class ProfileServiceImpl {
                 .toList();
     }
 
-//    public Object search(String username) {
-//
-//        String url = property.url() + "/armories/characters/" + username;
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("authorization", property.apiKey());
-//
-//
-//        ResponseEntity<Armory> response = restTemplate.exchange(
-//                url,
-//                HttpMethod.GET,
-//                new HttpEntity<>(headers),
-//                new ParameterizedTypeReference<>() {
-//                }
-//        );
-//
-//        return new ArmoryResponse("캐릭터 상세 정보 조회에 성공", 200, response.getBody());
-//    }
+
 //
 //
 

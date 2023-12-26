@@ -1,10 +1,10 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.info.dto.colosseum;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class AggregationElimination {
+public class AggregationEliminationParameter {
     @JsonProperty(value = "FirstWinCount")
     private Integer firstWinCount;
 

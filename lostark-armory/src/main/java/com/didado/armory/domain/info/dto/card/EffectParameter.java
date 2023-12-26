@@ -1,14 +1,10 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.info.dto.card;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class EngravingEffect {
-
-    @JsonProperty(value = "Icon")
-    private String icon;
-
+public class EffectParameter {
     @JsonProperty(value = "Name")
     private String name;
 

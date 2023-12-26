@@ -1,4 +1,4 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.info.dto.card;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class CardEffect {
+public class CardEffectParameter {
     @JsonProperty(value = "Index")
     private Integer index;
 
@@ -14,5 +14,5 @@ public class CardEffect {
     private List<Integer> cardSlots;
 
     @JsonProperty(value = "Items")
-    private List<Effect> items;
+    private List<EffectParameter> items;
 }

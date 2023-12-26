@@ -1,4 +1,4 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.info.dto.gem;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -6,10 +6,10 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class ArmoryGem {
+public class ArmoryGemParameter {
     @JsonProperty(value = "Gems")
-    private List<Gem> gems;
+    private List<GemParameter> gems;
 
     @JsonProperty(value = "Effects")
-    private List<GemEffect> effects;
+    private List<GemEffectParameter> effects;
 }

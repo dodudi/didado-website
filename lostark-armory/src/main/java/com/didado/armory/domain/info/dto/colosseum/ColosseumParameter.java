@@ -1,26 +1,26 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.info.dto.colosseum;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class Colosseum {
+public class ColosseumParameter {
 
     @JsonProperty(value = "SeasonName")
     private String seasonName;
 
     @JsonProperty(value = "Competitive")
-    private AggregationTeamDeathMatchRank competitive;
+    private AggregationTeamDeathMatchRankParameter competitive;
 
     @JsonProperty(value = "TeamDeathmatch")
-    private Aggregation teamDeathmatch;
+    private AggregationParameter teamDeathmatch;
 
     @JsonProperty(value = "Deathmatch")
-    private Aggregation deathmatch;
+    private AggregationParameter deathmatch;
 
     @JsonProperty(value = "TeamElimination")
-    private AggregationElimination teamElimination;
+    private AggregationEliminationParameter teamElimination;
 
     @JsonProperty(value = "CoOpBattle")
-    private Aggregation coOpBattle;
+    private AggregationParameter coOpBattle;
 }

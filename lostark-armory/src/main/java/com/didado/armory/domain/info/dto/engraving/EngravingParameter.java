@@ -1,12 +1,13 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.info.dto.engraving;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class Card {
+public class EngravingParameter {
+
     @JsonProperty(value = "Slot")
-    private String slot;
+    private Integer slot;
 
     @JsonProperty(value = "Name")
     private String name;
@@ -14,15 +15,7 @@ public class Card {
     @JsonProperty(value = "Icon")
     private String icon;
 
-    @JsonProperty(value = "AwakeCount")
-    private String awakeCount;
-
-    @JsonProperty(value = "AwakeTotal")
-    private String awakeTotal;
-
-    @JsonProperty(value = "Grade")
-    private String grade;
-
     @JsonProperty(value = "Tooltip")
     private String toolTip;
+
 }
