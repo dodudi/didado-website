@@ -1,9 +1,11 @@
-package com.didado.armory.domain.info.dto.card;
+package com.didado.armory.domain.card.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class CardParameter {
     @JsonProperty(value = "Slot")
     private String slot;

@@ -97,22 +97,7 @@ public class ProfileServiceImpl {
 //        return new ArmoryResponse("캐릭터 착용 각인 조회에 성공", 200, response.getBody());
 //    }
 //
-//    public Object cards(String username) {
-//        String url = property.url() + "/armories/characters/" + username + "/cards";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("authorization", property.apiKey());
-//
-//
-//        ResponseEntity<ArmoryCard> response = restTemplate.exchange(
-//                url,
-//                HttpMethod.GET,
-//                new HttpEntity<>(headers),
-//                new ParameterizedTypeReference<>() {
-//                }
-//        );
-//
-//        return new ArmoryResponse("캐릭터 착용 카드 조회에 성공", 200, response.getBody());
-//    }
+
 //
 
 //

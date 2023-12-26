@@ -2,7 +2,7 @@ package com.didado.armory.domain.info.dto;
 
 import com.didado.armory.domain.gem.dto.ArmoryGemParameter;
 import com.didado.armory.domain.info.dto.avatar.ArmoryAvatarParameter;
-import com.didado.armory.domain.info.dto.card.ArmoryCardParameter;
+import com.didado.armory.domain.card.dto.ArmoryCardParameter;
 import com.didado.armory.domain.info.dto.collectible.CollectibleParameter;
 import com.didado.armory.domain.info.dto.colosseum.ColosseumInfoParameter;
 import com.didado.armory.domain.info.dto.engraving.ArmoryEngravingParameter;

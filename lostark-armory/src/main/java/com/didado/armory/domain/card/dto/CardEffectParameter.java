@@ -1,11 +1,13 @@
-package com.didado.armory.domain.info.dto.card;
+package com.didado.armory.domain.card.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.List;
 
 @Getter
+@ToString
 public class CardEffectParameter {
     @JsonProperty(value = "Index")
     private Integer index;
