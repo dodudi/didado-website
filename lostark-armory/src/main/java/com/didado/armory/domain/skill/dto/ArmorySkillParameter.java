@@ -34,7 +34,29 @@ public class ArmorySkillParameter {
     @JsonProperty(value = "Tooltip")
     private String toolTip;
 
-    public ArmorySkill toArmorySkill(String characterName){
+    protected ArmorySkillParameter() {
+    }
+
+    public ArmorySkillParameter(ArmorySkill armorySkill) {
+
+        SkillRune rune = armorySkill.getRune();
+        if (rune != null) {
+            this.rune = new SkillRuneParameter(rune);
+        }
+
+        this.tripods = armorySkill.getTripods().stream()
+                .map(SkillTripodParameter::new)
+                .toList();
+
+        this.name = armorySkill.getName();
+        this.icon = armorySkill.getIcon();
+        this.level = armorySkill.getLevel();
+        this.type = armorySkill.getType();
+        this.isAwakening = armorySkill.getIsAwakening();
+        this.toolTip = armorySkill.getToolTip();
+    }
+
+    public ArmorySkill toArmorySkill(String characterName) {
         return ArmorySkill.builder()
                 .characterName(characterName)
                 .name(name)

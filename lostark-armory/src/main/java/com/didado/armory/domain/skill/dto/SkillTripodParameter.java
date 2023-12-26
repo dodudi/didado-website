@@ -28,6 +28,19 @@ public class SkillTripodParameter {
     @JsonProperty(value = "Tooltip")
     private String toolTip;
 
+    protected SkillTripodParameter() {
+    }
+
+    public SkillTripodParameter(SkillTripod skillTripod) {
+        this.tier = skillTripod.getTier();
+        this.slot = skillTripod.getSlot();
+        this.name = skillTripod.getName();
+        this.icon = skillTripod.getIcon();
+        this.level = skillTripod.getLevel();
+        this.isSelected = skillTripod.getIsSelected();
+        this.toolTip = skillTripod.getToolTip();
+    }
+
     public SkillTripod toSkillTripod(ArmorySkill armorySkill) {
         SkillTripod skillTripod = new SkillTripod(this);
         skillTripod.updateArmorySkill(armorySkill);

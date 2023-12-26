@@ -19,6 +19,16 @@ public class SkillRuneParameter {
     @JsonProperty(value = "Tooltip")
     private String toolTip;
 
+    protected SkillRuneParameter() {
+    }
+
+    public SkillRuneParameter(SkillRune skillRune) {
+        this.name = skillRune.getName();
+        this.icon = skillRune.getIcon();
+        this.grade = skillRune.getGrade();
+        this.toolTip = skillRune.getToolTip();
+    }
+
     public SkillRune toSkillRune(ArmorySkill armorySkill) {
 
         SkillRune convertSkillRune = SkillRune.builder()
