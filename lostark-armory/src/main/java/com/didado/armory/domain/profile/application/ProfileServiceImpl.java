@@ -94,22 +94,7 @@ public class ProfileServiceImpl {
 //
 
 //
-//    public Object combatSkills(String username) {
-//        String url = property.url() + "/armories/characters/" + username + "/combat-skills";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("authorization", property.apiKey());
-//
-//
-//        ResponseEntity<List<ArmorySkill>> response = restTemplate.exchange(
-//                url,
-//                HttpMethod.GET,
-//                new HttpEntity<>(headers),
-//                new ParameterizedTypeReference<>() {
-//                }
-//        );
-//
-//        return new ArmoryResponse("캐릭터 착용 스킬 조회에 성공", 200, response.getBody());
-//    }
+
 //
 //    public Object engravings(String username) {
 //        String url = property.url() + "/armories/characters/" + username + "/engravings";

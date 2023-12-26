@@ -1,10 +1,12 @@
-package com.didado.armory.domain.dto.armory;
+package com.didado.armory.domain.skill.dto;
 
+import com.didado.armory.domain.skill.domain.ArmorySkill;
+import com.didado.armory.domain.skill.domain.SkillTripod;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class SkillTripod {
+public class SkillTripodParameter {
     @JsonProperty(value = "Tier")
     private Integer tier;
 
@@ -25,4 +27,10 @@ public class SkillTripod {
 
     @JsonProperty(value = "Tooltip")
     private String toolTip;
+
+    public SkillTripod toSkillTripod(ArmorySkill armorySkill) {
+        SkillTripod skillTripod = new SkillTripod(this);
+        skillTripod.updateArmorySkill(armorySkill);
+        return skillTripod;
+    }
 }
