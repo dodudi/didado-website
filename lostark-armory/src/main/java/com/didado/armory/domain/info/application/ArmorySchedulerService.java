@@ -3,7 +3,7 @@ package com.didado.armory.domain.info.application;
 
 import com.didado.armory.domain.dto.LostarkProperty;
 import com.didado.armory.domain.info.dto.ArmoryParameter;
-import com.didado.armory.domain.info.dto.profile.ArmoryProfileParameter;
+import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;

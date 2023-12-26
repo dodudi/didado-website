@@ -118,20 +118,5 @@ public class ProfileServiceImpl {
 //        return new ArmoryResponse("캐릭터 결투장 정보 조회에 성공", 200, response.getBody());
 //    }
 //
-//    public Object collectibles(String username) {
-//        String url = property.url() + "/armories/characters/" + username + "/collectibles";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("authorization", property.apiKey());
-//
-//
-//        ResponseEntity<List<Collectible>> response = restTemplate.exchange(
-//                url,
-//                HttpMethod.GET,
-//                new HttpEntity<>(headers),
-//                new ParameterizedTypeReference<>() {
-//                }
-//        );
-//
-//        return new ArmoryResponse("캐릭터 수집물 조회에 성공", 200, response.getBody());
-//    }
+
 }

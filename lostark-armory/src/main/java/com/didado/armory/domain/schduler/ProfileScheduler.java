@@ -2,6 +2,7 @@ package com.didado.armory.domain.schduler;
 
 import com.didado.armory.domain.avatar.application.AvatarSchedulerService;
 import com.didado.armory.domain.card.application.CardSchedulerService;
+import com.didado.armory.domain.collectible.application.CollectibleSchedulerService;
 import com.didado.armory.domain.equipment.application.EquipmentSchedulerService;
 import com.didado.armory.domain.gem.application.GemSchedulerService;
 import com.didado.armory.domain.profile.application.ProfileSchedulerService;
@@ -24,6 +25,8 @@ public class ProfileScheduler {
 
     private final CardSchedulerService cardSchedulerService;
 
+    private final CollectibleSchedulerService collectibleSchedulerService;
+
     @Scheduled(cron = "0/10 * * * * *")
     public void test() {
 //        profileSchedulerService.search("Nelip");
@@ -31,6 +34,7 @@ public class ProfileScheduler {
 //        avatarSchedulerService.search("Nelip");
 //        skillSchedulerService.search("Nelip");
 //        gemSchedulerService.search("Nelip");
-        cardSchedulerService.search("Nelip");
+//        cardSchedulerService.search("Nelip");
+        collectibleSchedulerService.search("Nelip");
     }
 }
