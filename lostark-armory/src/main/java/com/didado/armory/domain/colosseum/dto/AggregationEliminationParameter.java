@@ -1,5 +1,6 @@
 package com.didado.armory.domain.colosseum.dto;
 
+import com.didado.armory.domain.colosseum.domain.AggregationElimination;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
@@ -48,4 +49,23 @@ public class AggregationEliminationParameter {
 
     @JsonProperty(value = "DeathCount")
     private Integer deathCount;
+
+    public AggregationElimination toAggregationElimination() {
+        return AggregationElimination.builder()
+                .firstWinCount(firstWinCount)
+                .secondWinCount(secondWinCount)
+                .thirdWinCount(thirdWinCount)
+                .firstPlayCount(firstPlayCount)
+                .secondPlayCount(secondPlayCount)
+                .thirdPlayCount(thirdPlayCount)
+                .allKillCount(allKillCount)
+                .playCount(playCount)
+                .victoryCount(victoryCount)
+                .loseCount(loseCount)
+                .tieCount(tieCount)
+                .killCount(killCount)
+                .aceCount(aceCount)
+                .deathCount(deathCount)
+                .build();
+    }
 }

@@ -1,5 +1,6 @@
 package com.didado.armory.domain.colosseum.dto;
 
+import com.didado.armory.domain.colosseum.domain.Colosseum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
@@ -25,4 +26,10 @@ public class ColosseumParameter {
 
     @JsonProperty(value = "CoOpBattle")
     private AggregationParameter coOpBattle;
+
+    public Colosseum toColosseum(){
+        return Colosseum.builder()
+                .seasonName(seasonName)
+                .build();
+    }
 }

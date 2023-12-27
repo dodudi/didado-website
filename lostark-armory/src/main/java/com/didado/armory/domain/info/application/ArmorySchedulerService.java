@@ -15,10 +15,8 @@ import com.didado.armory.domain.collectible.domain.Collectible;
 import com.didado.armory.domain.collectible.domain.CollectiblePoint;
 import com.didado.armory.domain.collectible.dto.CollectibleParameter;
 import com.didado.armory.domain.collectible.dto.CollectiblePointParameter;
-import com.didado.armory.domain.colosseum.domain.ColosseumInfo;
-import com.didado.armory.domain.colosseum.dto.AggregationTeamDeathMatchRankParameter;
-import com.didado.armory.domain.colosseum.dto.ColosseumInfoParameter;
-import com.didado.armory.domain.colosseum.dto.ColosseumParameter;
+import com.didado.armory.domain.colosseum.domain.*;
+import com.didado.armory.domain.colosseum.dto.*;
 import com.didado.armory.domain.dto.LostarkProperty;
 import com.didado.armory.domain.engraving.domain.ArmoryEngraving;
 import com.didado.armory.domain.engraving.domain.Engraving;
@@ -95,7 +93,36 @@ public class ArmorySchedulerService {
         ColosseumInfo convertColosseumInfo = colosseumInfoParameter.toColosseumInfo();
         List<ColosseumParameter> colosseumParameters = colosseumInfoParameter.getColosseums();
         for (ColosseumParameter colosseumParameter : colosseumParameters) {
-            AggregationTeamDeathMatchRankParameter competitive = colosseumParameter.getCompetitive();
+            Colosseum colosseum = colosseumParameter.toColosseum();
+
+            AggregationTeamDeathMatchRank convertTeamDeathMatchRank = colosseumParameter.getCompetitive()
+                    .toAggregationTeamDeathMatchRank();
+            log.debug("Save={}", convertTeamDeathMatchRank);
+
+            colosseum.changeAggregationTeamDeathMatchRank(convertTeamDeathMatchRank);
+
+
+            TeamDeathmatchAggregation teamDeathmatchAggregation = colosseumParameter.getTeamDeathmatch()
+                    .toTeamDeathmatchAggregation();
+            log.debug("Save={}", teamDeathmatchAggregation);
+            colosseum.changeTeamDeathmatchAggregation(teamDeathmatchAggregation);
+
+            DeathmatchAggregation deathmatchAggregation = colosseumParameter.getDeathmatch()
+                    .toDeathmatchAggregation();
+            log.debug("Save={}", deathmatchAggregation);
+            colosseum.changeDeathmatchAggregation(deathmatchAggregation);
+
+            CoOpBattleAggregation coOpBattleAggregation = colosseumParameter.getCoOpBattle()
+                    .toCoOpBattleAggregation();
+            log.debug("Save={}", coOpBattleAggregation);
+            colosseum.changeCoOpBattleAggregation(coOpBattleAggregation);
+
+            AggregationElimination teamElimination = colosseumParameter.getTeamElimination().toAggregationElimination();
+            log.debug("Save={}", teamElimination);
+            colosseum.changeTeamElimination(teamElimination);
+
+            log.debug("Save={}", colosseum);
+            convertColosseumInfo.getColosseums().add(colosseum);
         }
     }
 
