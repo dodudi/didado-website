@@ -1,9 +1,7 @@
 package com.didado.armory.domain.engraving.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
@@ -14,6 +12,10 @@ public class Engraving {
     @Column(name = "engraving_id")
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_engraving_id")
+    private ArmoryEngraving armoryEngraving;
+
     private Integer slot;
 
     private String name;
@@ -21,4 +23,20 @@ public class Engraving {
     private String icon;
 
     private String toolTip;
+
+    protected Engraving() {
+    }
+
+    @Builder
+    public Engraving(Integer slot, String name, String icon, String toolTip) {
+        this.slot = slot;
+        this.name = name;
+        this.icon = icon;
+        this.toolTip = toolTip;
+    }
+
+    public void changeArmoryEngraving(ArmoryEngraving armoryEngraving) {
+        this.armoryEngraving = armoryEngraving;
+        armoryEngraving.getEngravings().add(this);
+    }
 }

@@ -34,7 +34,7 @@ public class EquipmentSchedulerService {
         if (armoryEquipments.isEmpty()) {
             log.debug("Armory Equipment Not Exist = {}", characterName);
             List<ArmoryEquipment> convertEquipments = equipmentParameters.stream()
-                    .map(armoryEquipmentParameter -> armoryEquipmentParameter.toArmoryEquipment(characterName))
+                    .map(ArmoryEquipmentParameter::toArmoryEquipment)
                     .toList();
             equipmentRepository.saveAll(convertEquipments);
         } else {
@@ -45,7 +45,7 @@ public class EquipmentSchedulerService {
                                 .filter(parameter -> parameter.getType().equals(armoryEquipment.getType()))
                                 .findAny()
                                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 장비 타입입니다."));
-                        armoryEquipment.updateData(armoryEquipmentParameter, characterName);
+                        armoryEquipment.updateData(armoryEquipmentParameter);
                     })
                     .toList();
             equipmentRepository.saveAll(updateEquipment);

@@ -1,11 +1,9 @@
 package com.didado.armory.domain.equipment.domain;
 
 import com.didado.armory.domain.equipment.dto.ArmoryEquipmentParameter;
+import com.didado.armory.domain.info.domain.Armory;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -21,7 +19,10 @@ public class ArmoryEquipment {
     @Column(name = "armory_equipment_id")
     private Long id;
 
-    private String characterName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_id")
+    private Armory armory;
+
     private String type;
     private String name;
     private String icon;
@@ -40,7 +41,6 @@ public class ArmoryEquipment {
 
     @Builder
     public ArmoryEquipment(String characterName, String type, String name, String icon, String grade, String toolTip) {
-        this.characterName = characterName;
         this.type = type;
         this.name = name;
         this.icon = icon;
@@ -48,13 +48,17 @@ public class ArmoryEquipment {
         this.toolTip = toolTip;
     }
 
-    public ArmoryEquipment updateData(ArmoryEquipmentParameter parameter, String characterName) {
-        this.characterName = characterName;
+    public ArmoryEquipment updateData(ArmoryEquipmentParameter parameter) {
         this.type = parameter.getType();
         this.name = parameter.getName();
         this.icon = parameter.getIcon();
         this.grade = parameter.getGrade();
         this.toolTip = parameter.getToolTip();
         return this;
+    }
+
+    public void changeArmory(Armory armory) {
+        this.armory = armory;
+        armory.getArmoryEquipment().add(this);
     }
 }

@@ -1,10 +1,8 @@
 package com.didado.armory.domain.card.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
@@ -14,6 +12,10 @@ public class Card {
     @GeneratedValue
     @Column(name = "card_id")
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_card_id")
+    private ArmoryCard armoryCard;
 
     private String slot;
 
@@ -29,4 +31,23 @@ public class Card {
 
     @Column(name = "tool_tip", length = 10000)
     private String toolTip;
+
+    protected Card() {
+    }
+
+    @Builder
+    public Card(String slot, String name, String icon, String awakeCount, String awakeTotal, String grade, String toolTip) {
+        this.slot = slot;
+        this.name = name;
+        this.icon = icon;
+        this.awakeCount = awakeCount;
+        this.awakeTotal = awakeTotal;
+        this.grade = grade;
+        this.toolTip = toolTip;
+    }
+
+    public void changeArmoryCard(ArmoryCard armoryCard) {
+        this.armoryCard = armoryCard;
+        armoryCard.getCards().add(this);
+    }
 }

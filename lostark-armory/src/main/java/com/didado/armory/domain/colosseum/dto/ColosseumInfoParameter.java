@@ -1,5 +1,6 @@
 package com.didado.armory.domain.colosseum.dto;
 
+import com.didado.armory.domain.colosseum.domain.ColosseumInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
@@ -20,4 +21,12 @@ public class ColosseumInfoParameter {
 
     @JsonProperty(value = "Colosseums")
     private List<ColosseumParameter> colosseums;
+
+    public ColosseumInfo toColosseumInfo() {
+        return ColosseumInfo.builder()
+                .rank(rank)
+                .preRank(preRank)
+                .exp(exp)
+                .build();
+    }
 }

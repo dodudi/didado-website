@@ -24,14 +24,14 @@ public class StatParameter {
         this.toolTip = stat.getToolTip();
     }
 
-    public Stat toStat(List<String> toolTips) {
+    public Stat toStat() {
         Stat stat = Stat.builder()
                 .type(type)
                 .amount(value)
                 .build();
 
         stat.getToolTip().clear();
-        stat.getToolTip().addAll(toolTips);
+        stat.getToolTip().addAll(toolTip);
         return stat;
     }
 }

@@ -1,5 +1,6 @@
 package com.didado.armory.domain.profile.domain;
 
+import com.didado.armory.domain.info.domain.Armory;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,12 +37,6 @@ public class ArmoryProfile {
 
     private Integer totalSkillPoint;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryProfile")
-    private List<Stat> stats = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryProfile")
-    private List<Tendency> tendencies = new ArrayList<>();
-
     private String serverName;
 
     private String characterName;
@@ -54,7 +49,14 @@ public class ArmoryProfile {
 
     private String itemMaxLevel;
 
-    protected ArmoryProfile(){}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryProfile")
+    private List<Stat> stats = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryProfile")
+    private List<Tendency> tendencies = new ArrayList<>();
+
+    protected ArmoryProfile() {
+    }
 
     @Builder
     public ArmoryProfile(String characterImage, Integer expeditionLevel, String pvpGradeName, Integer townLevel, String townName, String title, String guildMemberGrade, String guildName, Integer usingSkillPoint, Integer totalSkillPoint, String serverName, String characterName, Integer characterLevel, String characterClassName, String itemAvgLevel, String itemMaxLevel) {

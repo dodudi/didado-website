@@ -1,10 +1,8 @@
 package com.didado.armory.domain.card.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
@@ -14,9 +12,25 @@ public class Effect {
     @GeneratedValue
     @Column(name = "effect_id")
     private Long id;
-    @JsonProperty(value = "Name")
-    private String name;
 
-    @JsonProperty(value = "Description")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_effect_id")
+    private CardEffect cardEffect;
+
+    private String name;
     private String description;
+
+    protected Effect() {
+    }
+
+    @Builder
+    public Effect(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public void changeCardEffect(CardEffect cardEffect) {
+        this.cardEffect = cardEffect;
+        cardEffect.getItems().add(this);
+    }
 }

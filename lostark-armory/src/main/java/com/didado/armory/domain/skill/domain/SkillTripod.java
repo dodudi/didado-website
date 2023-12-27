@@ -30,17 +30,19 @@ public class SkillTripod {
     protected SkillTripod() {
     }
 
-    public SkillTripod(SkillTripodParameter skillTripodParameter) {
-        this.tier = skillTripodParameter.getTier();
-        this.slot = skillTripodParameter.getSlot();
-        this.name = skillTripodParameter.getName();
-        this.icon = skillTripodParameter.getIcon();
-        this.level = skillTripodParameter.getLevel();
-        this.isSelected = skillTripodParameter.getIsSelected();
-        this.toolTip = skillTripodParameter.getToolTip();
+    @Builder
+    public SkillTripod(Integer tier, Integer slot, String name, String icon, Integer level, Boolean isSelected, String toolTip) {
+        this.tier = tier;
+        this.slot = slot;
+        this.name = name;
+        this.icon = icon;
+        this.level = level;
+        this.isSelected = isSelected;
+        this.toolTip = toolTip;
     }
 
-    public void updateArmorySkill(ArmorySkill armorySkill) {
+    public void changeArmorySkill(ArmorySkill armorySkill) {
         this.armorySkill = armorySkill;
+        armorySkill.getTripods().add(this);
     }
 }

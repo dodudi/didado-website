@@ -32,9 +32,8 @@ public class ArmoryEquipmentParameter {
         this.toolTip = armoryEquipment.getToolTip();
     }
 
-    public ArmoryEquipment toArmoryEquipment(String characterName) {
+    public ArmoryEquipment toArmoryEquipment() {
         return ArmoryEquipment.builder()
-                .characterName(characterName)
                 .type(type)
                 .name(name)
                 .icon(icon)

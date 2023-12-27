@@ -41,9 +41,15 @@ public class SkillTripodParameter {
         this.toolTip = skillTripod.getToolTip();
     }
 
-    public SkillTripod toSkillTripod(ArmorySkill armorySkill) {
-        SkillTripod skillTripod = new SkillTripod(this);
-        skillTripod.updateArmorySkill(armorySkill);
-        return skillTripod;
+    public SkillTripod toSkillTripod() {
+        return SkillTripod.builder()
+                .tier(tier)
+                .slot(slot)
+                .name(name)
+                .icon(icon)
+                .level(level)
+                .isSelected(isSelected)
+                .toolTip(toolTip)
+                .build();
     }
 }

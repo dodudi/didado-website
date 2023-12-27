@@ -1,11 +1,8 @@
 package com.didado.armory.domain.avatar.domain;
 
 import com.didado.armory.domain.avatar.dto.ArmoryAvatarParameter;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.didado.armory.domain.info.domain.Armory;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -17,7 +14,10 @@ public class ArmoryAvatar {
     @Column(name = "armory_avatar_id")
     private Long id;
 
-    private String characterName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_id")
+    private Armory armory;
+
     private String type;
     private String name;
     private String icon;
@@ -31,8 +31,7 @@ public class ArmoryAvatar {
     }
 
     @Builder
-    public ArmoryAvatar(String characterName, String type, String name, String icon, String grade, Boolean isSet, Boolean isInner, String toolTip) {
-        this.characterName = characterName;
+    public ArmoryAvatar(String type, String name, String icon, String grade, Boolean isSet, Boolean isInner, String toolTip) {
         this.type = type;
         this.name = name;
         this.icon = icon;
@@ -42,8 +41,7 @@ public class ArmoryAvatar {
         this.toolTip = toolTip;
     }
 
-    public ArmoryAvatar updateData(ArmoryAvatarParameter parameter, String characterName) {
-        this.characterName = characterName;
+    public ArmoryAvatar updateData(ArmoryAvatarParameter parameter) {
         this.type = parameter.getType();
         this.name = parameter.getName();
         this.icon = parameter.getIcon();
@@ -52,5 +50,10 @@ public class ArmoryAvatar {
         this.isInner = parameter.getIsInner();
         this.toolTip = parameter.getToolTip();
         return this;
+    }
+
+    public void changeArmory(Armory armory) {
+        this.armory = armory;
+        armory.getArmoryAvatars().add(this);
     }
 }

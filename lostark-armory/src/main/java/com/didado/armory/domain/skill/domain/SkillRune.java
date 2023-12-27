@@ -20,6 +20,7 @@ public class SkillRune {
     private String toolTip;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_skill_id")
     private ArmorySkill armorySkill;
 
     protected SkillRune() {
@@ -33,14 +34,8 @@ public class SkillRune {
         this.toolTip = toolTip;
     }
 
-    public void updateData(SkillRuneParameter skillRuneParameter) {
-        this.name = skillRuneParameter.getName();
-        this.icon = skillRuneParameter.getIcon();
-        this.grade = skillRuneParameter.getGrade();
-        this.toolTip = skillRuneParameter.getToolTip();
-    }
-
-    public void updateArmorySkill(ArmorySkill armorySkill) {
+    public void changeArmorySkill(ArmorySkill armorySkill) {
         this.armorySkill = armorySkill;
+        armorySkill.changeSkillRune(this);
     }
 }

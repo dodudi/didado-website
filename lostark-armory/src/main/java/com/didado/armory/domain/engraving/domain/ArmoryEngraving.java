@@ -18,9 +18,11 @@ public class ArmoryEngraving {
     @Column(name = "armory_engraving_id")
     private Long id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryEngraving")
     private List<Engraving> engravings;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryEngraving")
     private List<EngravingEffect> effects;
+
+
 }

@@ -1,5 +1,6 @@
 package com.didado.armory.domain.gem.dto;
 
+import com.didado.armory.domain.gem.domain.ArmoryGem;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
@@ -12,4 +13,11 @@ public class ArmoryGemParameter {
 
     @JsonProperty(value = "Effects")
     private List<GemEffectParameter> effects;
+
+    protected ArmoryGemParameter() {
+    }
+
+    public ArmoryGem toArmoryGem() {
+        return new ArmoryGem();
+    }
 }

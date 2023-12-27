@@ -22,13 +22,16 @@ public class Armory {
     @Column(name = "armory_id")
     private Long id;
 
+    private String characterName;
+
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_profile_id")
     private ArmoryProfile armoryProfile;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armory")
     private List<ArmoryEquipment> armoryEquipment;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armory")
     private List<ArmoryAvatar> armoryAvatars;
 
     @OneToMany(fetch = FetchType.LAZY)
@@ -38,6 +41,7 @@ public class Armory {
     private ArmoryEngraving armoryEngraving;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_card_id")
     private ArmoryCard armoryCard;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -48,4 +52,19 @@ public class Armory {
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Collectible> collectibles;
+
+    protected Armory() {
+    }
+
+    public Armory(String characterName) {
+        this.characterName = characterName;
+    }
+
+    public void changeArmoryProfile(ArmoryProfile armoryProfile) {
+        this.armoryProfile = armoryProfile;
+    }
+
+    public void changeArmoryCard(ArmoryCard armoryCard) {
+        this.armoryCard = armoryCard;
+    }
 }

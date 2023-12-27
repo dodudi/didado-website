@@ -1,6 +1,5 @@
 package com.didado.armory.domain.colosseum.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,19 +9,11 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class AggregationTeamDeathMatchRank {
+public class CoOpBattleAggregation {
     @Id
     @GeneratedValue
-    @Column(name = "aggregation_team_death_match_rank_id")
+    @Column(name = "coop_aggregation_id")
     private Long id;
-
-    private Integer rank;
-
-    private String rankName;
-
-    private String rankIcon;
-
-    private Integer rankLastMmr;
 
     private Integer playCount;
 
@@ -38,15 +29,10 @@ public class AggregationTeamDeathMatchRank {
 
     private Integer deathCount;
 
-    protected AggregationTeamDeathMatchRank() {
-    }
+    protected CoOpBattleAggregation(){}
 
     @Builder
-    public AggregationTeamDeathMatchRank(Integer rank, String rankName, String rankIcon, Integer rankLastMmr, Integer playCount, Integer victoryCount, Integer loseCount, Integer tieCount, Integer killCount, Integer aceCount, Integer deathCount) {
-        this.rank = rank;
-        this.rankName = rankName;
-        this.rankIcon = rankIcon;
-        this.rankLastMmr = rankLastMmr;
+    public CoOpBattleAggregation(Integer playCount, Integer victoryCount, Integer loseCount, Integer tieCount, Integer killCount, Integer aceCount, Integer deathCount) {
         this.playCount = playCount;
         this.victoryCount = victoryCount;
         this.loseCount = loseCount;

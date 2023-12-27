@@ -12,7 +12,7 @@ import lombok.Getter;
 public class Aggregation {
     @Id
     @GeneratedValue
-    @Column(name = "aggregation_Id")
+    @Column(name = "aggregation_id")
     private Long id;
 
     private Integer playCount;

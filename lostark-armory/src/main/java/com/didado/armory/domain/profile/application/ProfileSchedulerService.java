@@ -48,7 +48,7 @@ public class ProfileSchedulerService {
             armoryProfileRepository.save(convertProfile);
 
             List<Stat> convertStats = newStats.stream()
-                    .map(statParameter -> statParameter.toStat(statParameter.getToolTip()))
+                    .map(statParameter -> statParameter.toStat())
                     .map(stat -> stat.updateArmoryProfile(convertProfile))
                     .toList();
 

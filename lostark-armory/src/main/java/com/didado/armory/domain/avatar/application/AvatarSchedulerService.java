@@ -34,7 +34,7 @@ public class AvatarSchedulerService {
         if (armoryAvatars.isEmpty()) {
             log.debug("Armory Avatar Not Exist={}", characterName);
             List<ArmoryAvatar> convertAvatars = avatarParameters.stream()
-                    .map(armoryAvatarParameter -> armoryAvatarParameter.toArmoryAvatar(characterName))
+                    .map(ArmoryAvatarParameter::toArmoryAvatar)
                     .toList();
             avatarRepository.saveAll(convertAvatars);
         } else {
@@ -45,7 +45,7 @@ public class AvatarSchedulerService {
                                 .filter(parameter -> parameter.getType().equals(armoryAvatar.getType()))
                                 .findAny()
                                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아바타 타입입니다."));
-                        armoryAvatar.updateData(armoryAvatarParameter, characterName);
+                        armoryAvatar.updateData(armoryAvatarParameter);
                     })
                     .toList();
 

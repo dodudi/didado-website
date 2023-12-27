@@ -1,5 +1,6 @@
 package com.didado.armory.domain.collectible.dto;
 
+import com.didado.armory.domain.collectible.domain.Collectible;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
@@ -23,4 +24,13 @@ public class CollectibleParameter {
 
     @JsonProperty(value = "CollectiblePoints")
     private List<CollectiblePointParameter> collectiblePoints;
+
+    public Collectible toCollectible() {
+        return Collectible.builder()
+                .type(type)
+                .icon(icon)
+                .point(point)
+                .maxPoint(maxPoint)
+                .build();
+    }
 }

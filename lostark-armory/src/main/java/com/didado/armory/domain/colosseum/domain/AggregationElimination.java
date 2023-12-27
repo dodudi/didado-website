@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
@@ -13,6 +14,8 @@ public class AggregationElimination {
     @Id
     @GeneratedValue
     @Column(name = "aggregation_elimination_id")
+    private Long id;
+
     private Integer firstWinCount;
 
     private Integer secondWinCount;
@@ -40,4 +43,25 @@ public class AggregationElimination {
     private Integer aceCount;
 
     private Integer deathCount;
+
+    protected AggregationElimination() {
+    }
+
+    @Builder
+    public AggregationElimination(Integer firstWinCount, Integer secondWinCount, Integer thirdWinCount, Integer firstPlayCount, Integer secondPlayCount, Integer thirdPlayCount, Integer allKillCount, Integer playCount, Integer victoryCount, Integer loseCount, Integer tieCount, Integer killCount, Integer aceCount, Integer deathCount) {
+        this.firstWinCount = firstWinCount;
+        this.secondWinCount = secondWinCount;
+        this.thirdWinCount = thirdWinCount;
+        this.firstPlayCount = firstPlayCount;
+        this.secondPlayCount = secondPlayCount;
+        this.thirdPlayCount = thirdPlayCount;
+        this.allKillCount = allKillCount;
+        this.playCount = playCount;
+        this.victoryCount = victoryCount;
+        this.loseCount = loseCount;
+        this.tieCount = tieCount;
+        this.killCount = killCount;
+        this.aceCount = aceCount;
+        this.deathCount = deathCount;
+    }
 }

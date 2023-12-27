@@ -16,8 +16,6 @@ public class ArmorySkill {
     @Column(name = "armory_skill_id")
     private Long id;
 
-    private String characterName;
-
     private String name;
 
     private String icon;
@@ -28,10 +26,10 @@ public class ArmorySkill {
 
     private Boolean isAwakening;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armorySkill", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armorySkill")
     private List<SkillTripod> tripods = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "armorySkill",  cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "armorySkill")
     private SkillRune rune;
 
     @Column(name = "tool_tip", length = 10000)
@@ -41,13 +39,16 @@ public class ArmorySkill {
     }
 
     @Builder
-    public ArmorySkill(String characterName, String name, String icon, Integer level, String type, Boolean isAwakening, String toolTip) {
-        this.characterName = characterName;
+    public ArmorySkill(String name, String icon, Integer level, String type, Boolean isAwakening, String toolTip) {
         this.name = name;
         this.icon = icon;
         this.level = level;
         this.type = type;
         this.isAwakening = isAwakening;
         this.toolTip = toolTip;
+    }
+
+    public void changeSkillRune(SkillRune skillRune) {
+        this.rune = skillRune;
     }
 }

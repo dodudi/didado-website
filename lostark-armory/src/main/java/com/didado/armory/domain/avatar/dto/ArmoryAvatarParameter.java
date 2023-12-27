@@ -40,9 +40,8 @@ public class ArmoryAvatarParameter {
         this.toolTip = armoryAvatar.getToolTip();
     }
 
-    public ArmoryAvatar toArmoryAvatar(String characterName) {
+    public ArmoryAvatar toArmoryAvatar() {
         return ArmoryAvatar.builder()
-                .characterName(characterName)
                 .type(type)
                 .name(name)
                 .icon(icon)

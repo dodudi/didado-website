@@ -1,5 +1,6 @@
 package com.didado.armory.domain.card.dto;
 
+import com.didado.armory.domain.card.domain.CardEffect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
@@ -17,4 +18,8 @@ public class CardEffectParameter {
 
     @JsonProperty(value = "Items")
     private List<EffectParameter> items;
+
+    public CardEffect toCardEffect() {
+        return new CardEffect(index, cardSlots);
+    }
 }

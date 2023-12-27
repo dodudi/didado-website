@@ -3,6 +3,7 @@ package com.didado.armory.domain.colosseum.domain;
 import com.didado.armory.domain.colosseum.dto.ColosseumParameter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -22,6 +23,16 @@ public class ColosseumInfo {
 
     private Integer exp;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "colosseumInfo")
     private List<Colosseum> colosseums = new ArrayList<>();
+
+    protected ColosseumInfo() {
+    }
+
+    @Builder
+    public ColosseumInfo(Integer rank, Integer preRank, Integer exp) {
+        this.rank = rank;
+        this.preRank = preRank;
+        this.exp = exp;
+    }
 }

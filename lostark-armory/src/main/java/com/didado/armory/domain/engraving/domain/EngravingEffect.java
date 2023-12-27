@@ -1,10 +1,9 @@
 package com.didado.armory.domain.engraving.domain;
 
+import com.didado.armory.domain.info.domain.Armory;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
@@ -15,9 +14,29 @@ public class EngravingEffect {
     @Column(name = "engraving_effect_id")
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_engraving_id")
+    private ArmoryEngraving armoryEngraving;
+
     private String icon;
 
     private String name;
 
     private String description;
+
+    protected EngravingEffect() {
+    }
+
+    @Builder
+    public EngravingEffect(String icon, String name, String description) {
+        this.icon = icon;
+        this.name = name;
+        this.description = description;
+    }
+
+    public void changeArmoryEngraving(ArmoryEngraving armoryEngraving) {
+        this.armoryEngraving = armoryEngraving;
+        armoryEngraving.getEffects().add(this);
+    }
+
 }

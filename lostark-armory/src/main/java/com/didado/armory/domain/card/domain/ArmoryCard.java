@@ -16,9 +16,9 @@ public class ArmoryCard {
     @Column(name = "armory_card_id")
     private Long id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryCard")
     private List<Card> cards;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryCard")
     private List<CardEffect> effects;
 }

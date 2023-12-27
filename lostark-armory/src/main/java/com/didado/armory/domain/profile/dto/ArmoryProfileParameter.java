@@ -1,9 +1,10 @@
 package com.didado.armory.domain.profile.dto;
 
 import com.didado.armory.domain.profile.domain.ArmoryProfile;
+import com.didado.armory.domain.profile.domain.Stat;
+import com.didado.armory.domain.profile.domain.Tendency;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.ToString;
 
 import java.util.List;
 
@@ -106,5 +107,19 @@ public class ArmoryProfileParameter {
                 .itemAvgLevel(this.itemAvgLevel)
                 .itemMaxLevel(this.itemMaxLevel)
                 .build();
+    }
+
+    public List<Stat> convertAndAddStats(ArmoryProfile armoryProfile) {
+        return stats.stream()
+                .map(StatParameter::toStat)
+                .map(stat -> stat.updateArmoryProfile(armoryProfile))
+                .toList();
+    }
+
+    public List<Tendency> convertAndAddTendencies(ArmoryProfile armoryProfile) {
+        return tendencies.stream()
+                .map(TendencyParameter::toTendency)
+                .map(tendency -> tendency.updateArmoryProfile(armoryProfile))
+                .toList();
     }
 }

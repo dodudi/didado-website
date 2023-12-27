@@ -29,16 +29,12 @@ public class SkillRuneParameter {
         this.toolTip = skillRune.getToolTip();
     }
 
-    public SkillRune toSkillRune(ArmorySkill armorySkill) {
-
-        SkillRune convertSkillRune = SkillRune.builder()
+    public SkillRune toSkillRune() {
+        return SkillRune.builder()
                 .name(name)
                 .icon(icon)
                 .grade(grade)
                 .toolTip(toolTip)
                 .build();
-
-        convertSkillRune.updateArmorySkill(armorySkill);
-        return convertSkillRune;
     }
 }

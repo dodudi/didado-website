@@ -56,9 +56,8 @@ public class ArmorySkillParameter {
         this.toolTip = armorySkill.getToolTip();
     }
 
-    public ArmorySkill toArmorySkill(String characterName) {
+    public ArmorySkill toArmorySkill() {
         return ArmorySkill.builder()
-                .characterName(characterName)
                 .name(name)
                 .icon(icon)
                 .level(level)

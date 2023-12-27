@@ -1,5 +1,6 @@
 package com.didado.armory.domain.gem.dto;
 
+import com.didado.armory.domain.gem.domain.Gem;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
@@ -26,4 +27,15 @@ public class GemParameter {
     @JsonProperty(value = "Tooltip")
     private String toolTip;
 
+
+    public Gem toGem() {
+        return Gem.builder()
+                .slot(slot)
+                .name(name)
+                .icon(icon)
+                .level(level)
+                .grade(grade)
+                .toolTip(toolTip)
+                .build();
+    }
 }
