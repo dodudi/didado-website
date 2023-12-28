@@ -112,7 +112,7 @@ public class ArmoryProfileParameter {
     public List<Stat> convertAndAddStats(ArmoryProfile armoryProfile) {
         return stats.stream()
                 .map(StatParameter::toStat)
-                .map(stat -> stat.updateArmoryProfile(armoryProfile))
+                .map(stat -> stat.changeArmoryProfile(armoryProfile))
                 .toList();
     }
 

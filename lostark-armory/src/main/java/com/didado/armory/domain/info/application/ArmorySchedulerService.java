@@ -54,6 +54,8 @@ import com.didado.armory.domain.profile.domain.ArmoryProfile;
 import com.didado.armory.domain.profile.domain.Stat;
 import com.didado.armory.domain.profile.domain.Tendency;
 import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
+import com.didado.armory.domain.profile.dto.StatParameter;
+import com.didado.armory.domain.profile.dto.TendencyParameter;
 import com.didado.armory.domain.profile.repository.ArmoryProfileRepository;
 import com.didado.armory.domain.profile.repository.ArmoryStatRepository;
 import com.didado.armory.domain.profile.repository.ArmoryTendencyRepository;
@@ -79,6 +81,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -135,10 +139,15 @@ public class ArmorySchedulerService {
     private final TeamDeathMatchAggregationRepository teamDeathMatchAggregationRepository;
 
     public void search(String characterName) {
+
         ArmoryParameter parameter = getParameter(characterName);
 
-        Armory armory = parameter.toArmory(characterName);
-        armoryRepository.save(armory);
+        Armory armory = armoryRepository.findArmoryByCharacterName(characterName)
+                .orElseGet(() -> parameter.toArmory(characterName));
+
+        if (armory.getId() == null)
+            armoryRepository.save(armory);
+
 
         ArmoryProfile armoryProfile = armoryProfiles(armory, parameter);
         List<ArmoryEquipment> armoryEquipments = armoryEquipments(armory, parameter);
@@ -160,21 +169,61 @@ public class ArmorySchedulerService {
      * @param parameter API 에서 가져온 ArmoryParameter
      */
     private ArmoryProfile armoryProfiles(Armory armory, ArmoryParameter parameter) {
+
         //New Armory Profile
         ArmoryProfileParameter armoryProfileParameter = parameter.getArmoryProfile();
+        ArmoryProfile convertProfile = armoryProfileRepository.findArmoryProfileByArmoryId(armory.getId())
+                .orElseGet(armoryProfileParameter::toArmoryProfile);
 
-        //New Armory Profile Save
-        ArmoryProfile convertProfile = armoryProfileParameter.toArmoryProfile();
-        convertProfile.changeArmory(armory);
-        armoryProfileRepository.save(convertProfile);
+        //New
+        if (convertProfile.getId() == null) {
+            convertProfile.changeArmory(armory);
+            armoryProfileRepository.save(convertProfile);
+        }
 
-        //Armory Profile Stats, tendencies Convert And Get
-        List<Stat> stats = armoryProfileParameter.convertAndAddStats(convertProfile);
-        List<Tendency> tendencies = armoryProfileParameter.convertAndAddTendencies(convertProfile);
+
+        List<Stat> stats = armoryStatRepository.findStatByProfileId(convertProfile.getId());
+        if (stats.isEmpty()) {
+            stats = armoryProfileParameter.convertAndAddStats(convertProfile);
+        } else {
+            List<StatParameter> statParameters = armoryProfileParameter.getStats();
+            Map<String, StatParameter> statTypeMap = statParameters.stream()
+                    .collect(Collectors.toMap(StatParameter::getType, statParameter -> statParameter));
+
+            stats.forEach(stat -> {
+                if (statTypeMap.containsKey(stat.getType())) {
+                    StatParameter statParameter = statTypeMap.get(stat.getType());
+                    stat.updateData(
+                            statParameter.getType(),
+                            statParameter.getValue(),
+                            statParameter.getToolTip()
+                    );
+                }
+            });
+        }
+
+        List<Tendency> tendencies = armoryTendencyRepository.findTendencyByProfileId(convertProfile.getId());
+        if (tendencies.isEmpty()) {
+            tendencies = armoryProfileParameter.convertAndAddTendencies(convertProfile);
+        } else {
+            List<TendencyParameter> tendencyParameters = armoryProfileParameter.getTendencies();
+            Map<String, TendencyParameter> tendencyTypeMap = tendencyParameters.stream()
+                    .collect(Collectors.toMap(TendencyParameter::getType, tendencyParameter -> tendencyParameter));
+
+            tendencies.forEach(tendency -> {
+                if (tendencyTypeMap.containsKey(tendency.getType())) {
+                    TendencyParameter tendencyParameter = tendencyTypeMap.get(tendency.getType());
+                    tendency.updateData(
+                            tendencyParameter.getType(),
+                            tendencyParameter.getPoint(),
+                            tendencyParameter.getMaxPoint()
+                    );
+                }
+            });
+        }
 
         armoryStatRepository.saveAll(stats);
         armoryTendencyRepository.saveAll(tendencies);
-
         return convertProfile;
     }
 
@@ -237,7 +286,7 @@ public class ArmorySchedulerService {
             effectRepository.saveAll(convertEffects);
             convertCardEffects.add(convertCardEffect);
         }
-        
+
         //ArmoryCard -> Convert Data Add
         armoryCard.getCards().addAll(convertCards);
         armoryCard.getEffects().addAll(convertCardEffects);

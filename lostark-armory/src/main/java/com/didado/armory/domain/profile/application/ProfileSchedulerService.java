@@ -49,7 +49,7 @@ public class ProfileSchedulerService {
 
             List<Stat> convertStats = newStats.stream()
                     .map(statParameter -> statParameter.toStat())
-                    .map(stat -> stat.updateArmoryProfile(convertProfile))
+                    .map(stat -> stat.changeArmoryProfile(convertProfile))
                     .toList();
 
             armoryStatRepository.saveAll(convertStats);

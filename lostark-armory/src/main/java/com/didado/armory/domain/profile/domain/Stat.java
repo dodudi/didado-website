@@ -36,6 +36,12 @@ public class Stat {
         this.amount = amount;
     }
 
+    public void updateData(String type, String amount, List<String> toolTip) {
+        this.type = type;
+        this.amount = amount;
+        this.toolTip = toolTip;
+    }
+
     public Stat updateData(StatParameter parameter) {
         this.type = parameter.getType();
         this.amount = parameter.getValue();
@@ -44,7 +50,7 @@ public class Stat {
         return this;
     }
 
-    public Stat updateArmoryProfile(ArmoryProfile armoryProfile) {
+    public Stat changeArmoryProfile(ArmoryProfile armoryProfile) {
         this.armoryProfile = armoryProfile;
         return this;
     }
