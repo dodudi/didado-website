@@ -27,6 +27,8 @@ public class CardEffect {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cardEffect")
     private List<Effect> items = new ArrayList<>();
 
+    protected CardEffect(){}
+
     public CardEffect(Integer index, List<Integer> cardSlots) {
         this.index = index;
         this.cardSlots = cardSlots;

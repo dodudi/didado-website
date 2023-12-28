@@ -1,6 +1,7 @@
 package com.didado.armory.domain.collectible.domain;
 
 import com.didado.armory.domain.collectible.dto.CollectiblePointParameter;
+import com.didado.armory.domain.info.domain.Armory;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -17,8 +18,11 @@ public class Collectible {
     @Column(name = "collectible_id")
     private Long id;
 
-    private String type;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_id")
+    private Armory armory;
 
+    private String type;
     private String icon;
 
     private Integer point;
@@ -37,5 +41,10 @@ public class Collectible {
         this.icon = icon;
         this.point = point;
         this.maxPoint = maxPoint;
+    }
+
+    public void changeArmory(Armory armory) {
+        this.armory = armory;
+        armory.getCollectibles().add(this);
     }
 }

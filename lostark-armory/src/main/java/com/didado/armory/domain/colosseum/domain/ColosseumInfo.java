@@ -1,6 +1,7 @@
 package com.didado.armory.domain.colosseum.domain;
 
 import com.didado.armory.domain.colosseum.dto.ColosseumParameter;
+import com.didado.armory.domain.info.domain.Armory;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -16,6 +17,10 @@ public class ColosseumInfo {
     @GeneratedValue
     @Column(name = "colosseum_info_id")
     private Long id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_id")
+    private Armory armory;
 
     private Integer rank;
 
@@ -34,5 +39,10 @@ public class ColosseumInfo {
         this.rank = rank;
         this.preRank = preRank;
         this.exp = exp;
+    }
+
+    public void changeArmory(Armory armory) {
+        this.armory = armory;
+        armory.changeColosseumInfo(this);
     }
 }

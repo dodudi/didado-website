@@ -17,6 +17,10 @@ public class ArmoryProfile {
     @Column(name = "armory_profile_id")
     private Long id;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_id")
+    private Armory armory;
+
     private String characterImage;
 
     private Integer expeditionLevel;
@@ -76,5 +80,10 @@ public class ArmoryProfile {
         this.characterClassName = characterClassName;
         this.itemAvgLevel = itemAvgLevel;
         this.itemMaxLevel = itemMaxLevel;
+    }
+
+    public void changeArmory(Armory armory) {
+        this.armory = armory;
+        armory.changeArmoryProfile(this);
     }
 }

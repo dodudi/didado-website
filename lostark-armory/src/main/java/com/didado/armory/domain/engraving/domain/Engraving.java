@@ -22,6 +22,7 @@ public class Engraving {
 
     private String icon;
 
+    @Column(name = "tool_tip", length = 100000)
     private String toolTip;
 
     protected Engraving() {
