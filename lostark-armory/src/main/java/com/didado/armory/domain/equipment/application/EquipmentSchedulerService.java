@@ -28,28 +28,28 @@ public class EquipmentSchedulerService {
     private final EquipmentRepository equipmentRepository;
 
     public void search(String characterName) {
-        List<ArmoryEquipmentParameter> equipmentParameters = equipment(characterName);
-        List<ArmoryEquipment> armoryEquipments = equipmentRepository.findArmoryEquipmentByCharacterName(characterName);
-
-        if (armoryEquipments.isEmpty()) {
-            log.debug("Armory Equipment Not Exist = {}", characterName);
-            List<ArmoryEquipment> convertEquipments = equipmentParameters.stream()
-                    .map(ArmoryEquipmentParameter::toArmoryEquipment)
-                    .toList();
-            equipmentRepository.saveAll(convertEquipments);
-        } else {
-            log.debug("Armory Equipment Exist = {}", characterName);
-            List<ArmoryEquipment> updateEquipment = armoryEquipments.stream()
-                    .peek(armoryEquipment -> {
-                        ArmoryEquipmentParameter armoryEquipmentParameter = equipmentParameters.stream()
-                                .filter(parameter -> parameter.getType().equals(armoryEquipment.getType()))
-                                .findAny()
-                                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 장비 타입입니다."));
-                        armoryEquipment.updateData(armoryEquipmentParameter);
-                    })
-                    .toList();
-            equipmentRepository.saveAll(updateEquipment);
-        }
+//        List<ArmoryEquipmentParameter> equipmentParameters = equipment(characterName);
+//        List<ArmoryEquipment> armoryEquipments = equipmentRepository.findArmoryEquipmentByCharacterName(characterName);
+//
+//        if (armoryEquipments.isEmpty()) {
+//            log.debug("Armory Equipment Not Exist = {}", characterName);
+//            List<ArmoryEquipment> convertEquipments = equipmentParameters.stream()
+//                    .map(ArmoryEquipmentParameter::toArmoryEquipment)
+//                    .toList();
+//            equipmentRepository.saveAll(convertEquipments);
+//        } else {
+//            log.debug("Armory Equipment Exist = {}", characterName);
+//            List<ArmoryEquipment> updateEquipment = armoryEquipments.stream()
+//                    .peek(armoryEquipment -> {
+//                        ArmoryEquipmentParameter armoryEquipmentParameter = equipmentParameters.stream()
+//                                .filter(parameter -> parameter.getType().equals(armoryEquipment.getType()))
+//                                .findAny()
+//                                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 장비 타입입니다."));
+//                        armoryEquipment.updateData(armoryEquipmentParameter);
+//                    })
+//                    .toList();
+//            equipmentRepository.saveAll(updateEquipment);
+//        }
     }
 
     private List<ArmoryEquipmentParameter> equipment(String username) {

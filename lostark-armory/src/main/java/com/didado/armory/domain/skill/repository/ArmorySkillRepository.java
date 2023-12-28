@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ArmorySkillRepository extends JpaRepository<ArmorySkill, Long> {
-    List<ArmorySkill> findArmorySkillByCharacterName(String characterName);
+//    List<ArmorySkill> findArmorySkillByCharacterName(String characterName);
 }

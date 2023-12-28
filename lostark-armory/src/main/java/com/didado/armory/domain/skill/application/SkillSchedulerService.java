@@ -36,28 +36,28 @@ public class SkillSchedulerService {
     private final SkillTripodRepository skillTripodRepository;
 
     public void search(String characterName) {
-        List<ArmorySkillParameter> skillParameters = searchSkills(characterName);
-        List<ArmorySkill> skills = armorySkillRepository.findArmorySkillByCharacterName(characterName);
-
-        if (!skills.isEmpty())
-            armorySkillRepository.deleteAllById(skills.stream().map(ArmorySkill::getId).toList());
-
-        for (ArmorySkillParameter skillParameter : skillParameters) {
-            ArmorySkill armorySkill = skillParameter.toArmorySkill(characterName);
-            armorySkillRepository.save(armorySkill);
-
-            if (skillParameter.getRune() != null) {
-                SkillRuneParameter rune = skillParameter.getRune();
-                SkillRune convertSkillRune = rune.toSkillRune(armorySkill);
-                skillRuneRepository.save(convertSkillRune);
-            }
-
-
-            List<SkillTripodParameter> tripods = skillParameter.getTripods();
-            List<SkillTripod> convertTripods = tripods.stream().map(skillTripodParameter -> skillTripodParameter.toSkillTripod(armorySkill))
-                    .toList();
-            skillTripodRepository.saveAll(convertTripods);
-        }
+//        List<ArmorySkillParameter> skillParameters = searchSkills(characterName);
+//        List<ArmorySkill> skills = armorySkillRepository.findArmorySkillByCharacterName(characterName);
+//
+//        if (!skills.isEmpty())
+//            armorySkillRepository.deleteAllById(skills.stream().map(ArmorySkill::getId).toList());
+//
+//        for (ArmorySkillParameter skillParameter : skillParameters) {
+//            ArmorySkill armorySkill = skillParameter.toArmorySkill();
+//            armorySkillRepository.save(armorySkill);
+//
+//            if (skillParameter.getRune() != null) {
+//                SkillRuneParameter rune = skillParameter.getRune();
+//                SkillRune convertSkillRune = rune.toSkillRune();
+//                skillRuneRepository.save(convertSkillRune);
+//            }
+//
+//
+//            List<SkillTripodParameter> tripods = skillParameter.getTripods();
+//            List<SkillTripod> convertTripods = tripods.stream().map(SkillTripodParameter::toSkillTripod)
+//                    .toList();
+//            skillTripodRepository.saveAll(convertTripods);
+//        }
     }
 
     private List<ArmorySkillParameter> searchSkills(String characterName) {

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,10 +20,10 @@ public class ArmoryEngraving {
     private Long id;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryEngraving")
-    private List<Engraving> engravings;
+    private List<Engraving> engravings = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryEngraving")
-    private List<EngravingEffect> effects;
+    private List<EngravingEffect> effects = new ArrayList<>();
 
 
 }

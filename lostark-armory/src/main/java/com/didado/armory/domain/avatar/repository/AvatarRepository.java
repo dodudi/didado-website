@@ -8,5 +8,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AvatarRepository extends JpaRepository<ArmoryAvatar, Long> {
-    List<ArmoryAvatar> findArmoryAvatarByCharacterName(String characterName);
+//    List<ArmoryAvatar> findArmoryAvatarByCharacterName(String characterName);
 }

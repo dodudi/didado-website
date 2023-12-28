@@ -21,11 +21,11 @@ public class SkillService {
     private final SkillTripodRepository skillTripodRepository;
 
 
-    public List<ArmorySkillParameter> search(String characterName){
-        List<ArmorySkill> skills = armorySkillRepository.findArmorySkillByCharacterName(characterName);
-        return skills.stream().map(ArmorySkillParameter::new)
-                .toList();
-
+    public List<ArmorySkillParameter> search(String characterName) {
+//        List<ArmorySkill> skills = armorySkillRepository.findArmorySkillByCharacterName(characterName);
+//        return skills.stream().map(ArmorySkillParameter::new)
+//                .toList();
+        return null;
     }
 
 

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,8 +18,8 @@ public class ArmoryCard {
     private Long id;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryCard")
-    private List<Card> cards;
+    private List<Card> cards = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryCard")
-    private List<CardEffect> effects;
+    private List<CardEffect> effects = new ArrayList<>();
 }

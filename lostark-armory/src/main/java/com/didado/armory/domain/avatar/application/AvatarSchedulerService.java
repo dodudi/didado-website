@@ -28,29 +28,29 @@ public class AvatarSchedulerService {
     private final AvatarRepository avatarRepository;
 
     public void search(String characterName) {
-        List<ArmoryAvatarParameter> avatarParameters = avatars(characterName);
-        List<ArmoryAvatar> armoryAvatars = avatarRepository.findArmoryAvatarByCharacterName(characterName);
-
-        if (armoryAvatars.isEmpty()) {
-            log.debug("Armory Avatar Not Exist={}", characterName);
-            List<ArmoryAvatar> convertAvatars = avatarParameters.stream()
-                    .map(ArmoryAvatarParameter::toArmoryAvatar)
-                    .toList();
-            avatarRepository.saveAll(convertAvatars);
-        } else {
-            log.debug("Armory Avatar Exist={}", characterName);
-            List<ArmoryAvatar> updateAvatars = armoryAvatars.stream()
-                    .peek(armoryAvatar -> {
-                        ArmoryAvatarParameter armoryAvatarParameter = avatarParameters.stream()
-                                .filter(parameter -> parameter.getType().equals(armoryAvatar.getType()))
-                                .findAny()
-                                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아바타 타입입니다."));
-                        armoryAvatar.updateData(armoryAvatarParameter);
-                    })
-                    .toList();
-
-            avatarRepository.saveAll(updateAvatars);
-        }
+//        List<ArmoryAvatarParameter> avatarParameters = avatars(characterName);
+//        List<ArmoryAvatar> armoryAvatars = avatarRepository.findArmoryAvatarByCharacterName(characterName);
+//
+//        if (armoryAvatars.isEmpty()) {
+//            log.debug("Armory Avatar Not Exist={}", characterName);
+//            List<ArmoryAvatar> convertAvatars = avatarParameters.stream()
+//                    .map(ArmoryAvatarParameter::toArmoryAvatar)
+//                    .toList();
+//            avatarRepository.saveAll(convertAvatars);
+//        } else {
+//            log.debug("Armory Avatar Exist={}", characterName);
+//            List<ArmoryAvatar> updateAvatars = armoryAvatars.stream()
+//                    .peek(armoryAvatar -> {
+//                        ArmoryAvatarParameter armoryAvatarParameter = avatarParameters.stream()
+//                                .filter(parameter -> parameter.getType().equals(armoryAvatar.getType()))
+//                                .findAny()
+//                                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아바타 타입입니다."));
+//                        armoryAvatar.updateData(armoryAvatarParameter);
+//                    })
+//                    .toList();
+//
+//            avatarRepository.saveAll(updateAvatars);
+//        }
     }
 
     private List<ArmoryAvatarParameter> avatars(String characterName) {

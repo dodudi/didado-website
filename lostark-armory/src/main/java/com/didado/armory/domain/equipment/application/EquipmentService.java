@@ -16,9 +16,10 @@ public class EquipmentService {
     private final EquipmentRepository equipmentRepository;
 
     public List<ArmoryEquipmentParameter> search(String characterName) {
-        List<ArmoryEquipment> armoryEquipments = equipmentRepository.findArmoryEquipmentByCharacterName(characterName);
-        return armoryEquipments.stream()
-                .map(ArmoryEquipmentParameter::new)
-                .toList();
+//        List<ArmoryEquipment> armoryEquipments = equipmentRepository.findArmoryEquipmentByCharacterName(characterName);
+//        return armoryEquipments.stream()
+//                .map(ArmoryEquipmentParameter::new)
+//                .toList();
+        return null;
     }
 }

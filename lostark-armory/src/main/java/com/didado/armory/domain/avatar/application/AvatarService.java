@@ -15,10 +15,11 @@ import java.util.List;
 public class AvatarService {
     private final AvatarRepository avatarRepository;
 
-    public List<ArmoryAvatarParameter> search(String characterName){
-        List<ArmoryAvatar> avatars = avatarRepository.findArmoryAvatarByCharacterName(characterName);
-        return avatars.stream()
-                .map(ArmoryAvatarParameter::new)
-                .toList();
+    public List<ArmoryAvatarParameter> search(String characterName) {
+//        List<ArmoryAvatar> avatars = avatarRepository.findArmoryAvatarByCharacterName(characterName);
+//        return avatars.stream()
+//                .map(ArmoryAvatarParameter::new)
+//                .toList();
+        return null;
     }
 }

@@ -95,31 +95,45 @@ public class ArmorySchedulerService {
         for (ColosseumParameter colosseumParameter : colosseumParameters) {
             Colosseum colosseum = colosseumParameter.toColosseum();
 
-            AggregationTeamDeathMatchRank convertTeamDeathMatchRank = colosseumParameter.getCompetitive()
-                    .toAggregationTeamDeathMatchRank();
-            log.debug("Save={}", convertTeamDeathMatchRank);
+            AggregationTeamDeathMatchRankParameter competitive = colosseumParameter.getCompetitive();
+//                    .toAggregationTeamDeathMatchRank();
+            if (competitive != null) {
+                AggregationTeamDeathMatchRank convertTeamDeathMatchRank = competitive.toAggregationTeamDeathMatchRank();
+                log.debug("Save={}", convertTeamDeathMatchRank);
+                colosseum.changeAggregationTeamDeathMatchRank(convertTeamDeathMatchRank);
+            }
 
-            colosseum.changeAggregationTeamDeathMatchRank(convertTeamDeathMatchRank);
 
+            AggregationParameter teamDeathmatch = colosseumParameter.getTeamDeathmatch();
+            if (teamDeathmatch != null) {
+                TeamDeathmatchAggregation teamDeathmatchAggregation = teamDeathmatch.toTeamDeathmatchAggregation();
+                log.debug("Save={}", teamDeathmatchAggregation);
+                colosseum.changeTeamDeathmatchAggregation(teamDeathmatchAggregation);
+            }
 
-            TeamDeathmatchAggregation teamDeathmatchAggregation = colosseumParameter.getTeamDeathmatch()
-                    .toTeamDeathmatchAggregation();
-            log.debug("Save={}", teamDeathmatchAggregation);
-            colosseum.changeTeamDeathmatchAggregation(teamDeathmatchAggregation);
+            AggregationParameter deathmatch = colosseumParameter.getDeathmatch();
+//                    .toDeathmatchAggregation();
 
-            DeathmatchAggregation deathmatchAggregation = colosseumParameter.getDeathmatch()
-                    .toDeathmatchAggregation();
-            log.debug("Save={}", deathmatchAggregation);
-            colosseum.changeDeathmatchAggregation(deathmatchAggregation);
+            if (deathmatch != null) {
+                DeathmatchAggregation deathmatchAggregation = deathmatch.toDeathmatchAggregation();
+                log.debug("Save={}", deathmatchAggregation);
+                colosseum.changeDeathmatchAggregation(deathmatchAggregation);
+            }
 
-            CoOpBattleAggregation coOpBattleAggregation = colosseumParameter.getCoOpBattle()
-                    .toCoOpBattleAggregation();
-            log.debug("Save={}", coOpBattleAggregation);
-            colosseum.changeCoOpBattleAggregation(coOpBattleAggregation);
+            AggregationParameter coOpBattle = colosseumParameter.getCoOpBattle();
+//                    .toCoOpBattleAggregation();
+            if (coOpBattle != null) {
+                CoOpBattleAggregation coOpBattleAggregation = coOpBattle.toCoOpBattleAggregation();
+                log.debug("Save={}", coOpBattleAggregation);
+                colosseum.changeCoOpBattleAggregation(coOpBattleAggregation);
+            }
 
-            AggregationElimination teamElimination = colosseumParameter.getTeamElimination().toAggregationElimination();
-            log.debug("Save={}", teamElimination);
-            colosseum.changeTeamElimination(teamElimination);
+            AggregationEliminationParameter teamElimination = colosseumParameter.getTeamElimination();
+            if (teamElimination != null) {
+                AggregationElimination aggregationElimination = teamElimination.toAggregationElimination();
+                log.debug("Save={}", aggregationElimination);
+                colosseum.changeTeamElimination(aggregationElimination);
+            }
 
             log.debug("Save={}", colosseum);
             convertColosseumInfo.getColosseums().add(colosseum);
@@ -151,8 +165,11 @@ public class ArmorySchedulerService {
             ArmorySkill armorySkill = armorySkillParameter.toArmorySkill();
 
             SkillRuneParameter rune = armorySkillParameter.getRune();
-            SkillRune convertRune = rune.toSkillRune();
-            convertRune.changeArmorySkill(armorySkill);
+            if (rune != null) {
+                SkillRune convertRune = rune.toSkillRune();
+                convertRune.changeArmorySkill(armorySkill);
+            }
+
 
             List<SkillTripodParameter> tripods = armorySkillParameter.getTripods();
             List<SkillTripod> convertTripods = tripods.stream()
