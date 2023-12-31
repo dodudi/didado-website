@@ -39,12 +39,6 @@ public class ArmoryProfileParameter {
     @JsonProperty(value = "TotalSkillPoint")
     private Integer totalSkillPoint;
 
-    @JsonProperty(value = "Stats")
-    private List<StatParameter> stats;
-
-    @JsonProperty(value = "Tendencies")
-    private List<TendencyParameter> tendencies;
-
     @JsonProperty(value = "ServerName")
     private String serverName;
 
@@ -63,32 +57,15 @@ public class ArmoryProfileParameter {
     @JsonProperty(value = "ItemMaxLevel")
     private String itemMaxLevel;
 
-    protected ArmoryProfileParameter() {
-    }
+    @JsonProperty(value = "Stats")
+    private List<StatParameter> stats;
 
-    public ArmoryProfileParameter(ArmoryProfile armoryProfile, List<StatParameter> statParameters, List<TendencyParameter> tendencyParameters) {
-        this.characterImage = armoryProfile.getCharacterImage();
-        this.expeditionLevel = armoryProfile.getExpeditionLevel();
-        this.pvpGradeName = armoryProfile.getPvpGradeName();
-        this.townLevel = armoryProfile.getTownLevel();
-        this.townName = armoryProfile.getTownName();
-        this.title = armoryProfile.getTitle();
-        this.guildMemberGrade = armoryProfile.getGuildMemberGrade();
-        this.guildName = armoryProfile.getGuildName();
-        this.usingSkillPoint = armoryProfile.getUsingSkillPoint();
-        this.totalSkillPoint = armoryProfile.getTotalSkillPoint();
-        this.stats = statParameters;
-        this.tendencies = tendencyParameters;
-        this.serverName = armoryProfile.getServerName();
-        this.characterName = armoryProfile.getCharacterName();
-        this.characterLevel = armoryProfile.getCharacterLevel();
-        this.characterClassName = armoryProfile.getCharacterClassName();
-        this.itemAvgLevel = armoryProfile.getItemAvgLevel();
-        this.itemMaxLevel = armoryProfile.getItemMaxLevel();
-    }
+    @JsonProperty(value = "Tendencies")
+    private List<TendencyParameter> tendencies;
 
     public ArmoryProfile toArmoryProfile() {
         return ArmoryProfile.builder()
+                .characterName(this.characterName)
                 .characterImage(this.characterImage)
                 .expeditionLevel(this.expeditionLevel)
                 .pvpGradeName(this.pvpGradeName)
@@ -100,7 +77,6 @@ public class ArmoryProfileParameter {
                 .usingSkillPoint(this.usingSkillPoint)
                 .totalSkillPoint(this.totalSkillPoint)
                 .serverName(this.serverName)
-                .characterName(this.characterName)
                 .characterLevel(this.characterLevel)
                 .characterClassName(this.characterClassName)
                 .itemAvgLevel(this.itemAvgLevel)

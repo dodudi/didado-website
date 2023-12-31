@@ -1,7 +1,5 @@
 package com.didado.armory.domain.profile.domain;
 
-import com.didado.armory.domain.dto.armory.Armory;
-import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
 import com.didado.armory.domain.profile.dto.StatParameter;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -20,7 +18,9 @@ public class Stat {
     @Column(name = "stat_id")
     private Long id;
     private String type;
-    private String amount;
+
+    @Column(name = "amount")
+    private String value;
 
     @ElementCollection
     private List<String> toolTip = new ArrayList<>();
@@ -33,21 +33,19 @@ public class Stat {
     }
 
     @Builder
-    public Stat(String type, String amount) {
+    public Stat(String type, String value, List<String> toolTip) {
         this.type = type;
-        this.amount = amount;
+        this.value = value;
+        this.toolTip = toolTip;
     }
 
-    public Stat updateData(StatParameter parameter) {
-        this.type = parameter.getType();
-        this.amount = parameter.getValue();
-        this.toolTip.clear();
-        this.toolTip.addAll(parameter.getToolTip());
-        return this;
-    }
-
-    public Stat updateArmoryProfile(ArmoryProfile armoryProfile) {
+    public void changeArmoryProfile(ArmoryProfile armoryProfile){
         this.armoryProfile = armoryProfile;
-        return this;
+    }
+
+    public void changeData(Stat stat){
+        this.type = stat.getType();
+        this.value = stat.getValue();
+        this.toolTip = stat.getToolTip();
     }
 }

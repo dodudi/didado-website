@@ -16,6 +16,8 @@ public class ArmoryProfile {
     @Column(name = "armory_profile_id")
     private Long id;
 
+    private String characterName;
+
     private String characterImage;
 
     private Integer expeditionLevel;
@@ -36,15 +38,7 @@ public class ArmoryProfile {
 
     private Integer totalSkillPoint;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryProfile")
-    private List<Stat> stats = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryProfile")
-    private List<Tendency> tendencies = new ArrayList<>();
-
     private String serverName;
-
-    private String characterName;
 
     private Integer characterLevel;
 
@@ -53,6 +47,12 @@ public class ArmoryProfile {
     private String itemAvgLevel;
 
     private String itemMaxLevel;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryProfile")
+    private List<Stat> stats = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryProfile")
+    private List<Tendency> tendencies = new ArrayList<>();
 
     protected ArmoryProfile(){}
 
@@ -74,5 +74,24 @@ public class ArmoryProfile {
         this.characterClassName = characterClassName;
         this.itemAvgLevel = itemAvgLevel;
         this.itemMaxLevel = itemMaxLevel;
+    }
+
+    public void changeData(ArmoryProfile armoryProfile){
+        this.characterImage = armoryProfile.getCharacterImage();
+        this.expeditionLevel = armoryProfile.getExpeditionLevel();
+        this.pvpGradeName = armoryProfile.getPvpGradeName();
+        this.townLevel = armoryProfile.getTownLevel();
+        this.townName = armoryProfile.getTownName();
+        this.title = armoryProfile.getTitle();
+        this.guildMemberGrade = armoryProfile.getGuildMemberGrade();
+        this.guildName = armoryProfile.getGuildName();
+        this.usingSkillPoint = armoryProfile.getUsingSkillPoint();
+        this.totalSkillPoint = armoryProfile.getTotalSkillPoint();
+        this.serverName = armoryProfile.getServerName();
+        this.characterName = armoryProfile.getCharacterName();
+        this.characterLevel = armoryProfile.getCharacterLevel();
+        this.characterClassName = armoryProfile.getCharacterClassName();
+        this.itemAvgLevel = armoryProfile.getItemAvgLevel();
+        this.itemMaxLevel = armoryProfile.getItemMaxLevel();
     }
 }

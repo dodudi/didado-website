@@ -20,18 +20,15 @@ public class StatParameter {
 
     public StatParameter(Stat stat) {
         this.type = stat.getType();
-        this.value = stat.getAmount();
+        this.value = stat.getValue();
         this.toolTip = stat.getToolTip();
     }
 
-    public Stat toStat(List<String> toolTips) {
-        Stat stat = Stat.builder()
+    public Stat toStat() {
+        return Stat.builder()
                 .type(type)
-                .amount(value)
+                .value(value)
+                .toolTip(toolTip)
                 .build();
-
-        stat.getToolTip().clear();
-        stat.getToolTip().addAll(toolTips);
-        return stat;
     }
 }
