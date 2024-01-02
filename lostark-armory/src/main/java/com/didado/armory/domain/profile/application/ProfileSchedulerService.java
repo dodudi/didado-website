@@ -21,7 +21,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -34,62 +36,68 @@ public class ProfileSchedulerService {
     private final ArmoryStatRepository armoryStatRepository;
     private final ArmoryTendencyRepository armoryTendencyRepository;
 
-    public void search(String characterName) {
-        ArmoryProfileParameter newParameter = getProfile(characterName);
-        List<StatParameter> newStats = newParameter.getStats();
-        List<TendencyParameter> newTendencies = newParameter.getTendencies();
+    public void save(ArmoryProfileParameter armoryProfileParameter) {
+        ArmoryProfile armoryProfile = armoryProfileRepository.findByCharacterName(armoryProfileParameter.getCharacterName())
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 캐릭터 이름입니다."));
+        List<Stat> oldStats = armoryStatRepository.findStatByProfileId(armoryProfile.getId());
+        List<Tendency> oldTendencies = armoryTendencyRepository.findTendencyByProfileId(armoryProfile.getId());
 
-        ArmoryProfile armoryProfile = armoryProfileRepository.findByCharacterName(characterName)
-                .orElseGet(() -> null);
+        ArmoryProfile convertProfile = convertProfile(armoryProfileParameter);
 
-        if (armoryProfile == null) {
-            log.debug("Armory Profile Not Exist {}", characterName);
-            ArmoryProfile convertProfile = newParameter.toArmoryProfile();
-            armoryProfileRepository.save(convertProfile);
+        //Stat Update
+        Map<String, Stat> statMap = convertProfile.getStats().stream()
+                .collect(Collectors.toMap(Stat::getType, stat -> stat));
+        oldStats.forEach(
+                stat -> {
+                    if (statMap.containsKey(stat.getType())) {
+                        Stat newStat = statMap.get(stat.getType());
+                        stat.changeData(newStat);
+                    }
+                }
+        );
 
-            List<Stat> convertStats = newStats.stream()
-                    .map(statParameter -> statParameter.toStat())
-                    .map(stat -> stat.changeArmoryProfile(convertProfile))
-                    .toList();
+        //Tendency Update
+        Map<String, Tendency> tendencyMap = convertProfile.getTendencies().stream()
+                .collect(Collectors.toMap(Tendency::getType, tendency -> tendency));
+        oldTendencies.forEach(
+                tendency -> {
+                    if (tendencyMap.containsKey(tendency.getType())) {
+                        Tendency newTendency = tendencyMap.get(tendency.getType());
+                        tendency.changeData(newTendency);
+                    }
+                }
+        );
 
-            armoryStatRepository.saveAll(convertStats);
-
-            List<Tendency> convertTendencies = newTendencies.stream()
-                    .map(TendencyParameter::toTendency)
-                    .map(tendency -> tendency.updateArmoryProfile(convertProfile))
-                    .toList();
-            armoryTendencyRepository.saveAll(convertTendencies);
-        } else {
-            log.debug("Armory Profile Exist {}", characterName);
-//            armoryProfile.getStats().clear();
-//            armoryProfile.getTendencies().clear();
-
-            Long profileId = armoryProfile.getId();
-
-            List<Stat> oldStats = armoryStatRepository.findStatByProfileId(profileId);
-            List<Stat> updateStats = oldStats.stream()
-                    .peek(stat -> newStats.stream()
-                            .filter(statParameter -> statParameter.getType().equals(stat.getType()))
-                            .findFirst()
-                            .ifPresent(stat::updateData)).toList();
-            armoryStatRepository.saveAll(updateStats);
-
-
-            List<Tendency> oldTendencies = armoryTendencyRepository.findTendencyByProfileId(profileId);
-            List<Tendency> updateTendencies = oldTendencies.stream()
-                    .peek(tendency -> newTendencies.stream()
-                            .filter(tendencyParameter -> tendencyParameter.getType().equals(tendency.getType()))
-                            .findFirst()
-                            .ifPresent(tendency::updateData)
-                    ).toList();
-            armoryTendencyRepository.saveAll(updateTendencies);
-
-            log.debug("Update Stats={}", updateStats);
-            log.debug("Update Tendencies={}", updateTendencies);
-        }
+        armoryProfile.changeData(armoryProfile);
     }
 
-    public ArmoryProfileParameter getProfile(String username) {
+    private ArmoryProfile convertProfile(ArmoryProfileParameter armoryProfileParameter) {
+        List<StatParameter> stats = armoryProfileParameter.getStats();
+        List<TendencyParameter> tendencies = armoryProfileParameter.getTendencies();
+
+        List<Stat> convertStats = convertStats(stats);
+        List<Tendency> convertTendencies = convertTendencies(tendencies);
+
+        ArmoryProfile armoryProfile = armoryProfileParameter.toArmoryProfile();
+
+        convertStats.forEach(stat -> stat.changeArmoryProfile(armoryProfile));
+        convertTendencies.forEach(tendency -> tendency.changeArmoryProfile(armoryProfile));
+        return armoryProfile;
+    }
+
+    private List<Stat> convertStats(List<StatParameter> statParameters) {
+        return statParameters.stream()
+                .map(StatParameter::toStat)
+                .toList();
+    }
+
+    private List<Tendency> convertTendencies(List<TendencyParameter> tendencies) {
+        return tendencies.stream()
+                .map(TendencyParameter::toTendency)
+                .toList();
+    }
+
+    private ArmoryProfileParameter getProfile(String username) {
         String url = property.url() + "/armories/characters/" + username + "/profiles";
         HttpHeaders headers = new HttpHeaders();
         headers.set("authorization", property.apiKey());

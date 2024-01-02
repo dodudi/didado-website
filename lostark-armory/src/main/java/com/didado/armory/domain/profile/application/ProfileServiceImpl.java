@@ -48,7 +48,7 @@ public class ProfileServiceImpl {
                 .map(TendencyParameter::new)
                 .toList();
 
-        return new ArmoryProfileParameter(armoryProfiles, convertStats, convertTendencies);
+        return null;
     }
 
     public List<StatParameter> searchStats(String characterName) {

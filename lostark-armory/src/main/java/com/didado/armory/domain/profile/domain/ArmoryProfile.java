@@ -21,6 +21,8 @@ public class ArmoryProfile {
     @JoinColumn(name = "armory_id")
     private Armory armory;
 
+    private String characterName;
+
     private String characterImage;
 
     private Integer expeditionLevel;
@@ -42,8 +44,6 @@ public class ArmoryProfile {
     private Integer totalSkillPoint;
 
     private String serverName;
-
-    private String characterName;
 
     private Integer characterLevel;
 
@@ -82,8 +82,23 @@ public class ArmoryProfile {
         this.itemMaxLevel = itemMaxLevel;
     }
 
-    public void changeArmory(Armory armory) {
-        this.armory = armory;
-        armory.changeArmoryProfile(this);
+
+    public void changeData(ArmoryProfile armoryProfile) {
+        this.characterImage = armoryProfile.getCharacterImage();
+        this.expeditionLevel = armoryProfile.getExpeditionLevel();
+        this.pvpGradeName = armoryProfile.getPvpGradeName();
+        this.townLevel = armoryProfile.getTownLevel();
+        this.townName = armoryProfile.getTownName();
+        this.title = armoryProfile.getTitle();
+        this.guildMemberGrade = armoryProfile.getGuildMemberGrade();
+        this.guildName = armoryProfile.getGuildName();
+        this.usingSkillPoint = armoryProfile.getUsingSkillPoint();
+        this.totalSkillPoint = armoryProfile.getTotalSkillPoint();
+        this.serverName = armoryProfile.getServerName();
+        this.characterName = armoryProfile.getCharacterName();
+        this.characterLevel = armoryProfile.getCharacterLevel();
+        this.characterClassName = armoryProfile.getCharacterClassName();
+        this.itemAvgLevel = armoryProfile.getItemAvgLevel();
+        this.itemMaxLevel = armoryProfile.getItemMaxLevel();
     }
 }

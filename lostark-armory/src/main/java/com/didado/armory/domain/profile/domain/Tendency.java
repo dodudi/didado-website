@@ -37,22 +37,13 @@ public class Tendency {
         this.maxPoint = maxPoint;
     }
 
-    public Tendency updateData(String type, Integer point, Integer maxPoint) {
-        this.type = type;
-        this.point = point;
-        this.maxPoint = maxPoint;
-        return this;
-    }
-
-    public Tendency updateData(TendencyParameter parameter) {
-        this.type = parameter.getType();
-        this.point = parameter.getPoint();
-        this.maxPoint = parameter.getMaxPoint();
-        return this;
-    }
-
-    public Tendency updateArmoryProfile(ArmoryProfile armoryProfile) {
+    public void changeArmoryProfile(ArmoryProfile armoryProfile) {
         this.armoryProfile = armoryProfile;
-        return this;
+    }
+
+    public void changeData(Tendency tendency) {
+        this.type = tendency.getType();
+        this.point = tendency.getPoint();
+        this.maxPoint = tendency.getMaxPoint();
     }
 }
