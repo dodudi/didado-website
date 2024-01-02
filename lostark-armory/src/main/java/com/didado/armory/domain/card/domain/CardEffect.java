@@ -22,16 +22,22 @@ public class CardEffect {
     private ArmoryCard armoryCard;
 
     @ElementCollection
-    private List<Integer> cardSlots;
+    private List<Integer> cardSlots = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cardEffect")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cardEffect", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Effect> items = new ArrayList<>();
 
-    protected CardEffect(){}
+    protected CardEffect() {
+    }
 
     public CardEffect(Integer index, List<Integer> cardSlots) {
         this.index = index;
         this.cardSlots = cardSlots;
+    }
+
+    public void changeData(CardEffect cardEffect) {
+        this.index = cardEffect.getIndex();
+        this.cardSlots = cardEffect.getCardSlots();
     }
 
     public void changeArmoryCard(ArmoryCard armoryCard) {

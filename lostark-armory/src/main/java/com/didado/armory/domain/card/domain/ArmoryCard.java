@@ -14,6 +14,8 @@ public class ArmoryCard {
     @Column(name = "armory_card_id")
     private Long id;
 
+    private String characterName;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryCard")
     private List<Card> cards = new ArrayList<>();
 

@@ -46,6 +46,16 @@ public class Card {
         this.toolTip = toolTip;
     }
 
+    public void changeData(Card card) {
+        this.slot = card.getSlot();
+        this.name = card.getName();
+        this.icon = card.getIcon();
+        this.awakeCount = card.getAwakeCount();
+        this.awakeTotal = card.getAwakeTotal();
+        this.grade = card.getGrade();
+        this.toolTip = card.getToolTip();
+    }
+
     public void changeArmoryCard(ArmoryCard armoryCard) {
         this.armoryCard = armoryCard;
         armoryCard.getCards().add(this);

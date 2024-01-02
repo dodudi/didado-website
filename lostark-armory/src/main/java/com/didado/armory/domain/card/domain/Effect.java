@@ -33,4 +33,9 @@ public class Effect {
         this.cardEffect = cardEffect;
         cardEffect.getItems().add(this);
     }
+
+    public void deleteCardEffect(CardEffect cardEffect) {
+        this.cardEffect = null;
+        cardEffect.getItems().remove(this);
+    }
 }
