@@ -39,6 +39,7 @@ public class Tendency {
 
     public void changeArmoryProfile(ArmoryProfile armoryProfile) {
         this.armoryProfile = armoryProfile;
+        armoryProfile.getTendencies().add(this);
     }
 
     public void changeData(Tendency tendency) {

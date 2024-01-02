@@ -1,9 +1,10 @@
 package com.didado.armory.domain.equipment.domain;
 
 import com.didado.armory.domain.equipment.dto.ArmoryEquipmentParameter;
-import com.didado.armory.domain.info.domain.Armory;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,10 +19,6 @@ public class ArmoryEquipment {
     @GeneratedValue
     @Column(name = "armory_equipment_id")
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "armory_id")
-    private Armory armory;
 
     private String type;
     private String name;
@@ -55,10 +52,5 @@ public class ArmoryEquipment {
         this.grade = parameter.getGrade();
         this.toolTip = parameter.getToolTip();
         return this;
-    }
-
-    public void changeArmory(Armory armory) {
-        this.armory = armory;
-        armory.getArmoryEquipment().add(this);
     }
 }

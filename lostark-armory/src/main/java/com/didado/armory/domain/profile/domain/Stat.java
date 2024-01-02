@@ -1,6 +1,5 @@
 package com.didado.armory.domain.profile.domain;
 
-import com.didado.armory.domain.profile.dto.StatParameter;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @Entity(name = "armory_stat")
 @Getter
-@ToString(exclude = "armoryProfile")
+@ToString(of = {"id", "type", "value"})
 public class Stat {
     @Id
     @GeneratedValue
@@ -41,6 +40,7 @@ public class Stat {
 
     public void changeArmoryProfile(ArmoryProfile armoryProfile) {
         this.armoryProfile = armoryProfile;
+        armoryProfile.getStats().add(this);
     }
 
     public void changeData(Stat stat) {

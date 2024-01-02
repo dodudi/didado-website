@@ -1,6 +1,5 @@
 package com.didado.armory.domain.profile.domain;
 
-import com.didado.armory.domain.info.domain.Armory;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,15 +10,12 @@ import java.util.List;
 
 @Entity
 @Getter
+@ToString(of = {"id", "characterName", "stats", "tendencies"})
 public class ArmoryProfile {
     @Id
     @GeneratedValue
     @Column(name = "armory_profile_id")
     private Long id;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "armory_id")
-    private Armory armory;
 
     private String characterName;
 

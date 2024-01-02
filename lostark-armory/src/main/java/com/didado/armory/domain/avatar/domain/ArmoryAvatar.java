@@ -1,8 +1,10 @@
 package com.didado.armory.domain.avatar.domain;
 
 import com.didado.armory.domain.avatar.dto.ArmoryAvatarParameter;
-import com.didado.armory.domain.info.domain.Armory;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -13,10 +15,6 @@ public class ArmoryAvatar {
     @GeneratedValue
     @Column(name = "armory_avatar_id")
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "armory_id")
-    private Armory armory;
 
     private String type;
     private String name;
@@ -52,8 +50,4 @@ public class ArmoryAvatar {
         return this;
     }
 
-    public void changeArmory(Armory armory) {
-        this.armory = armory;
-        armory.getArmoryAvatars().add(this);
-    }
 }

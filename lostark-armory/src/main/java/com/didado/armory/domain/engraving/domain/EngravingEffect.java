@@ -1,7 +1,5 @@
 package com.didado.armory.domain.engraving.domain;
 
-import com.didado.armory.domain.info.domain.Armory;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,7 +1,5 @@
 package com.didado.armory.domain.skill.domain;
 
-import com.didado.armory.domain.info.domain.Armory;
-import com.didado.armory.domain.skill.dto.ArmorySkillParameter;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,11 +14,6 @@ public class ArmorySkill {
     @GeneratedValue
     @Column(name = "armory_skill_id")
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "armory_id")
-    private Armory armory;
-
 
     private String name;
 
@@ -56,10 +49,5 @@ public class ArmorySkill {
 
     public void changeSkillRune(SkillRune skillRune) {
         this.rune = skillRune;
-    }
-
-    public void changeArmory(Armory armory) {
-        this.armory = armory;
-        armory.getArmorySkills().add(this);
     }
 }

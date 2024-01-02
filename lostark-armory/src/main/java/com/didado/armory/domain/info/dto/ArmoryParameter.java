@@ -1,17 +1,13 @@
 package com.didado.armory.domain.info.dto;
 
-import com.didado.armory.domain.avatar.domain.ArmoryAvatar;
 import com.didado.armory.domain.avatar.dto.ArmoryAvatarParameter;
 import com.didado.armory.domain.collectible.dto.CollectibleParameter;
-import com.didado.armory.domain.equipment.domain.ArmoryEquipment;
 import com.didado.armory.domain.equipment.dto.ArmoryEquipmentParameter;
 import com.didado.armory.domain.gem.dto.ArmoryGemParameter;
 import com.didado.armory.domain.card.dto.ArmoryCardParameter;
 import com.didado.armory.domain.colosseum.dto.ColosseumInfoParameter;
 import com.didado.armory.domain.engraving.dto.ArmoryEngravingParameter;
-import com.didado.armory.domain.info.domain.Armory;
 import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
-import com.didado.armory.domain.skill.domain.ArmorySkill;
 import com.didado.armory.domain.skill.dto.ArmorySkillParameter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -50,7 +46,4 @@ public class ArmoryParameter {
     protected ArmoryParameter() {
     }
 
-    public Armory toArmory(String characterName) {
-        return new Armory(characterName);
-    }
 }
