@@ -9,6 +9,7 @@ import com.didado.armory.domain.profile.domain.Tendency;
 import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
 import com.didado.armory.domain.profile.dto.StatParameter;
 import com.didado.armory.domain.profile.dto.TendencyParameter;
+import com.didado.armory.domain.profile.exception.NotFoundProfileException;
 import com.didado.armory.domain.profile.repository.ArmoryProfileRepository;
 import com.didado.armory.domain.profile.repository.ArmoryStatRepository;
 import com.didado.armory.domain.profile.repository.ArmoryTendencyRepository;
@@ -35,7 +36,7 @@ public class ProfileServiceImpl {
 
     public ArmoryProfileParameter search(String characterName) {
         ArmoryProfile armoryProfiles = armoryProfileRepository.findByCharacterName(characterName)
-                .orElseThrow(() -> new IllegalArgumentException("존재하는 캐릭터명이 아닙니다."));
+                .orElseThrow(() -> new NotFoundProfileException("존재하는 캐릭터명이 아닙니다."));
 
         List<Stat> stats = armoryStatRepository.findStatByProfileId(armoryProfiles.getId());
         List<StatParameter> convertStats = stats.stream()

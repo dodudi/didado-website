@@ -4,14 +4,19 @@ import com.didado.armory.domain.profile.application.ProfileServiceImpl;
 import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
 import com.didado.armory.domain.profile.dto.StatParameter;
 import com.didado.armory.domain.profile.dto.TendencyParameter;
+import com.didado.armory.domain.profile.exception.NotFoundProfileException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.NotFound;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class ProfileController {
@@ -31,6 +36,12 @@ public class ProfileController {
     @GetMapping("/lostark/armory/{characterName}/profiles/tendencies")
     public ResponseEntity<List<TendencyParameter>> tendencies(@PathVariable String characterName) {
         return ResponseEntity.ok(profileService.searchTendencies(characterName));
+    }
+
+    @ExceptionHandler
+    public void NotFoundProfileExceptionHandler(NotFoundProfileException e) {
+        log.error("{}", e, e);
+
     }
 
 //    @GetMapping("/lostark/armory/{username}")
