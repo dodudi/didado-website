@@ -1,5 +1,9 @@
 package com.didado.armory.domain.profile.api;
 
+import com.didado.armory.domain.core.application.ArmorySchedulerService;
+import com.didado.armory.domain.core.domain.ArmoryType;
+import com.didado.armory.domain.core.dto.ArmoryParameter;
+import com.didado.armory.domain.core.dto.CoreSaveParameter;
 import com.didado.armory.domain.profile.application.ProfileServiceImpl;
 import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
 import com.didado.armory.domain.profile.dto.StatParameter;
@@ -8,11 +12,14 @@ import com.didado.armory.domain.profile.exception.NotFoundProfileException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.NotFound;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -39,9 +46,20 @@ public class ProfileController {
     }
 
     @ExceptionHandler
-    public void NotFoundProfileExceptionHandler(NotFoundProfileException e) {
+    public ResponseEntity<ArmoryProfileParameter> NotFoundProfileExceptionHandler(NotFoundProfileException e) {
         log.error("{}", e, e);
+        CoreSaveParameter saveParameter = new CoreSaveParameter(ArmoryType.PROFILE, e.getCharacterName());
+        ArmoryProfileParameter saveData = WebClient.create()
+                .post()
+                .uri("http://localhost:8080/lostark/armory/core")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(saveParameter)
+                .retrieve()
+                .bodyToMono(ArmoryProfileParameter.class)
+                .block();
 
+        log.debug("Save Data={}", saveData);
+        return ResponseEntity.ok(saveData);
     }
 
 //    @GetMapping("/lostark/armory/{username}")

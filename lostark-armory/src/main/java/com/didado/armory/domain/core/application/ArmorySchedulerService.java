@@ -1,4 +1,4 @@
-package com.didado.armory.domain.info.application;
+package com.didado.armory.domain.core.application;
 
 
 import com.didado.armory.domain.avatar.repository.AvatarRepository;
@@ -17,7 +17,7 @@ import com.didado.armory.domain.equipment.repository.EquipmentRepository;
 import com.didado.armory.domain.gem.repository.ArmoryGemRepository;
 import com.didado.armory.domain.gem.repository.GemEffectRepository;
 import com.didado.armory.domain.gem.repository.GemRepository;
-import com.didado.armory.domain.info.dto.ArmoryParameter;
+import com.didado.armory.domain.core.dto.ArmoryParameter;
 import com.didado.armory.domain.profile.application.ProfileSchedulerService;
 import com.didado.armory.domain.skill.repository.ArmorySkillRepository;
 import com.didado.armory.domain.skill.repository.SkillRuneRepository;
@@ -40,7 +40,6 @@ public class ArmorySchedulerService {
     private final RestTemplate restTemplate;
 
     private final ProfileSchedulerService profileSchedulerService;
-
 
     //equipment
     private final EquipmentRepository equipmentRepository;
@@ -82,7 +81,7 @@ public class ArmorySchedulerService {
     private final DeathMatchAggregationRepository deathMatchAggregationRepository;
     private final TeamDeathMatchAggregationRepository teamDeathMatchAggregationRepository;
 
-    public void search(String characterName) {
+    public void save(String characterName) {
         ArmoryParameter parameter = getParameter(characterName);
         profileSchedulerService.save(parameter.getArmoryProfile());
 
@@ -95,8 +94,6 @@ public class ArmorySchedulerService {
 //        List<Collectible> collectibles = armoryCollectibles(armory, parameter);
 //        ColosseumInfo colosseumInfo = armoryColosseum(armory, parameter);
     }
-
-
 //    /**
 //     * API 에서 새로운 Armory Equipment 저장.
 //     *
@@ -157,13 +154,13 @@ public class ArmorySchedulerService {
 //            convertCardEffects.add(convertCardEffect);
 //        }
 
-        //ArmoryCard -> Convert Data Add
+    //ArmoryCard -> Convert Data Add
 //        armoryCard.getCards().addAll(convertCards);
 //        armoryCard.getEffects().addAll(convertCardEffects);
 //        return armoryCard;
 //    }
 
-//    /**
+    //    /**
 //     * API 에서 새로운 Armory Gem 저장.
 //     *
 //     * @param armory

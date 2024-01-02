@@ -5,11 +5,17 @@ import com.didado.armory.domain.profile.domain.Stat;
 import com.didado.armory.domain.profile.domain.Tendency;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.List;
 
 @Getter
+@ToString(of = {"characterName", "stats", "tendencies"})
 public class ArmoryProfileParameter {
+
+    @JsonProperty(value = "CharacterName")
+    private String characterName;
+
     @JsonProperty(value = "CharacterImage")
     private String characterImage;
 
@@ -43,8 +49,6 @@ public class ArmoryProfileParameter {
     @JsonProperty(value = "ServerName")
     private String serverName;
 
-    @JsonProperty(value = "CharacterName")
-    private String characterName;
 
     @JsonProperty(value = "CharacterLevel")
     private Integer characterLevel;
@@ -63,6 +67,29 @@ public class ArmoryProfileParameter {
 
     @JsonProperty(value = "Tendencies")
     private List<TendencyParameter> tendencies;
+
+
+    protected ArmoryProfileParameter() {
+    }
+
+    public ArmoryProfileParameter(ArmoryProfile armoryProfile) {
+        this.characterName = armoryProfile.getCharacterName();
+        this.characterImage = armoryProfile.getCharacterImage();
+        this.expeditionLevel = armoryProfile.getExpeditionLevel();
+        this.pvpGradeName = armoryProfile.getPvpGradeName();
+        this.townLevel = armoryProfile.getTownLevel();
+        this.townName = armoryProfile.getTownName();
+        this.title = armoryProfile.getTitle();
+        this.guildMemberGrade = armoryProfile.getGuildMemberGrade();
+        this.guildName = armoryProfile.getGuildName();
+        this.usingSkillPoint = armoryProfile.getUsingSkillPoint();
+        this.totalSkillPoint = armoryProfile.getTotalSkillPoint();
+        this.serverName = armoryProfile.getServerName();
+        this.characterLevel = armoryProfile.getCharacterLevel();
+        this.characterClassName = armoryProfile.getCharacterClassName();
+        this.itemAvgLevel = armoryProfile.getItemAvgLevel();
+        this.itemMaxLevel = armoryProfile.getItemMaxLevel();
+    }
 
     public ArmoryProfile toArmoryProfile() {
         return ArmoryProfile.builder()
@@ -83,5 +110,13 @@ public class ArmoryProfileParameter {
                 .itemAvgLevel(this.itemAvgLevel)
                 .itemMaxLevel(this.itemMaxLevel)
                 .build();
+    }
+
+    public void changeStats(List<StatParameter> stats) {
+        this.stats = stats;
+    }
+
+    public void changeTendencies(List<TendencyParameter> tendencies) {
+        this.tendencies = tendencies;
     }
 }

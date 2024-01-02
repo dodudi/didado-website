@@ -41,8 +41,6 @@ public class ProfileSchedulerService {
 
     @Transactional
     public void save(ArmoryProfileParameter armoryProfileParameter) {
-
-
         if (armoryProfileRepository.existsByCharacterName(armoryProfileParameter.getCharacterName())) {
             log.debug("Profile Update Logic Start");
 
@@ -63,14 +61,13 @@ public class ProfileSchedulerService {
 
             //Tendency Save
             saveTendency(armoryProfile, convertTendencies);
-
         }
     }
 
     @Transactional
     public void update(ArmoryProfileParameter armoryProfileParameter) {
         ArmoryProfile armoryProfile = armoryProfileRepository.findByCharacterName(armoryProfileParameter.getCharacterName())
-                .orElseThrow(() -> new NotFoundProfileException("존재하지 않는 캐릭터 이름입니다."));
+                .orElseThrow(() -> new NotFoundProfileException("존재하지 않는 캐릭터 이름입니다.", armoryProfileParameter.getCharacterName()));
 
         ArmoryProfile convertProfile = convertProfile(armoryProfileParameter);
 

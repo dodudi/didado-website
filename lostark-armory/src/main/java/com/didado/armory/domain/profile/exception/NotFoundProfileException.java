@@ -1,22 +1,14 @@
 package com.didado.armory.domain.profile.exception;
 
+import lombok.Getter;
+
+@Getter
 public class NotFoundProfileException extends RuntimeException {
-    public NotFoundProfileException() {
-    }
 
-    public NotFoundProfileException(String message) {
+    private final String characterName;
+
+    public NotFoundProfileException(String message, String characterName) {
         super(message);
-    }
-
-    public NotFoundProfileException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public NotFoundProfileException(Throwable cause) {
-        super(cause);
-    }
-
-    public NotFoundProfileException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
+        this.characterName = characterName;
     }
 }

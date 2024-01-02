@@ -3,8 +3,10 @@ package com.didado.armory.domain.profile.dto;
 import com.didado.armory.domain.profile.domain.Tendency;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class TendencyParameter {
     @JsonProperty(value = "Type")
     private String type;

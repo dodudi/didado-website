@@ -3,10 +3,12 @@ package com.didado.armory.domain.profile.dto;
 import com.didado.armory.domain.profile.domain.Stat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.List;
 
 @Getter
+@ToString(of = {"type", "value"})
 public class StatParameter {
     @JsonProperty(value = "Type")
     private String type;

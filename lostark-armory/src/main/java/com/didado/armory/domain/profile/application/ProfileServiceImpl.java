@@ -36,7 +36,7 @@ public class ProfileServiceImpl {
 
     public ArmoryProfileParameter search(String characterName) {
         ArmoryProfile armoryProfiles = armoryProfileRepository.findByCharacterName(characterName)
-                .orElseThrow(() -> new NotFoundProfileException("존재하는 캐릭터명이 아닙니다."));
+                .orElseThrow(() -> new NotFoundProfileException("존재하는 캐릭터명이 아닙니다.", characterName));
 
         List<Stat> stats = armoryStatRepository.findStatByProfileId(armoryProfiles.getId());
         List<StatParameter> convertStats = stats.stream()
@@ -49,7 +49,10 @@ public class ProfileServiceImpl {
                 .map(TendencyParameter::new)
                 .toList();
 
-        return null;
+        ArmoryProfileParameter armoryProfileParameter = new ArmoryProfileParameter(armoryProfiles);
+        armoryProfileParameter.changeStats(convertStats);
+        armoryProfileParameter.changeTendencies(convertTendencies);
+        return armoryProfileParameter;
     }
 
     public List<StatParameter> searchStats(String characterName) {

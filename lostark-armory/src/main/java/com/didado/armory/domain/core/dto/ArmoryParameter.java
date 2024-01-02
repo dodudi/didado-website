@@ -1,4 +1,4 @@
-package com.didado.armory.domain.info.dto;
+package com.didado.armory.domain.core.dto;
 
 import com.didado.armory.domain.avatar.dto.ArmoryAvatarParameter;
 import com.didado.armory.domain.collectible.dto.CollectibleParameter;
