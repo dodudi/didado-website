@@ -45,7 +45,7 @@ public class ProfileController {
         return ResponseEntity.ok(profileService.searchTendencies(characterName));
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(NotFoundProfileException.class)
     public ResponseEntity<ArmoryProfileParameter> NotFoundProfileExceptionHandler(NotFoundProfileException e) {
         log.error("{}", e, e);
         CoreSaveParameter saveParameter = new CoreSaveParameter(ArmoryType.PROFILE, e.getCharacterName());

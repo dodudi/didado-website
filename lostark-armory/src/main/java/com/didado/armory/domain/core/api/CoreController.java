@@ -1,5 +1,6 @@
 package com.didado.armory.domain.core.api;
 
+import com.didado.armory.domain.avatar.application.AvatarService;
 import com.didado.armory.domain.core.application.ArmorySchedulerService;
 import com.didado.armory.domain.core.domain.ArmoryType;
 import com.didado.armory.domain.core.dto.ArmoryParameter;
@@ -19,10 +20,17 @@ public class CoreController {
     private final ArmorySchedulerService armorySchedulerService;
 
     private final ProfileServiceImpl profileService;
+    private final AvatarService avatarService;
 
     @PostMapping("/lostark/armory/core")
-    public ResponseEntity<ArmoryProfileParameter> save(@RequestBody CoreSaveParameter saveParameter) {
+    public ResponseEntity<Object> save(@RequestBody CoreSaveParameter saveParameter) {
         armorySchedulerService.save(saveParameter.getCharacterName());
-        return ResponseEntity.ok(profileService.search(saveParameter.getCharacterName()));
+        if (saveParameter.getArmoryType().equals(ArmoryType.AVATAR)) {
+            return ResponseEntity.ok(avatarService.search(saveParameter.getCharacterName()));
+        } else if (saveParameter.getArmoryType().equals(ArmoryType.PROFILE)) {
+            return ResponseEntity.ok(profileService.search(saveParameter.getCharacterName()));
+        }
+
+        return ResponseEntity.ofNullable(null);
     }
 }

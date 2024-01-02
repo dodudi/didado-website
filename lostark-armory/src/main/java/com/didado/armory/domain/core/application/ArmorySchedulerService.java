@@ -1,6 +1,7 @@
 package com.didado.armory.domain.core.application;
 
 
+import com.didado.armory.domain.avatar.application.AvatarSchedulerService;
 import com.didado.armory.domain.avatar.repository.AvatarRepository;
 import com.didado.armory.domain.card.repository.ArmoryCardRepository;
 import com.didado.armory.domain.card.repository.CardEffectRepository;
@@ -40,7 +41,7 @@ public class ArmorySchedulerService {
     private final RestTemplate restTemplate;
 
     private final ProfileSchedulerService profileSchedulerService;
-
+    private final AvatarSchedulerService avatarSchedulerService;
     //equipment
     private final EquipmentRepository equipmentRepository;
 
@@ -84,7 +85,7 @@ public class ArmorySchedulerService {
     public void save(String characterName) {
         ArmoryParameter parameter = getParameter(characterName);
         profileSchedulerService.save(parameter.getArmoryProfile());
-
+        avatarSchedulerService.save(characterName, parameter.getArmoryAvatars());
 //        List<ArmoryEquipment> armoryEquipments = armoryEquipments(armory, parameter);
 //        List<ArmoryAvatar> armoryAvatars = armoryAvatars(armory, parameter);
 //        ArmoryCard armoryCard = armoryCard(armory, parameter);

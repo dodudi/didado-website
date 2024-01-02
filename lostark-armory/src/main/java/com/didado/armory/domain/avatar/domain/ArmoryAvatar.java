@@ -1,10 +1,7 @@
 package com.didado.armory.domain.avatar.domain;
 
 import com.didado.armory.domain.avatar.dto.ArmoryAvatarParameter;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,13 +12,17 @@ public class ArmoryAvatar {
     @GeneratedValue
     @Column(name = "armory_avatar_id")
     private Long id;
-
     private String type;
     private String name;
     private String icon;
     private String grade;
     private Boolean isSet;
     private Boolean isInner;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "armory_avatar_info_id")
+    private ArmoryAvatarInfo armoryAvatarInfo;
+
     @Column(name = "tool_tip", length = 10000)
     private String toolTip;
 
@@ -39,7 +40,11 @@ public class ArmoryAvatar {
         this.toolTip = toolTip;
     }
 
-    public ArmoryAvatar updateData(ArmoryAvatarParameter parameter) {
+    public void changeAvatarInfo(ArmoryAvatarInfo armoryAvatarInfo) {
+        this.armoryAvatarInfo = armoryAvatarInfo;
+    }
+
+    public void changeData(ArmoryAvatar parameter) {
         this.type = parameter.getType();
         this.name = parameter.getName();
         this.icon = parameter.getIcon();
@@ -47,7 +52,5 @@ public class ArmoryAvatar {
         this.isSet = parameter.getIsSet();
         this.isInner = parameter.getIsInner();
         this.toolTip = parameter.getToolTip();
-        return this;
     }
-
 }
