@@ -21,6 +21,7 @@ import com.didado.armory.domain.gem.repository.GemEffectRepository;
 import com.didado.armory.domain.gem.repository.GemRepository;
 import com.didado.armory.domain.core.dto.ArmoryParameter;
 import com.didado.armory.domain.profile.application.ProfileSchedulerService;
+import com.didado.armory.domain.skill.application.SkillSchedulerService;
 import com.didado.armory.domain.skill.repository.ArmorySkillRepository;
 import com.didado.armory.domain.skill.repository.SkillRuneRepository;
 import com.didado.armory.domain.skill.repository.SkillTripodRepository;
@@ -44,7 +45,7 @@ public class ArmorySchedulerService {
     private final ProfileSchedulerService profileSchedulerService;
     private final AvatarSchedulerService avatarSchedulerService;
     private final CardSchedulerService cardSchedulerService;
-
+    private final SkillSchedulerService skillSchedulerService;
     //equipment
     private final EquipmentRepository equipmentRepository;
 
@@ -57,11 +58,6 @@ public class ArmorySchedulerService {
     private final ArmoryEngravingRepository armoryEngravingRepository;
     private final EngravingRepository engravingRepository;
     private final EngravingEffectRepository engravingEffectRepository;
-
-    //Skill
-    private final ArmorySkillRepository armorySkillRepository;
-    private final SkillTripodRepository skillTripodRepository;
-    private final SkillRuneRepository skillRuneRepository;
 
     //Collectible
     private final CollectibleRepository collectibleRepository;
@@ -78,9 +74,11 @@ public class ArmorySchedulerService {
 
     public void save(String characterName) {
         ArmoryParameter parameter = getParameter(characterName);
-        profileSchedulerService.save(parameter.getArmoryProfile());
-        avatarSchedulerService.save(characterName, parameter.getArmoryAvatars());
-        cardSchedulerService.save(characterName, parameter.getArmoryCard());
+//        profileSchedulerService.save(parameter.getArmoryProfile());
+//        avatarSchedulerService.save(characterName, parameter.getArmoryAvatars());
+//        cardSchedulerService.save(characterName, parameter.getArmoryCard());
+        skillSchedulerService.search(characterName, parameter.getArmorySkills());
+//        parameter.getArmorySkills();
 //        List<ArmoryEquipment> armoryEquipments = armoryEquipments(armory, parameter);
 //        List<ArmoryAvatar> armoryAvatars = armoryAvatars(armory, parameter);
 //        ArmoryCard armoryCard = armoryCard(armory, parameter);

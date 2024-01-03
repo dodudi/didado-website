@@ -9,6 +9,7 @@ import com.didado.armory.domain.core.dto.ArmoryParameter;
 import com.didado.armory.domain.core.dto.CoreSaveParameter;
 import com.didado.armory.domain.profile.application.ProfileServiceImpl;
 import com.didado.armory.domain.profile.dto.ArmoryProfileParameter;
+import com.didado.armory.domain.skill.application.SkillService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class CoreController {
     private final ProfileServiceImpl profileService;
     private final AvatarService avatarService;
     private final CardService cardService;
+    private final SkillService skillService;
 
     @PostMapping("/lostark/armory/core")
     public ResponseEntity<Object> save(@RequestBody CoreSaveParameter saveParameter) {
@@ -35,6 +37,8 @@ public class CoreController {
             return ResponseEntity.ok(profileService.search(saveParameter.getCharacterName()));
         } else if (saveParameter.getArmoryType().equals(ArmoryType.CARD)) {
             return ResponseEntity.ok(cardService.search(saveParameter.getCharacterName()));
+        } else if (saveParameter.getArmoryType().equals(ArmoryType.SKILL)) {
+            return ResponseEntity.ok(skillService.search(saveParameter.getCharacterName()));
         }
 
         return ResponseEntity.ofNullable(null);

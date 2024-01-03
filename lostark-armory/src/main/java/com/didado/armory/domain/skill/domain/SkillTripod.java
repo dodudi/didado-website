@@ -45,4 +45,19 @@ public class SkillTripod {
         this.armorySkill = armorySkill;
         armorySkill.getTripods().add(this);
     }
+
+    public void deleteArmorySkill() {
+        armorySkill.getTripods().remove(this);
+        this.armorySkill = null;
+    }
+
+    public void changeData(SkillTripod skillTripod) {
+        this.tier = skillTripod.getTier();
+        this.slot = skillTripod.getSlot();
+        this.name = skillTripod.getName();
+        this.icon = skillTripod.getIcon();
+        this.level = skillTripod.getLevel();
+        this.isSelected = skillTripod.getIsSelected();
+
+    }
 }

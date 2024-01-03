@@ -6,6 +6,7 @@ import com.didado.armory.domain.skill.domain.SkillTripod;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,7 +27,7 @@ public class ArmorySkillParameter {
     private Boolean isAwakening;
 
     @JsonProperty(value = "Tripods")
-    private List<SkillTripodParameter> tripods;
+    private List<SkillTripodParameter> tripods = new ArrayList<>();
 
     @JsonProperty(value = "Rune")
     private SkillRuneParameter rune;
@@ -38,16 +39,6 @@ public class ArmorySkillParameter {
     }
 
     public ArmorySkillParameter(ArmorySkill armorySkill) {
-
-        SkillRune rune = armorySkill.getRune();
-        if (rune != null) {
-            this.rune = new SkillRuneParameter(rune);
-        }
-
-        this.tripods = armorySkill.getTripods().stream()
-                .map(SkillTripodParameter::new)
-                .toList();
-
         this.name = armorySkill.getName();
         this.icon = armorySkill.getIcon();
         this.level = armorySkill.getLevel();
@@ -65,5 +56,9 @@ public class ArmorySkillParameter {
                 .isAwakening(isAwakening)
                 .toolTip(toolTip)
                 .build();
+    }
+
+    public void changeSkillRuneParameter(SkillRuneParameter skillRuneParameter) {
+        this.rune = skillRuneParameter;
     }
 }

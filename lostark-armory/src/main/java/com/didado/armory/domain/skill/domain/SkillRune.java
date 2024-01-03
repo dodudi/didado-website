@@ -38,4 +38,16 @@ public class SkillRune {
         this.armorySkill = armorySkill;
         armorySkill.changeSkillRune(this);
     }
+
+    public void deleteArmorySkill() {
+        armorySkill.changeSkillRune(null);
+        this.armorySkill = null;
+    }
+
+    public void changeData(SkillRune skillRune) {
+        this.name = skillRune.getName();
+        this.icon = skillRune.getIcon();
+        this.grade = skillRune.getGrade();
+        this.toolTip = skillRune.getToolTip();
+    }
 }

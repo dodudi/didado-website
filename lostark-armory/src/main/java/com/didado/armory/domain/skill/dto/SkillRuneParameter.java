@@ -23,10 +23,12 @@ public class SkillRuneParameter {
     }
 
     public SkillRuneParameter(SkillRune skillRune) {
-        this.name = skillRune.getName();
-        this.icon = skillRune.getIcon();
-        this.grade = skillRune.getGrade();
-        this.toolTip = skillRune.getToolTip();
+        if (skillRune != null) {
+            this.name = skillRune.getName();
+            this.icon = skillRune.getIcon();
+            this.grade = skillRune.getGrade();
+            this.toolTip = skillRune.getToolTip();
+        }
     }
 
     public SkillRune toSkillRune() {
