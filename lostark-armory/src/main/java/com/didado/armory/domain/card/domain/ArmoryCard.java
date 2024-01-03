@@ -22,4 +22,10 @@ public class ArmoryCard {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "armoryCard")
     private List<CardEffect> effects = new ArrayList<>();
 
+    protected ArmoryCard() {
+    }
+
+    public ArmoryCard(String characterName) {
+        this.characterName = characterName;
+    }
 }

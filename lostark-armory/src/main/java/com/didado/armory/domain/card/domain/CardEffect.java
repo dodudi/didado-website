@@ -44,4 +44,9 @@ public class CardEffect {
         this.armoryCard = armoryCard;
         armoryCard.getEffects().add(this);
     }
+
+    public void deleteArmoryCard(ArmoryCard armoryCard) {
+        armoryCard.getEffects().remove(this);
+        this.armoryCard = null;
+    }
 }

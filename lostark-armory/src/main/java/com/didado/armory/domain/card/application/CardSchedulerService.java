@@ -7,6 +7,7 @@ import com.didado.armory.domain.card.domain.Effect;
 import com.didado.armory.domain.card.dto.ArmoryCardParameter;
 import com.didado.armory.domain.card.dto.CardEffectParameter;
 import com.didado.armory.domain.card.dto.CardParameter;
+import com.didado.armory.domain.card.dto.EffectParameter;
 import com.didado.armory.domain.card.exception.NotFoundArmoryCardException;
 import com.didado.armory.domain.card.repository.ArmoryCardRepository;
 import com.didado.armory.domain.card.repository.CardEffectRepository;
@@ -44,27 +45,92 @@ public class CardSchedulerService {
         armoryCardRepository.findByCharacterName(characterName);
 
         if (armoryCardRepository.existsByCharacterName(characterName)) {
-            //update
             ArmoryCard armoryCard = armoryCardRepository.findByCharacterName(characterName)
                     .orElseThrow(() -> new NotFoundArmoryCardException("존재 하지 않는 캐릭터 이름입니다.", characterName));
 
+            //Delete Old Card Effect
+            deleteCardEffects(armoryCard);
+
+            //Update Old Card Effect
+            updateCardEffects(armoryCardParameter, armoryCard);
+
+            //Update Old Card
             updateCards(armoryCardParameter, armoryCard);
 
-            cardEffectRepository.deleteByArmoryCardId(armoryCard.getId());
-            List<CardEffect> cardEffects = armoryCardParameter.toArmoryCard().getEffects();
-            cardEffects.forEach(cardEffect -> cardEffect.changeArmoryCard(armoryCard));
-            cardEffectRepository.saveAll(cardEffects);
-
+            armoryCardRepository.save(armoryCard);
         } else {
-            //save
+            ArmoryCard armoryCard = new ArmoryCard(characterName);
+            armoryCardRepository.save(armoryCard);
 
+            //Save New Card
+            saveCards(armoryCardParameter, armoryCard);
+
+            //Save New Card Effect
+            saveCardEffects(armoryCardParameter, armoryCard);
         }
 
     }
 
-    private void updateCards(ArmoryCardParameter newCard, ArmoryCard armoryCard) {
-        List<Card> oldCard = cardRepository.findByArmoryCardId(armoryCard.getId());
+    private void saveCards(ArmoryCardParameter armoryCardParameter, ArmoryCard armoryCard) {
+        List<CardParameter> cards = armoryCardParameter.getCards();
+        List<Card> convertCards = cards.stream()
+                .map(CardParameter::toCard)
+                .toList();
+        convertCards.forEach(card -> {
+            card.changeArmoryCard(armoryCard);
+            cardRepository.save(card);
+        });
+    }
 
+    private void saveCardEffects(ArmoryCardParameter armoryCardParameter, ArmoryCard armoryCard) {
+        List<CardEffectParameter> cardEffects = armoryCardParameter.getEffects();
+        cardEffects.forEach(cardEffectParameter -> {
+            CardEffect convertCardEffect = cardEffectParameter.toCardEffect();
+            convertCardEffect.changeArmoryCard(armoryCard);
+            cardEffectRepository.save(convertCardEffect);
+
+            List<EffectParameter> items = cardEffectParameter.getItems();
+            List<Effect> convertEffects = items.stream().map(EffectParameter::toCardEffect)
+                    .toList();
+            convertEffects.forEach(effect -> {
+                effect.changeCardEffect(convertCardEffect);
+                effectRepository.save(effect);
+            });
+        });
+    }
+
+    private void updateCardEffects(ArmoryCardParameter newArmoryCard, ArmoryCard oldArmoryCard) {
+        List<CardEffect> newCardEffect = newArmoryCard.toArmoryCard(oldArmoryCard.getCharacterName()).getEffects();
+        newCardEffect.forEach(cardEffect -> {
+            List<Effect> newEffects = cardEffect.getItems();
+            newEffects.forEach(effect -> {
+                effect.changeCardEffect(cardEffect);
+                effectRepository.save(effect);
+            });
+
+            cardEffect.changeArmoryCard(oldArmoryCard);
+            cardEffectRepository.save(cardEffect);
+        });
+    }
+
+    private void deleteCardEffects(ArmoryCard oldArmoryCard) {
+        List<CardEffect> cardEffects = cardEffectRepository.findByArmoryCardId(oldArmoryCard.getId());
+        cardEffects.forEach(cardEffect -> {
+            //Effect delete
+            List<Effect> effects = effectRepository.findByCardEffectId(cardEffect.getId());
+            effects.forEach(effect -> {
+                effect.deleteCardEffect(cardEffect);
+                effectRepository.delete(effect);
+            });
+
+            //CardEffect delete
+            cardEffect.deleteArmoryCard(oldArmoryCard);
+            cardEffectRepository.delete(cardEffect);
+        });
+    }
+
+    private void updateCards(ArmoryCardParameter newCard, ArmoryCard oldArmoryCard) {
+        List<Card> oldCard = cardRepository.findByArmoryCardId(oldArmoryCard.getId());
         Map<String, Card> cardMap = newCard.getCards().stream()
                 .map(CardParameter::toCard)
                 .collect(Collectors.toMap(Card::getSlot, card -> card));

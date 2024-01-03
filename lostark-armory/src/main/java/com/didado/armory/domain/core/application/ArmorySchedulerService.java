@@ -3,6 +3,7 @@ package com.didado.armory.domain.core.application;
 
 import com.didado.armory.domain.avatar.application.AvatarSchedulerService;
 import com.didado.armory.domain.avatar.repository.AvatarRepository;
+import com.didado.armory.domain.card.application.CardSchedulerService;
 import com.didado.armory.domain.card.repository.ArmoryCardRepository;
 import com.didado.armory.domain.card.repository.CardEffectRepository;
 import com.didado.armory.domain.card.repository.CardRepository;
@@ -42,17 +43,10 @@ public class ArmorySchedulerService {
 
     private final ProfileSchedulerService profileSchedulerService;
     private final AvatarSchedulerService avatarSchedulerService;
+    private final CardSchedulerService cardSchedulerService;
+
     //equipment
     private final EquipmentRepository equipmentRepository;
-
-    //avatar
-    private final AvatarRepository avatarRepository;
-
-    //Card
-    private final ArmoryCardRepository armoryCardRepository;
-    private final CardRepository cardRepository;
-    private final CardEffectRepository cardEffectRepository;
-    private final EffectRepository effectRepository;
 
     //Gem
     private final ArmoryGemRepository armoryGemRepository;
@@ -86,6 +80,7 @@ public class ArmorySchedulerService {
         ArmoryParameter parameter = getParameter(characterName);
         profileSchedulerService.save(parameter.getArmoryProfile());
         avatarSchedulerService.save(characterName, parameter.getArmoryAvatars());
+        cardSchedulerService.save(characterName, parameter.getArmoryCard());
 //        List<ArmoryEquipment> armoryEquipments = armoryEquipments(armory, parameter);
 //        List<ArmoryAvatar> armoryAvatars = armoryAvatars(armory, parameter);
 //        ArmoryCard armoryCard = armoryCard(armory, parameter);

@@ -15,6 +15,14 @@ public class EffectParameter {
     @JsonProperty(value = "Description")
     private String description;
 
+    protected EffectParameter() {
+    }
+
+    public EffectParameter(Effect effect) {
+        this.name = effect.getName();
+        this.description = effect.getDescription();
+    }
+
     public Effect toCardEffect() {
         return Effect.builder()
                 .name(name)
