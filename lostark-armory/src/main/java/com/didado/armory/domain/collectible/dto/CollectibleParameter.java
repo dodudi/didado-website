@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -23,7 +24,17 @@ public class CollectibleParameter {
     private Integer maxPoint;
 
     @JsonProperty(value = "CollectiblePoints")
-    private List<CollectiblePointParameter> collectiblePoints;
+    private List<CollectiblePointParameter> collectiblePoints = new ArrayList<>();
+
+    protected CollectibleParameter() {
+    }
+
+    public CollectibleParameter(Collectible collectible) {
+        this.type = collectible.getType();
+        this.icon = collectible.getIcon();
+        this.point = collectible.getPoint();
+        this.maxPoint = collectible.getMaxPoint();
+    }
 
     public Collectible toCollectible() {
         return Collectible.builder()

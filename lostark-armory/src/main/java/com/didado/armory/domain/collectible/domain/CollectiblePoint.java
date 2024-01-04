@@ -37,4 +37,15 @@ public class CollectiblePoint {
         this.collectible = collectible;
         collectible.getCollectiblePoints().add(this);
     }
+
+    public void deleteCollectible() {
+        collectible.getCollectiblePoints().remove(this);
+        this.collectible = null;
+    }
+
+    public void changeData(CollectiblePoint collectiblePoint) {
+        this.pointName = collectiblePoint.getPointName();
+        this.point = collectiblePoint.getPoint();
+        this.maxPoint = collectiblePoint.getMaxPoint();
+    }
 }

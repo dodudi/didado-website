@@ -25,6 +25,10 @@ public class Collectible {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "collectible")
     private List<CollectiblePoint> collectiblePoints = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "collectible_info_id")
+    private CollectibleInfo collectibleInfo;
+
     protected Collectible() {
     }
 
@@ -34,5 +38,22 @@ public class Collectible {
         this.icon = icon;
         this.point = point;
         this.maxPoint = maxPoint;
+    }
+
+    public void changeCollectibleInfo(CollectibleInfo collectibleInfo) {
+        this.collectibleInfo = collectibleInfo;
+        collectibleInfo.getCollectibles().add(this);
+    }
+
+    public void deleteCollectibleInfo() {
+        collectibleInfo.getCollectibles().remove(this);
+        this.collectibleInfo = null;
+    }
+
+    public void changeData(Collectible collectible) {
+        this.type = collectible.getType();
+        this.icon = collectible.getIcon();
+        this.point = collectible.getPoint();
+        this.maxPoint = collectible.getMaxPoint();
     }
 }

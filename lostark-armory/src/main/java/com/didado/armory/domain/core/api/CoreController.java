@@ -3,6 +3,7 @@ package com.didado.armory.domain.core.api;
 import com.didado.armory.domain.avatar.application.AvatarService;
 import com.didado.armory.domain.card.application.CardSchedulerService;
 import com.didado.armory.domain.card.application.CardService;
+import com.didado.armory.domain.collectible.application.CollectibleService;
 import com.didado.armory.domain.core.application.ArmorySchedulerService;
 import com.didado.armory.domain.core.domain.ArmoryType;
 import com.didado.armory.domain.core.dto.ArmoryParameter;
@@ -26,6 +27,7 @@ public class CoreController {
     private final AvatarService avatarService;
     private final CardService cardService;
     private final SkillService skillService;
+    private final CollectibleService collectibleService;
 
     @PostMapping("/lostark/armory/core")
     public ResponseEntity<Object> save(@RequestBody CoreSaveParameter saveParameter) {
@@ -39,6 +41,8 @@ public class CoreController {
             return ResponseEntity.ok(cardService.search(saveParameter.getCharacterName()));
         } else if (saveParameter.getArmoryType().equals(ArmoryType.SKILL)) {
             return ResponseEntity.ok(skillService.search(saveParameter.getCharacterName()));
+        } else if (saveParameter.getArmoryType().equals(ArmoryType.COLLECTIBLE)) {
+            return ResponseEntity.ok(collectibleService.search(saveParameter.getCharacterName()));
         }
 
         return ResponseEntity.ofNullable(null);

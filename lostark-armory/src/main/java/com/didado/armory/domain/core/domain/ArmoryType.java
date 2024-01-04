@@ -4,5 +4,5 @@ public enum ArmoryType {
     PROFILE,
     AVATAR,
     SKILL,
-    CARD
+    COLLECTIBLE, CARD
 }

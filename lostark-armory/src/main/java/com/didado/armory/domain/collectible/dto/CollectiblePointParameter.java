@@ -17,6 +17,15 @@ public class CollectiblePointParameter {
     @JsonProperty(value = "MaxPoint")
     private Integer maxPoint;
 
+    protected CollectiblePointParameter() {
+    }
+
+    public CollectiblePointParameter(CollectiblePoint collectiblePoint) {
+        this.pointName = collectiblePoint.getPointName();
+        this.point = collectiblePoint.getPoint();
+        this.maxPoint = collectiblePoint.getMaxPoint();
+    }
+
     public CollectiblePoint toCollectiblePoint() {
         return CollectiblePoint.builder()
                 .pointName(pointName)

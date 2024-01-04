@@ -8,6 +8,7 @@ import com.didado.armory.domain.card.repository.ArmoryCardRepository;
 import com.didado.armory.domain.card.repository.CardEffectRepository;
 import com.didado.armory.domain.card.repository.CardRepository;
 import com.didado.armory.domain.card.repository.EffectRepository;
+import com.didado.armory.domain.collectible.application.CollectibleSchedulerService;
 import com.didado.armory.domain.collectible.repository.CollectiblePointRepository;
 import com.didado.armory.domain.collectible.repository.CollectibleRepository;
 import com.didado.armory.domain.colosseum.repository.*;
@@ -46,6 +47,7 @@ public class ArmorySchedulerService {
     private final AvatarSchedulerService avatarSchedulerService;
     private final CardSchedulerService cardSchedulerService;
     private final SkillSchedulerService skillSchedulerService;
+    private final CollectibleSchedulerService collectibleSchedulerService;
     //equipment
     private final EquipmentRepository equipmentRepository;
 
@@ -58,10 +60,6 @@ public class ArmorySchedulerService {
     private final ArmoryEngravingRepository armoryEngravingRepository;
     private final EngravingRepository engravingRepository;
     private final EngravingEffectRepository engravingEffectRepository;
-
-    //Collectible
-    private final CollectibleRepository collectibleRepository;
-    private final CollectiblePointRepository collectiblePointRepository;
 
     //Colosseum
     private final ColosseumInfoRepository colosseumInfoRepository;
@@ -77,7 +75,8 @@ public class ArmorySchedulerService {
 //        profileSchedulerService.save(parameter.getArmoryProfile());
 //        avatarSchedulerService.save(characterName, parameter.getArmoryAvatars());
 //        cardSchedulerService.save(characterName, parameter.getArmoryCard());
-        skillSchedulerService.search(characterName, parameter.getArmorySkills());
+//        skillSchedulerService.search(characterName, parameter.getArmorySkills());
+        collectibleSchedulerService.save(characterName, parameter.getCollectibles());
 //        parameter.getArmorySkills();
 //        List<ArmoryEquipment> armoryEquipments = armoryEquipments(armory, parameter);
 //        List<ArmoryAvatar> armoryAvatars = armoryAvatars(armory, parameter);
