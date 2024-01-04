@@ -16,29 +16,29 @@ public class Colosseum {
     @Column(name = "colosseum_id")
     private Long id;
 
+    private String seasonName;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "colosseum_info_id")
     private ColosseumInfo colosseumInfo;
 
-    private String seasonName;
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "aggregation_team_death_match_rank_id")
     private AggregationTeamDeathMatchRank competitive;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "team_death_match_aggregation_id")
     private TeamDeathmatchAggregation teamDeathmatch;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "death_match_aggregation_id")
     private DeathmatchAggregation deathmatch;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "aggregation_elimination_id")
     private AggregationElimination teamElimination;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "coop_aggregation_id")
     private CoOpBattleAggregation coOpBattle;
 
@@ -72,5 +72,15 @@ public class Colosseum {
 
     public void changeColosseumInfo(ColosseumInfo colosseumInfo) {
         this.colosseumInfo = colosseumInfo;
+        colosseumInfo.getColosseums().add(this);
+    }
+
+    public void deleteColosseumInfo() {
+        colosseumInfo.getColosseums().remove(this);
+        this.colosseumInfo = null;
+    }
+
+    public void changeData(Colosseum colosseum) {
+        this.seasonName = colosseum.getSeasonName();
     }
 }

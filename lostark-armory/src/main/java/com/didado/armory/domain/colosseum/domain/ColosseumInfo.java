@@ -15,6 +15,8 @@ public class ColosseumInfo {
     @Column(name = "colosseum_info_id")
     private Long id;
 
+    private String characterName;
+
     private Integer rank;
 
     private Integer preRank;
@@ -28,9 +30,16 @@ public class ColosseumInfo {
     }
 
     @Builder
-    public ColosseumInfo(Integer rank, Integer preRank, Integer exp) {
+    public ColosseumInfo(String characterName, Integer rank, Integer preRank, Integer exp) {
+        this.characterName = characterName;
         this.rank = rank;
         this.preRank = preRank;
         this.exp = exp;
+    }
+
+    public void changeData(ColosseumInfo colosseumInfo) {
+        this.rank = colosseumInfo.getRank();
+        this.preRank = colosseumInfo.getPreRank();
+        this.exp = colosseumInfo.getExp();
     }
 }

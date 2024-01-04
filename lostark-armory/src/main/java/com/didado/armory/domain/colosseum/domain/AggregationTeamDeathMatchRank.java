@@ -55,4 +55,18 @@ public class AggregationTeamDeathMatchRank {
         this.aceCount = aceCount;
         this.deathCount = deathCount;
     }
+
+    public void changeData(AggregationTeamDeathMatchRank aggregationTeamDeathMatchRank) {
+        this.rank = aggregationTeamDeathMatchRank.getRank();
+        this.rankName = aggregationTeamDeathMatchRank.getRankName();
+        this.rankIcon = aggregationTeamDeathMatchRank.getRankIcon();
+        this.rankLastMmr = aggregationTeamDeathMatchRank.getRankLastMmr();
+        this.playCount = aggregationTeamDeathMatchRank.getPlayCount();
+        this.victoryCount = aggregationTeamDeathMatchRank.getVictoryCount();
+        this.loseCount = aggregationTeamDeathMatchRank.getLoseCount();
+        this.tieCount = aggregationTeamDeathMatchRank.getTieCount();
+        this.killCount = aggregationTeamDeathMatchRank.getKillCount();
+        this.aceCount = aggregationTeamDeathMatchRank.getAceCount();
+        this.deathCount = aggregationTeamDeathMatchRank.getDeathCount();
+    }
 }

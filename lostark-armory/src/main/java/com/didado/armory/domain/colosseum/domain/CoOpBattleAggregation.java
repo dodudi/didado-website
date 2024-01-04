@@ -41,4 +41,14 @@ public class CoOpBattleAggregation {
         this.aceCount = aceCount;
         this.deathCount = deathCount;
     }
+
+    public void changeData(CoOpBattleAggregation coOpBattleAggregation) {
+        this.playCount = coOpBattleAggregation.getPlayCount();
+        this.victoryCount = coOpBattleAggregation.getVictoryCount();
+        this.loseCount = coOpBattleAggregation.getLoseCount();
+        this.tieCount = coOpBattleAggregation.getTieCount();
+        this.killCount = coOpBattleAggregation.getKillCount();
+        this.aceCount = coOpBattleAggregation.getAceCount();
+        this.deathCount = coOpBattleAggregation.getDeathCount();
+    }
 }

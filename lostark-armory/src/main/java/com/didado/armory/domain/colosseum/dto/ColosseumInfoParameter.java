@@ -1,10 +1,12 @@
 package com.didado.armory.domain.colosseum.dto;
 
+import com.didado.armory.domain.colosseum.domain.Colosseum;
 import com.didado.armory.domain.colosseum.domain.ColosseumInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,10 +22,20 @@ public class ColosseumInfoParameter {
     private Integer exp;
 
     @JsonProperty(value = "Colosseums")
-    private List<ColosseumParameter> colosseums;
+    private List<ColosseumParameter> colosseums = new ArrayList<>();
 
-    public ColosseumInfo toColosseumInfo() {
+    protected ColosseumInfoParameter() {
+    }
+
+    public ColosseumInfoParameter(ColosseumInfo colosseumInfo) {
+        this.rank = colosseumInfo.getRank();
+        this.preRank = colosseumInfo.getPreRank();
+        this.exp = colosseumInfo.getExp();
+    }
+
+    public ColosseumInfo toColosseumInfo(String characterName) {
         return ColosseumInfo.builder()
+                .characterName(characterName)
                 .rank(rank)
                 .preRank(preRank)
                 .exp(exp)

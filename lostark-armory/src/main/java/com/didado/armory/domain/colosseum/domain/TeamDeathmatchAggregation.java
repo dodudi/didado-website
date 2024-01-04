@@ -41,4 +41,14 @@ public class TeamDeathmatchAggregation {
         this.aceCount = aceCount;
         this.deathCount = deathCount;
     }
+
+    public void changeData(TeamDeathmatchAggregation teamDeathmatchAggregation) {
+        this.playCount = teamDeathmatchAggregation.getPlayCount();
+        this.victoryCount = teamDeathmatchAggregation.getVictoryCount();
+        this.loseCount = teamDeathmatchAggregation.getLoseCount();
+        this.tieCount = teamDeathmatchAggregation.getTieCount();
+        this.killCount = teamDeathmatchAggregation.getKillCount();
+        this.aceCount = teamDeathmatchAggregation.getAceCount();
+        this.deathCount = teamDeathmatchAggregation.getDeathCount();
+    }
 }

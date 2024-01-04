@@ -29,7 +29,8 @@ public class DeathmatchAggregation {
 
     private Integer deathCount;
 
-    protected DeathmatchAggregation(){}
+    protected DeathmatchAggregation() {
+    }
 
     @Builder
     public DeathmatchAggregation(Integer playCount, Integer victoryCount, Integer loseCount, Integer tieCount, Integer killCount, Integer aceCount, Integer deathCount) {
@@ -40,5 +41,15 @@ public class DeathmatchAggregation {
         this.killCount = killCount;
         this.aceCount = aceCount;
         this.deathCount = deathCount;
+    }
+
+    public void changeData(DeathmatchAggregation deathmatchAggregation) {
+        this.playCount = deathmatchAggregation.getPlayCount();
+        this.victoryCount = deathmatchAggregation.getVictoryCount();
+        this.loseCount = deathmatchAggregation.getLoseCount();
+        this.tieCount = deathmatchAggregation.getTieCount();
+        this.killCount = deathmatchAggregation.getKillCount();
+        this.aceCount = deathmatchAggregation.getAceCount();
+        this.deathCount = deathmatchAggregation.getDeathCount();
     }
 }

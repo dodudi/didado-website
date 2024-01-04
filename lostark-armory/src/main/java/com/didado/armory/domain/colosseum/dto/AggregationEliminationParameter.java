@@ -50,6 +50,30 @@ public class AggregationEliminationParameter {
     @JsonProperty(value = "DeathCount")
     private Integer deathCount;
 
+    protected AggregationEliminationParameter() {
+
+    }
+
+    public AggregationEliminationParameter(AggregationElimination aggregationElimination) {
+        if (aggregationElimination == null)
+            return;
+
+        this.firstWinCount = aggregationElimination.getFirstWinCount();
+        this.secondWinCount = aggregationElimination.getSecondWinCount();
+        this.thirdWinCount = aggregationElimination.getThirdWinCount();
+        this.firstPlayCount = aggregationElimination.getFirstPlayCount();
+        this.secondPlayCount = aggregationElimination.getSecondPlayCount();
+        this.thirdPlayCount = aggregationElimination.getThirdPlayCount();
+        this.allKillCount = aggregationElimination.getAllKillCount();
+        this.playCount = aggregationElimination.getPlayCount();
+        this.victoryCount = aggregationElimination.getVictoryCount();
+        this.loseCount = aggregationElimination.getLoseCount();
+        this.tieCount = aggregationElimination.getTieCount();
+        this.killCount = aggregationElimination.getKillCount();
+        this.aceCount = aggregationElimination.getAceCount();
+        this.deathCount = aggregationElimination.getDeathCount();
+    }
+
     public AggregationElimination toAggregationElimination() {
         return AggregationElimination.builder()
                 .firstWinCount(firstWinCount)

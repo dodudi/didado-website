@@ -11,6 +11,7 @@ import com.didado.armory.domain.card.repository.EffectRepository;
 import com.didado.armory.domain.collectible.application.CollectibleSchedulerService;
 import com.didado.armory.domain.collectible.repository.CollectiblePointRepository;
 import com.didado.armory.domain.collectible.repository.CollectibleRepository;
+import com.didado.armory.domain.colosseum.application.ColosseumSchedulerService;
 import com.didado.armory.domain.colosseum.repository.*;
 import com.didado.armory.domain.dto.LostarkProperty;
 import com.didado.armory.domain.engraving.repository.ArmoryEngravingRepository;
@@ -48,6 +49,7 @@ public class ArmorySchedulerService {
     private final CardSchedulerService cardSchedulerService;
     private final SkillSchedulerService skillSchedulerService;
     private final CollectibleSchedulerService collectibleSchedulerService;
+    private final ColosseumSchedulerService colosseumSchedulerService;
     //equipment
     private final EquipmentRepository equipmentRepository;
 
@@ -61,22 +63,16 @@ public class ArmorySchedulerService {
     private final EngravingRepository engravingRepository;
     private final EngravingEffectRepository engravingEffectRepository;
 
-    //Colosseum
-    private final ColosseumInfoRepository colosseumInfoRepository;
-    private final ColosseumRepository colosseumRepository;
-    private final AggregationEliminationRepository aggregationEliminationRepository;
-    private final AggregationTeamDeathMatchRankRepository aggregationTeamDeathMatchRankRepository;
-    private final CoOpBattleAggregationRepository coOpBattleAggregationRepository;
-    private final DeathMatchAggregationRepository deathMatchAggregationRepository;
-    private final TeamDeathMatchAggregationRepository teamDeathMatchAggregationRepository;
-
     public void save(String characterName) {
         ArmoryParameter parameter = getParameter(characterName);
 //        profileSchedulerService.save(parameter.getArmoryProfile());
 //        avatarSchedulerService.save(characterName, parameter.getArmoryAvatars());
 //        cardSchedulerService.save(characterName, parameter.getArmoryCard());
 //        skillSchedulerService.search(characterName, parameter.getArmorySkills());
-        collectibleSchedulerService.save(characterName, parameter.getCollectibles());
+//        collectibleSchedulerService.save(characterName, parameter.getCollectibles());
+        colosseumSchedulerService.save(characterName, parameter.getColosseumInfo());
+
+
 //        parameter.getArmorySkills();
 //        List<ArmoryEquipment> armoryEquipments = armoryEquipments(armory, parameter);
 //        List<ArmoryAvatar> armoryAvatars = armoryAvatars(armory, parameter);

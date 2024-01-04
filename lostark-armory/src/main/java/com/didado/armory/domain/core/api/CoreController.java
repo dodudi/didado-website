@@ -4,6 +4,7 @@ import com.didado.armory.domain.avatar.application.AvatarService;
 import com.didado.armory.domain.card.application.CardSchedulerService;
 import com.didado.armory.domain.card.application.CardService;
 import com.didado.armory.domain.collectible.application.CollectibleService;
+import com.didado.armory.domain.colosseum.application.ColosseumService;
 import com.didado.armory.domain.core.application.ArmorySchedulerService;
 import com.didado.armory.domain.core.domain.ArmoryType;
 import com.didado.armory.domain.core.dto.ArmoryParameter;
@@ -28,6 +29,7 @@ public class CoreController {
     private final CardService cardService;
     private final SkillService skillService;
     private final CollectibleService collectibleService;
+    private final ColosseumService colosseumService;
 
     @PostMapping("/lostark/armory/core")
     public ResponseEntity<Object> save(@RequestBody CoreSaveParameter saveParameter) {
@@ -43,8 +45,9 @@ public class CoreController {
             return ResponseEntity.ok(skillService.search(saveParameter.getCharacterName()));
         } else if (saveParameter.getArmoryType().equals(ArmoryType.COLLECTIBLE)) {
             return ResponseEntity.ok(collectibleService.search(saveParameter.getCharacterName()));
+        } else if (saveParameter.getArmoryType().equals(ArmoryType.COLOSSEUM)) {
+            return ResponseEntity.ok(colosseumService.search(saveParameter.getCharacterName()));
         }
-
         return ResponseEntity.ofNullable(null);
     }
 }

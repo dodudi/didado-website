@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.ToString;
 
 @Getter
-@ToString
 public class AggregationTeamDeathMatchRankParameter {
     @JsonProperty(value = "Rank")
     private Integer rank;
@@ -40,6 +39,26 @@ public class AggregationTeamDeathMatchRankParameter {
 
     @JsonProperty(value = "DeathCount")
     private Integer deathCount;
+
+    protected AggregationTeamDeathMatchRankParameter() {
+    }
+
+    public AggregationTeamDeathMatchRankParameter(AggregationTeamDeathMatchRank competitive) {
+        if (competitive == null)
+            return;
+
+        this.rank = competitive.getRank();
+        this.rankName = competitive.getRankName();
+        this.rankIcon = competitive.getRankIcon();
+        this.rankLastMmr = competitive.getRankLastMmr();
+        this.playCount = competitive.getPlayCount();
+        this.victoryCount = competitive.getVictoryCount();
+        this.loseCount = competitive.getLoseCount();
+        this.tieCount = competitive.getTieCount();
+        this.killCount = competitive.getKillCount();
+        this.aceCount = competitive.getAceCount();
+        this.deathCount = competitive.getDeathCount();
+    }
 
     public AggregationTeamDeathMatchRank toAggregationTeamDeathMatchRank() {
         return AggregationTeamDeathMatchRank.builder()

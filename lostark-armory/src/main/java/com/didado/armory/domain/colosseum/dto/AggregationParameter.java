@@ -10,26 +10,69 @@ import lombok.ToString;
 @Getter
 @ToString
 public class AggregationParameter {
-    @JsonProperty(value = "PlayCount")
-    private Integer playCount;
+    @JsonProperty("PlayCount")
+    private int playCount;
 
-    @JsonProperty(value = "VictoryCount")
-    private Integer victoryCount;
+    @JsonProperty("VictoryCount")
+    private int victoryCount;
 
-    @JsonProperty(value = "LoseCount")
-    private Integer loseCount;
+    @JsonProperty("LoseCount")
+    private int loseCount;
 
-    @JsonProperty(value = "TieCount")
-    private Integer tieCount;
+    @JsonProperty("TieCount")
+    private int tieCount;
 
-    @JsonProperty(value = "KillCount")
-    private Integer killCount;
+    @JsonProperty("KillCount")
+    private int killCount;
 
-    @JsonProperty(value = "AceCount")
-    private Integer aceCount;
+    @JsonProperty("AceCount")
+    private int aceCount;
 
-    @JsonProperty(value = "DeathCount")
-    private Integer deathCount;
+    @JsonProperty("DeathCount")
+    private int deathCount;
+
+    protected AggregationParameter() {
+
+    }
+
+    public AggregationParameter(CoOpBattleAggregation coOpBattleAggregation) {
+        if (coOpBattleAggregation == null)
+            return;
+
+        this.playCount = coOpBattleAggregation.getPlayCount();
+        this.victoryCount = coOpBattleAggregation.getVictoryCount();
+        this.loseCount = coOpBattleAggregation.getLoseCount();
+        this.tieCount = coOpBattleAggregation.getTieCount();
+        this.killCount = coOpBattleAggregation.getKillCount();
+        this.aceCount = coOpBattleAggregation.getAceCount();
+        this.deathCount = coOpBattleAggregation.getDeathCount();
+    }
+
+    public AggregationParameter(DeathmatchAggregation deathMatchAggregation) {
+        if (deathMatchAggregation == null)
+            return;
+
+        this.playCount = deathMatchAggregation.getPlayCount();
+        this.victoryCount = deathMatchAggregation.getVictoryCount();
+        this.loseCount = deathMatchAggregation.getLoseCount();
+        this.tieCount = deathMatchAggregation.getTieCount();
+        this.killCount = deathMatchAggregation.getKillCount();
+        this.aceCount = deathMatchAggregation.getAceCount();
+        this.deathCount = deathMatchAggregation.getDeathCount();
+    }
+
+    public AggregationParameter(TeamDeathmatchAggregation teamDeathMatchAggregation) {
+        if (teamDeathMatchAggregation == null)
+            return;
+
+        this.playCount = teamDeathMatchAggregation.getPlayCount();
+        this.victoryCount = teamDeathMatchAggregation.getVictoryCount();
+        this.loseCount = teamDeathMatchAggregation.getLoseCount();
+        this.tieCount = teamDeathMatchAggregation.getTieCount();
+        this.killCount = teamDeathMatchAggregation.getKillCount();
+        this.aceCount = teamDeathMatchAggregation.getAceCount();
+        this.deathCount = teamDeathMatchAggregation.getDeathCount();
+    }
 
     public CoOpBattleAggregation toCoOpBattleAggregation() {
         return CoOpBattleAggregation.builder()
