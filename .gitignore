@@ -5,7 +5,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 .$sequence.drawio.bkp
+.$package.drawio.dtmp
 .$package.drawio.bkp
+.$package.drawio.btmp
 
 ### STS ###
 .apt_generated
