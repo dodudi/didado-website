@@ -7,4 +7,14 @@
 가져온 데이터를 필요한 형태로 가공하여 조회, 추가, 삭제, 수정 같은 기능을 개발합니다.<br>
 프로젝트 주제로 선택한 이유는 게임을 하면서 필요한 정보들을 간편하게 검색하고 싶어서 결정하게 되었습니다.<br>
 
+<h1>프로젝트 사용 기술</h1>
+
+**Data Base**
+H2 Database, Postgresql
+
+**Spring**
+Spring Boot, Spring Data Jpa, Spring WebFlux
+
+**CI/CD**
+Git, GitHub, Docker, Docker Compose, Docker Swarm
 
