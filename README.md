@@ -21,3 +21,5 @@ Git, GitHub, Docker, Docker Compose, Docker Swarm
 
 **사용할 예정**
 QueryDsl, Redis, Jenkins, AWS
+
+**패키지 구조**
