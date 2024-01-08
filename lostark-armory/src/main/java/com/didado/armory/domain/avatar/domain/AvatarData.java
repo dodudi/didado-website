@@ -18,7 +18,7 @@ public class AvatarData {
 
     private String characterName;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "avatarData")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "avatarData", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Avatar> avatars = new ArrayList<>();
 
     protected AvatarData() {

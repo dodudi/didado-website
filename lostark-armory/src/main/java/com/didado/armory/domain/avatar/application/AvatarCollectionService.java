@@ -3,12 +3,14 @@ package com.didado.armory.domain.avatar.application;
 import com.didado.armory.domain.avatar.domain.Avatar;
 import com.didado.armory.domain.avatar.domain.AvatarData;
 import com.didado.armory.domain.avatar.dto.AvatarParameter;
+import com.didado.armory.domain.avatar.exception.NotFoundAvatarException;
 import com.didado.armory.domain.avatar.repository.AvatarDataRepository;
 import com.didado.armory.domain.avatar.repository.AvatarRepository;
 import com.didado.armory.domain.dto.LostarkProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,9 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * 로스트아크 API 를 이용해 데이터를 추가, 수정하는 클래스입니다.
@@ -60,48 +62,43 @@ public class AvatarCollectionService implements AvatarCollection {
     }
 
     @Override
+    @Modifying
     public void update(String characterName) {
+        AvatarData oldAvatarData = avatarDataRepository.findByCharacterNameFetch(characterName)
+                .orElseThrow(() -> new NotFoundAvatarException("캐릭터 이름에 Avatar 데이터가 없습니다.", characterName));
 
+        List<Avatar> oldAvatars = oldAvatarData.getAvatars();
+
+        List<AvatarParameter> newAvatars = getAvatars(characterName);
+        Map<String, Avatar> newAvatarsMap = newAvatars.stream()
+                .map(AvatarParameter::toArmoryAvatar)
+                .collect(Collectors.toMap(Avatar::getKey, Function.identity()));
+
+        //업데이트 진행이 안된 oldAvatar 가져오기
+        List<Avatar> deleteAvatars = oldAvatars.stream()
+                .map(oldAvatar -> {
+                    String key = oldAvatar.getKey();
+                    Avatar updateAvatar = newAvatarsMap.containsKey(key) ? newAvatarsMap.remove(key) : null;
+                    if (updateAvatar != null)
+                        oldAvatar.changeData(updateAvatar);
+
+                    return updateAvatar == null ? oldAvatar : null;
+                })
+                .filter(Objects::nonNull)
+                .toList();
+
+        //새로운 데이터에 존재하지 않는 old 데이터 삭제
+        deleteAvatars.forEach(avatar -> {
+            avatar.deleteAvatarData();
+            avatarRepository.delete(avatar);
+        });
+
+        //새로운 데이터 추가
+        newAvatarsMap.forEach((s, avatar) -> {
+            avatar.changeAvatarData(oldAvatarData);
+            avatarRepository.save(avatar);
+        });
     }
-
-//    public void save(String characterName, List<ArmoryAvatarParameter> newAvatars) {
-//        if (avatarInfoRepository.existsByCharacterName(characterName)) {
-//            update(characterName, newAvatars);
-//        } else {
-//            //save
-//            ArmoryAvatarInfo armoryAvatarInfo = ArmoryAvatarInfo.builder()
-//                    .characterName(characterName)
-//                    .build();
-//
-//            avatarInfoRepository.save(armoryAvatarInfo);
-//
-//            List<ArmoryAvatar> convertAvatars = newAvatars.stream()
-//                    .map(ArmoryAvatarParameter::toArmoryAvatar)
-//                    .toList();
-//            convertAvatars.forEach(armoryAvatar -> armoryAvatar.changeAvatarInfo(armoryAvatarInfo));
-//            avatarRepository.saveAll(convertAvatars);
-//        }
-//    }
-//
-//    private void update(String characterName, List<ArmoryAvatarParameter> newAvatars) {
-//        ArmoryAvatarInfo avatarInfo = avatarInfoRepository.findByCharacterName(characterName)
-//                .orElseThrow(() -> new NotFoundAvatarException("존재 하지 않는 캐릭터 이름입니다.", characterName));
-//
-//        List<ArmoryAvatar> oldAvatars = avatarRepository.findByArmoryAvatarInfoId(avatarInfo.getId());
-//
-//        //New Avatars Convert Map
-//        Map<String, ArmoryAvatar> avatarMap = newAvatars.stream()
-//                .map(ArmoryAvatarParameter::toArmoryAvatar)
-//                .collect(Collectors.toMap(ArmoryAvatar::getType, armoryAvatar -> armoryAvatar));
-//
-//        //Update Old Avatars
-//        oldAvatars.forEach(oldAvatar -> {
-//            if (avatarMap.containsKey(oldAvatar.getType())) {
-//                ArmoryAvatar newAvatar = avatarMap.get(oldAvatar.getType());
-//                oldAvatar.changeData(newAvatar);
-//            }
-//        });
-//    }
 
     private List<AvatarParameter> getAvatars(String characterName) {
         String url = property.url() + "/armories/characters/" + characterName + "/avatars";

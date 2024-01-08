@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Entity
 @Getter
-@ToString(exclude = {"avatarData"})
+@ToString(exclude = {"avatarData", "toolTip"})
 public class Avatar {
     @Id
     @GeneratedValue
@@ -46,6 +46,11 @@ public class Avatar {
         avatarData.getAvatars().add(this);
     }
 
+    public void deleteAvatarData() {
+        this.avatarData.getAvatars().remove(this);
+        this.avatarData = null;
+    }
+
     public void changeData(Avatar parameter) {
         this.type = parameter.getType();
         this.name = parameter.getName();
@@ -54,5 +59,9 @@ public class Avatar {
         this.isSet = parameter.getIsSet();
         this.isInner = parameter.getIsInner();
         this.toolTip = parameter.getToolTip();
+    }
+
+    public String getKey() {
+        return type + isInner;
     }
 }
