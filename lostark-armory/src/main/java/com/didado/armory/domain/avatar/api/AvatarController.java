@@ -25,7 +25,8 @@ public class AvatarController {
 
     @ExceptionHandler(NotFoundAvatarException.class)
     public ResponseEntity<AvatarDataParameter> avatar(NotFoundAvatarException e) {
-//
+        avatarCollectService.save(e.getCharacterName());
+        return ResponseEntity.ok(avatarService.search(e.getCharacterName()));
 //        AvatarInfoParameter result = WebClient.create()
 //                .post()
 //                .uri("http://localhost:8080/lostark/armory/core")
@@ -36,7 +37,6 @@ public class AvatarController {
 //                .block();
 //
 //        return ResponseEntity.ok(result);
-        return null;
     }
 
 }

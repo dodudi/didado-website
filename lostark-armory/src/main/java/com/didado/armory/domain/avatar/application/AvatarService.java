@@ -20,13 +20,13 @@ public class AvatarService {
     private final AvatarDataRepository avatarDataRepository;
 
     public AvatarDataParameter search(String characterName) {
-        AvatarData avatarInfo = avatarDataRepository.findByCharacterName(characterName)
+        AvatarData avatarData = avatarDataRepository.findByCharacterNameFetch(characterName)
                 .orElseThrow(() -> new NotFoundAvatarException("존재 하지 않는 캐릭터 이름입니다.", characterName));
 
-        List<AvatarParameter> convertAvatars = avatarRepository.findByAvatarDataId(avatarInfo.getId()).stream()
+        List<AvatarParameter> convertAvatars = avatarData.getAvatars().stream()
                 .map(AvatarParameter::new)
                 .toList();
 
-        return new AvatarDataParameter(avatarInfo.getCharacterName(), convertAvatars);
+        return new AvatarDataParameter(avatarData.getCharacterName(), convertAvatars);
     }
 }

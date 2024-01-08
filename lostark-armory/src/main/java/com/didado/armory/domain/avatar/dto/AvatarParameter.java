@@ -3,8 +3,10 @@ package com.didado.armory.domain.avatar.dto;
 import com.didado.armory.domain.avatar.domain.Avatar;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString(exclude = {"toolTip"})
 public class AvatarParameter {
     @JsonProperty(value = "Type")
     private String type;
