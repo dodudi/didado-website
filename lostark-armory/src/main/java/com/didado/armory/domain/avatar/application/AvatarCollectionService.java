@@ -3,6 +3,7 @@ package com.didado.armory.domain.avatar.application;
 import com.didado.armory.domain.avatar.domain.Avatar;
 import com.didado.armory.domain.avatar.domain.AvatarData;
 import com.didado.armory.domain.avatar.dto.AvatarParameter;
+import com.didado.armory.domain.avatar.exception.InvalidCharacterNameException;
 import com.didado.armory.domain.avatar.exception.NotFoundAvatarException;
 import com.didado.armory.domain.avatar.repository.AvatarDataRepository;
 import com.didado.armory.domain.avatar.repository.AvatarRepository;
@@ -44,6 +45,8 @@ public class AvatarCollectionService implements AvatarCollection {
     @Override
     public void save(String characterName) {
         List<AvatarParameter> newAvatars = getAvatars(characterName);
+        if (newAvatars == null)
+            throw new InvalidCharacterNameException("존재 하는 캐릭터 이름이 아닙니다.", characterName);
 
         //Save AvatarData
         AvatarData avatarData = new AvatarData(characterName);
@@ -115,6 +118,6 @@ public class AvatarCollectionService implements AvatarCollection {
         );
 
         return Optional.ofNullable(response.getBody())
-                .orElseGet(Collections::emptyList);
+                .orElseGet(() -> null);
     }
 }

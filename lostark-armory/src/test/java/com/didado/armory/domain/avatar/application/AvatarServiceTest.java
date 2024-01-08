@@ -25,7 +25,7 @@ class AvatarServiceTest {
 
     @Test
     void search() {
-        String characterName = "Nelip";
+        String characterName = "디다도두";
 
         Assertions.assertThatThrownBy(() -> avatarService.search(characterName))
                 .isInstanceOf(NotFoundAvatarException.class);
