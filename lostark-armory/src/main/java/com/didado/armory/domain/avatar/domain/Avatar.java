@@ -1,16 +1,17 @@
 package com.didado.armory.domain.avatar.domain;
 
-import com.didado.armory.domain.avatar.dto.ArmoryAvatarParameter;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Entity
 @Getter
-public class ArmoryAvatar {
+@ToString(exclude = {"avatarData"})
+public class Avatar {
     @Id
     @GeneratedValue
-    @Column(name = "armory_avatar_id")
+    @Column(name = "avatar_id")
     private Long id;
     private String type;
     private String name;
@@ -20,17 +21,17 @@ public class ArmoryAvatar {
     private Boolean isInner;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "armory_avatar_info_id")
-    private ArmoryAvatarInfo armoryAvatarInfo;
+    @JoinColumn(name = "avatar_data_id")
+    private AvatarData avatarData;
 
     @Column(name = "tool_tip", length = 10000)
     private String toolTip;
 
-    protected ArmoryAvatar() {
+    protected Avatar() {
     }
 
     @Builder
-    public ArmoryAvatar(String type, String name, String icon, String grade, Boolean isSet, Boolean isInner, String toolTip) {
+    public Avatar(String type, String name, String icon, String grade, Boolean isSet, Boolean isInner, String toolTip) {
         this.type = type;
         this.name = name;
         this.icon = icon;
@@ -40,11 +41,12 @@ public class ArmoryAvatar {
         this.toolTip = toolTip;
     }
 
-    public void changeAvatarInfo(ArmoryAvatarInfo armoryAvatarInfo) {
-        this.armoryAvatarInfo = armoryAvatarInfo;
+    public void changeAvatarData(AvatarData avatarData) {
+        this.avatarData = avatarData;
+        avatarData.getAvatars().add(this);
     }
 
-    public void changeData(ArmoryAvatar parameter) {
+    public void changeData(Avatar parameter) {
         this.type = parameter.getType();
         this.name = parameter.getName();
         this.icon = parameter.getIcon();

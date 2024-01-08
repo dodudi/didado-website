@@ -1,6 +1,6 @@
 package com.didado.armory.domain.core.dto;
 
-import com.didado.armory.domain.avatar.dto.ArmoryAvatarParameter;
+import com.didado.armory.domain.avatar.dto.AvatarParameter;
 import com.didado.armory.domain.collectible.dto.CollectibleParameter;
 import com.didado.armory.domain.equipment.dto.ArmoryEquipmentParameter;
 import com.didado.armory.domain.gem.dto.ArmoryGemParameter;
@@ -23,7 +23,7 @@ public class ArmoryParameter {
     private List<ArmoryEquipmentParameter> armoryEquipment;
 
     @JsonProperty(value = "ArmoryAvatars")
-    private List<ArmoryAvatarParameter> armoryAvatars;
+    private List<AvatarParameter> armoryAvatars;
 
     @JsonProperty(value = "ArmorySkills")
     private List<ArmorySkillParameter> armorySkills;

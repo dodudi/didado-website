@@ -1,11 +1,11 @@
 package com.didado.armory.domain.avatar.dto;
 
-import com.didado.armory.domain.avatar.domain.ArmoryAvatar;
+import com.didado.armory.domain.avatar.domain.Avatar;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class ArmoryAvatarParameter {
+public class AvatarParameter {
     @JsonProperty(value = "Type")
     private String type;
 
@@ -27,21 +27,21 @@ public class ArmoryAvatarParameter {
     @JsonProperty(value = "Tooltip")
     private String toolTip;
 
-    protected ArmoryAvatarParameter() {
+    protected AvatarParameter() {
     }
 
-    public ArmoryAvatarParameter(ArmoryAvatar armoryAvatar) {
-        this.type = armoryAvatar.getType();
-        this.name = armoryAvatar.getName();
-        this.icon = armoryAvatar.getIcon();
-        this.grade = armoryAvatar.getGrade();
-        this.isSet = armoryAvatar.getIsSet();
-        this.isInner = armoryAvatar.getIsInner();
-        this.toolTip = armoryAvatar.getToolTip();
+    public AvatarParameter(Avatar avatar) {
+        this.type = avatar.getType();
+        this.name = avatar.getName();
+        this.icon = avatar.getIcon();
+        this.grade = avatar.getGrade();
+        this.isSet = avatar.getIsSet();
+        this.isInner = avatar.getIsInner();
+        this.toolTip = avatar.getToolTip();
     }
 
-    public ArmoryAvatar toArmoryAvatar() {
-        return ArmoryAvatar.builder()
+    public Avatar toArmoryAvatar() {
+        return Avatar.builder()
                 .type(type)
                 .name(name)
                 .icon(icon)

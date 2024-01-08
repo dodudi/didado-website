@@ -1,6 +1,6 @@
 package com.didado.armory.domain.schduler;
 
-import com.didado.armory.domain.avatar.application.AvatarSchedulerService;
+import com.didado.armory.domain.avatar.application.AvatarCollectionService;
 import com.didado.armory.domain.card.application.CardSchedulerService;
 import com.didado.armory.domain.collectible.application.CollectibleSchedulerService;
 import com.didado.armory.domain.colosseum.application.ColosseumSchedulerService;
@@ -21,7 +21,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class ProfileScheduler {
     private final ProfileSchedulerService profileSchedulerService;
     private final EquipmentSchedulerService equipmentSchedulerService;
-    private final AvatarSchedulerService avatarSchedulerService;
+    private final AvatarCollectionService avatarCollectService;
     private final SkillSchedulerService skillSchedulerService;
 
     private final GemSchedulerService gemSchedulerService;

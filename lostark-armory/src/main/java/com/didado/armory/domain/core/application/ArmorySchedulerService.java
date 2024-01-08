@@ -1,18 +1,10 @@
 package com.didado.armory.domain.core.application;
 
 
-import com.didado.armory.domain.avatar.application.AvatarSchedulerService;
-import com.didado.armory.domain.avatar.repository.AvatarRepository;
+import com.didado.armory.domain.avatar.application.AvatarCollectionService;
 import com.didado.armory.domain.card.application.CardSchedulerService;
-import com.didado.armory.domain.card.repository.ArmoryCardRepository;
-import com.didado.armory.domain.card.repository.CardEffectRepository;
-import com.didado.armory.domain.card.repository.CardRepository;
-import com.didado.armory.domain.card.repository.EffectRepository;
 import com.didado.armory.domain.collectible.application.CollectibleSchedulerService;
-import com.didado.armory.domain.collectible.repository.CollectiblePointRepository;
-import com.didado.armory.domain.collectible.repository.CollectibleRepository;
 import com.didado.armory.domain.colosseum.application.ColosseumSchedulerService;
-import com.didado.armory.domain.colosseum.repository.*;
 import com.didado.armory.domain.dto.LostarkProperty;
 import com.didado.armory.domain.engraving.repository.ArmoryEngravingRepository;
 import com.didado.armory.domain.engraving.repository.EngravingEffectRepository;
@@ -24,9 +16,6 @@ import com.didado.armory.domain.gem.repository.GemRepository;
 import com.didado.armory.domain.core.dto.ArmoryParameter;
 import com.didado.armory.domain.profile.application.ProfileSchedulerService;
 import com.didado.armory.domain.skill.application.SkillSchedulerService;
-import com.didado.armory.domain.skill.repository.ArmorySkillRepository;
-import com.didado.armory.domain.skill.repository.SkillRuneRepository;
-import com.didado.armory.domain.skill.repository.SkillTripodRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -45,7 +34,7 @@ public class ArmorySchedulerService {
     private final RestTemplate restTemplate;
 
     private final ProfileSchedulerService profileSchedulerService;
-    private final AvatarSchedulerService avatarSchedulerService;
+    private final AvatarCollectionService avatarCollectService;
     private final CardSchedulerService cardSchedulerService;
     private final SkillSchedulerService skillSchedulerService;
     private final CollectibleSchedulerService collectibleSchedulerService;
