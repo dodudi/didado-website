@@ -1,9 +1,149 @@
-<mxfile host="app.diagrams.net" modified="2024-01-08T03:57:14.996Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="FvMqr3BlqUz3iP_nHujz" version="22.1.17" type="github">
-  <diagram name="페이지-1" id="oF4s1JSkIHEOH0VB_uYJ">
-    <mxGraphModel dx="1266" dy="734" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+<mxfile host="app.diagrams.net" modified="2024-01-08T07:48:59.397Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="k2hNBhzsLOllXLsOzXWy" version="22.1.17" type="github">
+  <diagram name="Page-1" id="oF4s1JSkIHEOH0VB_uYJ">
+    <mxGraphModel dx="1026" dy="684" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-1" value=":Api" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="120" y="40" width="100" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="3L6Rtp6F7m73qz-CYdAy-1">
+          <mxGeometry x="45" y="70" width="10" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-3" value="dispatch" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="3L6Rtp6F7m73qz-CYdAy-1" target="3L6Rtp6F7m73qz-CYdAy-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-15" y="70" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-5" value=":AvatarSerice" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="300" y="40" width="100" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-6" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="3L6Rtp6F7m73qz-CYdAy-5">
+          <mxGeometry x="45" y="80" width="10" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-7" value="1. avatar 정보 조회 요청" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1" source="3L6Rtp6F7m73qz-CYdAy-2" target="3L6Rtp6F7m73qz-CYdAy-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="275" y="130" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="260" y="120" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-11" value=":Repository" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="480" y="40" width="100" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-12" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="3L6Rtp6F7m73qz-CYdAy-11">
+          <mxGeometry x="45" y="90" width="10" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-31" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="3L6Rtp6F7m73qz-CYdAy-11">
+          <mxGeometry x="45" y="320" width="10" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-13" value=":ExceptionHandler" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="660" y="40" width="100" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-14" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="3L6Rtp6F7m73qz-CYdAy-13">
+          <mxGeometry x="45" y="250" width="10" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-15" value="2. characterName으로 조회" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1" source="3L6Rtp6F7m73qz-CYdAy-6" target="3L6Rtp6F7m73qz-CYdAy-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="130" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="435" y="130" />
+            </Array>
+            <mxPoint x="520" y="130" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-17" value="exception" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="180" width="840" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-19" value="3. 조회 결과 리턴" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1" source="3L6Rtp6F7m73qz-CYdAy-12" target="3L6Rtp6F7m73qz-CYdAy-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="160" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="445" y="160" />
+            </Array>
+            <mxPoint x="520" y="160" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-22" value="4. 조회 결과 리턴" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1" source="3L6Rtp6F7m73qz-CYdAy-6" target="3L6Rtp6F7m73qz-CYdAy-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="170" y="200" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="320" y="210" />
+              <mxPoint x="330" y="200" />
+              <mxPoint x="260" y="200" />
+            </Array>
+            <mxPoint x="340" y="200" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-28" value=":AvatarCollectService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="840" y="40" width="140" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-29" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="3L6Rtp6F7m73qz-CYdAy-28">
+          <mxGeometry x="65" y="260" width="10" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-24" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=default;dashed=1;dashPattern=8 8;" vertex="1" parent="1">
+          <mxGeometry x="120" y="256" width="840" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-33" value="4. NotFoundAvatarException" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1" source="3L6Rtp6F7m73qz-CYdAy-6" target="3L6Rtp6F7m73qz-CYdAy-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="279.5" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="650" y="290" />
+              <mxPoint x="600" y="280" />
+              <mxPoint x="560" y="350" />
+              <mxPoint x="440" y="279.5" />
+            </Array>
+            <mxPoint x="530" y="279.5" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-37" value="5. charaterName으로 api에 조회" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1" source="3L6Rtp6F7m73qz-CYdAy-14" target="3L6Rtp6F7m73qz-CYdAy-29">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="525" y="300" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="820" y="300" />
+              <mxPoint x="770" y="290" />
+              <mxPoint x="730" y="360" />
+              <mxPoint x="610" y="289.5" />
+            </Array>
+            <mxPoint x="875" y="300" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-38" value="6. 조회 결과 리턴" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1" source="3L6Rtp6F7m73qz-CYdAy-29" target="3L6Rtp6F7m73qz-CYdAy-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="730" y="320" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="820" y="320" />
+            </Array>
+            <mxPoint x="900" y="320" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-41" value="7. 조회 결과 리턴" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1" source="3L6Rtp6F7m73qz-CYdAy-14" target="3L6Rtp6F7m73qz-CYdAy-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="330" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="615" y="330" />
+            </Array>
+            <mxPoint x="710" y="330" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3L6Rtp6F7m73qz-CYdAy-42" value="8. 조회한 데이터 저장" style="html=1;verticalAlign=bottom;endArrow=none;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;startArrow=block;startFill=1;endFill=0;" edge="1" parent="1" source="3L6Rtp6F7m73qz-CYdAy-31" target="3L6Rtp6F7m73qz-CYdAy-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="360" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="635" y="360" />
+              <mxPoint x="585" y="350" />
+              <mxPoint x="545" y="420" />
+              <mxPoint x="425" y="349.5" />
+            </Array>
+            <mxPoint x="720" y="360" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
