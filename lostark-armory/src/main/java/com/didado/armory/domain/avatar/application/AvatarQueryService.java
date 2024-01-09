@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AvatarService {
+public class AvatarQueryService {
     private final AvatarRepository avatarRepository;
     private final AvatarDataRepository avatarDataRepository;
 

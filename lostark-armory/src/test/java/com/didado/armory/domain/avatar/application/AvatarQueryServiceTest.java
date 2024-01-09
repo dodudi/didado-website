@@ -9,16 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
-
 @Slf4j
 @SpringBootTest
-class AvatarServiceTest {
+class AvatarQueryServiceTest {
 
     @Autowired
-    private AvatarService avatarService;
+    private AvatarQueryService avatarQueryService;
 
     @Autowired
     private AvatarCollection avatarCollection;
@@ -27,11 +23,11 @@ class AvatarServiceTest {
     void search() {
         String characterName = "디다도두";
 
-        Assertions.assertThatThrownBy(() -> avatarService.search(characterName))
+        Assertions.assertThatThrownBy(() -> avatarQueryService.search(characterName))
                 .isInstanceOf(NotFoundAvatarException.class);
 
         avatarCollection.save(characterName);
-        AvatarDataParameter avatarData = avatarService.search(characterName);
+        AvatarDataParameter avatarData = avatarQueryService.search(characterName);
 
         Boolean first = avatarData.getAvatarParameters().stream().map(AvatarParameter::getIsSet)
                 .filter(isSet -> isSet)

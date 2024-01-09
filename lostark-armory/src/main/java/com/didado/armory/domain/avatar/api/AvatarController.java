@@ -1,8 +1,7 @@
 package com.didado.armory.domain.avatar.api;
 
 import com.didado.armory.domain.avatar.application.AvatarCollectionService;
-import com.didado.armory.domain.avatar.application.AvatarService;
-import com.didado.armory.domain.avatar.dto.AvatarDataParameter;
+import com.didado.armory.domain.avatar.application.AvatarQueryService;
 import com.didado.armory.domain.avatar.dto.AvatarResponse;
 import com.didado.armory.domain.avatar.exception.InvalidCharacterNameException;
 import com.didado.armory.domain.avatar.exception.NotFoundAvatarException;
@@ -18,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AvatarController {
 
-    private final AvatarService avatarService;
+    private final AvatarQueryService avatarQueryService;
     private final AvatarCollectionService avatarCollectService;
 
     @GetMapping("/lostark/armory/{characterName}/avatars")
     public ResponseEntity<AvatarResponse> avatars(@PathVariable("characterName") String characterName) {
-        AvatarResponse response = new AvatarResponse(200, "Success", avatarService.search(characterName));
+        AvatarResponse response = new AvatarResponse(200, "Success", avatarQueryService.search(characterName));
         return ResponseEntity.ok(response);
     }
 
@@ -31,7 +30,7 @@ public class AvatarController {
     public ResponseEntity<AvatarResponse> avatar(NotFoundAvatarException e) {
         try {
             avatarCollectService.save(e.getCharacterName());
-            AvatarResponse response = new AvatarResponse(200, "Success", avatarService.search(e.getCharacterName()));
+            AvatarResponse response = new AvatarResponse(200, "Success", avatarQueryService.search(e.getCharacterName()));
             return ResponseEntity.ok(response);
         } catch (InvalidCharacterNameException e1) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
