@@ -29,19 +29,6 @@ public class CardParameter {
     @JsonProperty(value = "Tooltip")
     private String toolTip;
 
-    protected CardParameter() {
-    }
-
-    public CardParameter(Card card) {
-        this.slot = card.getSlot();
-        this.name = card.getName();
-        this.icon = card.getIcon();
-        this.awakeCount = card.getAwakeCount();
-        this.awakeTotal = card.getAwakeTotal();
-        this.grade = card.getGrade();
-        this.toolTip = card.getToolTip();
-    }
-
     public Card toCard() {
         return Card.builder()
                 .slot(slot)

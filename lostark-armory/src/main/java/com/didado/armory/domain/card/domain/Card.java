@@ -1,12 +1,14 @@
 package com.didado.armory.domain.card.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Card {
     @Id
     @GeneratedValue
@@ -32,9 +34,6 @@ public class Card {
     @Column(name = "tool_tip", length = 10000)
     private String toolTip;
 
-    protected Card() {
-    }
-
     @Builder
     public Card(String slot, String name, String icon, String awakeCount, String awakeTotal, String grade, String toolTip) {
         this.slot = slot;
@@ -46,18 +45,8 @@ public class Card {
         this.toolTip = toolTip;
     }
 
-    public void changeData(Card card) {
-        this.slot = card.getSlot();
-        this.name = card.getName();
-        this.icon = card.getIcon();
-        this.awakeCount = card.getAwakeCount();
-        this.awakeTotal = card.getAwakeTotal();
-        this.grade = card.getGrade();
-        this.toolTip = card.getToolTip();
-    }
-
     public void changeArmoryCard(ArmoryCard armoryCard) {
         this.armoryCard = armoryCard;
-        armoryCard.getCards().add(this);
+        this.armoryCard.getCards().add(this);
     }
 }

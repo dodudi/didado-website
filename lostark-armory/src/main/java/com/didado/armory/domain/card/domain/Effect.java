@@ -2,11 +2,14 @@ package com.didado.armory.domain.card.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Effect {
     @Id
     @GeneratedValue
@@ -20,9 +23,6 @@ public class Effect {
     private String name;
     private String description;
 
-    protected Effect() {
-    }
-
     @Builder
     public Effect(String name, String description) {
         this.name = name;
@@ -31,11 +31,6 @@ public class Effect {
 
     public void changeCardEffect(CardEffect cardEffect) {
         this.cardEffect = cardEffect;
-        cardEffect.getItems().add(this);
-    }
-
-    public void deleteCardEffect(CardEffect cardEffect) {
-        this.cardEffect = null;
-        cardEffect.getItems().remove(this);
+        this.cardEffect.getItems().add(this);
     }
 }
