@@ -1,8 +1,8 @@
 package com.didado.armory.domain.avatar.application;
 
 import com.didado.armory.domain.avatar.domain.AvatarData;
-import com.didado.armory.domain.avatar.dto.AvatarParameter;
 import com.didado.armory.domain.avatar.dto.AvatarDataParameter;
+import com.didado.armory.domain.avatar.dto.AvatarParameter;
 import com.didado.armory.domain.avatar.exception.NotFoundAvatarException;
 import com.didado.armory.domain.avatar.repository.AvatarDataRepository;
 import com.didado.armory.domain.avatar.repository.AvatarRepository;

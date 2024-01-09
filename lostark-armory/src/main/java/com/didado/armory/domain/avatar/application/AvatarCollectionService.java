@@ -46,7 +46,6 @@ public class AvatarCollectionService implements AvatarCollection {
     public void save(String characterName) {
         List<AvatarParameter> newAvatars = getAvatars(characterName);
 
-
         //Save AvatarData
         AvatarData avatarData = new AvatarData(characterName);
         avatarDataRepository.save(avatarData);
