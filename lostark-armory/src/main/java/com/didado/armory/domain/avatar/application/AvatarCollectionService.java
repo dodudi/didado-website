@@ -38,15 +38,14 @@ public class AvatarCollectionService implements AvatarCollection {
 
 
     /**
-     * Avatar 정보를 저장하는 기능입니다.
+     * API 로 가져온 Avatar 정보를 저장하는 기능입니다.
      *
      * @param characterName 저장할 캐릭터의 이름입니다.
      */
     @Override
     public void save(String characterName) {
         List<AvatarParameter> newAvatars = getAvatars(characterName);
-        if (newAvatars == null)
-            throw new InvalidCharacterNameException("존재 하는 캐릭터 이름이 아닙니다.", characterName);
+
 
         //Save AvatarData
         AvatarData avatarData = new AvatarData(characterName);
@@ -64,6 +63,12 @@ public class AvatarCollectionService implements AvatarCollection {
         avatarRepository.saveAll(avatars);
     }
 
+
+    /**
+     * API 로 가져온 Avatar 정보를 수정하는 기능입니다.
+     *
+     * @param characterName 수정할 캐릭터의 이름입니다.
+     */
     @Override
     @Modifying
     public void update(String characterName) {
@@ -118,6 +123,6 @@ public class AvatarCollectionService implements AvatarCollection {
         );
 
         return Optional.ofNullable(response.getBody())
-                .orElseGet(() -> null);
+                .orElseThrow(() -> new InvalidCharacterNameException("존재 하는 캐릭터 이름이 아닙니다.", characterName));
     }
 }

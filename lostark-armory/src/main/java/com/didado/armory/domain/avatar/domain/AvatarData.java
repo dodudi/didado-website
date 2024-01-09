@@ -16,6 +16,7 @@ public class AvatarData {
     @Column(name = "avatar_data_id")
     private Long id;
 
+    @Column(unique = true)
     private String characterName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "avatarData", cascade = CascadeType.REMOVE, orphanRemoval = true)
